@@ -1,0 +1,21 @@
+<app>
+	
+	<!-- mode, input 0 = live, 1 = video  -->
+
+	<mode>0</mode>
+	
+	<!-- some per mode settings -->
+
+    	<videoFile>movies/temptEye.mov</videoFile>
+
+	<videoGrabber>
+
+		<!-- set device id if you need to work with a different camera -->
+
+		<deviceId></deviceId>
+
+		<width>640</width>
+		<height>480</height>
+	</videoGrabber>
+
+</app>

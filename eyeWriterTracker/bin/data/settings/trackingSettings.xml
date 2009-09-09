@@ -1,0 +1,51 @@
+<B_RIGHT_FLIP_X>
+    <val_0>0.000000</val_0>
+</B_RIGHT_FLIP_X>
+<B_RIGHT_FLIP_Y>
+    <val_0>1.000000</val_0>
+</B_RIGHT_FLIP_Y>
+<B_USE_CONTRAST>
+    <val_0>1.000000</val_0>
+</B_USE_CONTRAST>
+<CONTRAST>
+    <val_0>0.280000</val_0>
+</CONTRAST>
+<BRIGHTNESS>
+    <val_0>-0.020000</val_0>
+</BRIGHTNESS>
+<B_USE_GAMMA>
+    <val_0>1.000000</val_0>
+</B_USE_GAMMA>
+<GAMMA>
+    <val_0>0.570000</val_0>
+</GAMMA>
+<THRESHOLD_GAZE>
+    <val_0>58.083332</val_0>
+</THRESHOLD_GAZE>
+<B_USE_DILATE>
+    <val_0>1.000000</val_0>
+</B_USE_DILATE>
+<N_DILATIONS>
+    <val_0>6.166667</val_0>
+</N_DILATIONS>
+<MIN_BLOB>
+    <val_0>472.222229</val_0>
+</MIN_BLOB>
+<MAX_BLOB>
+    <val_0>29738.888672</val_0>
+</MAX_BLOB>
+<EDGE_MASK_X>
+    <val_0>295.111115</val_0>
+</EDGE_MASK_X>
+<EDGE_MASK_Y>
+    <val_0>316.444427</val_0>
+</EDGE_MASK_Y>
+<EDGE_MASK_INNER_RADIUS>
+    <val_0>250.000000</val_0>
+</EDGE_MASK_INNER_RADIUS>
+<EDGE_MASK_OUTER_RADIUS>
+    <val_0>350.000000</val_0>
+</EDGE_MASK_OUTER_RADIUS>
+<VIDEO_SETTINGS>
+    <val_0>0.000000</val_0>
+</VIDEO_SETTINGS>
