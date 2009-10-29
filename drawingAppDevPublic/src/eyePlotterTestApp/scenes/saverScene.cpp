@@ -160,7 +160,7 @@ void saverScene::update(float mouseX, float mouseY){
 		reader.loadGML(fullPath);
 		
 		if( bUpload )uploader.uploadToWeb(gmlUploadString, reader.xml);
-		if( bUpload )grabScreen = true;
+		grabScreen = true;
 	}
 	
 	if( tmpGroups.size() ){
@@ -220,9 +220,11 @@ void saverScene::draw(){
 		img.grabScreen(SIDE_GUI_X, 0, ofGetWidth()-SIDE_GUI_X, ofGetHeight());
 		img.saveImage(imagePath + imageFilename);
 		
-		if( !uploadImage(imagePath, imageFilename) ){
-			printf("ERROR UPLOADING VIA FTP\n");
-		}		
+		if( bUpload ){
+			if( !uploadImage(imagePath, imageFilename) ){
+				printf("ERROR UPLOADING VIA FTP\n");
+			}		
+		}
 		
 		grabScreen = false;
 	}
