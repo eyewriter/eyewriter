@@ -12,6 +12,7 @@ testApp::testApp(){
 //--------------------------------------------------------------
 void testApp::setup(){
 
+	// testing git
 	
 	//---- setup standard application settings
 	
