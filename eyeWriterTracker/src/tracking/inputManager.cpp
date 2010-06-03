@@ -60,10 +60,18 @@ void inputManager::setup(){
 		grayImage.setUseTexture(false);
 		colorImg.allocate(width,height);
 		grayImage.allocate(width,height);
+		grayOddImage.allocate(width,height);
+		grayEvenImage.allocate(width,height);
+
 	}
 
 	bIsFrameNew = false;
 
+	fcount = 0;
+	
+	flipX = false;
+	flipY = false;
+	
 }
 
 //--------------------------------------------------------------
@@ -88,6 +96,32 @@ void inputManager::update(){
 		}
 		
         grayImage = colorImg;		// TODO: this color to gray conversion is *slow*, since it's using the CV cvt color, we can make this faster !
-				
+		
+		
+		if( flipX || flipY ){
+			grayImage.mirror(flipY, flipX);
+		}
+		
+		fcount++;
+		fcount = fcount % 2;
+		
+		if (fcount == 0) grayEvenImage = grayImage;
+		else grayOddImage = grayImage;
+		
+		
 	}	
 }
+
+//--------------------------------------------------------------
+void inputManager::drawOddFrame(int x, int y, int width, int height){	
+	
+	grayOddImage.draw(x,y,width, height);
+	
+}
+//--------------------------------------------------------------
+void inputManager::drawEvenFrame(int x, int y, int width, int height){	
+	
+	grayEvenImage.draw(x,y,width, height);
+	
+}			
+//--------------------------------------------------------------

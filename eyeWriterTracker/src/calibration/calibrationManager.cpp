@@ -1,12 +1,12 @@
 #include "calibrationManager.h"
 
-#include <gsl_math.h>
-#include <gsl_test.h>
-#include <gsl_fit.h>
-#include <gsl_multifit.h>
-#include <gsl_multifit_nlin.h>
-#include <gsl_blas.h>
-#include <gsl_ieee_utils.h>
+//#include <gsl_math.h>
+//#include <gsl_test.h>
+//#include <gsl_fit.h>
+//#include <gsl_multifit.h>
+//#include <gsl_multifit_nlin.h>
+//#include <gsl_blas.h>
+//#include <gsl_ieee_utils.h>
 
 
 //--------------------------------------------------------------
@@ -18,13 +18,15 @@ void calibrationManager::setup(){
 	calibrationInfo.loadImage("images/calibrationInfo.png");
 	font.loadFont("fonts/HelveticaNeueMed.ttf", 32);
 	
-	
-	nDivisionsWidth = 10;
+	nDivisionsWidth = 5;
 	nDivisionsHeight = 5;
+	inputCount = 6;
+	outputCount = 2;
+	
+	ls.setup(inputCount, outputCount);
 	
 	nPosition = 0;
 	pos  = 0;
-	
 
 	
 	inputEnergy = 0;
@@ -100,6 +102,7 @@ void calibrationManager::stop(){
 
 
 
+//--------------------------------------------------------------
 void calibrationManager::saveCalibration(){
 	ofxXmlSettings xml;
 	for (int i = 0; i < 6; i++){
@@ -163,8 +166,10 @@ void calibrationManager::update(){
 	
 	panel.update();
 	
-	nDivisionsWidth = panel.getValueI("N_DIV_W");
-	nDivisionsHeight = panel.getValueI("N_DIV_H");;
+	// TODO:make it possible to change nDivisions?
+//	nDivisionsWidth = panel.getValueI("N_DIV_W");
+//	nDivisionsHeight = panel.getValueI("N_DIV_H");;
+	
 	preTimePerDot = panel.getValueF("PRE_RECORD_TIME");;
 	recordTimePerDot = panel.getValueF("RECORD_TIME");;
 	smoothing = panel.getValueF("AMOUNT_SMOOTHING");
@@ -402,7 +407,7 @@ void calibrationManager::draw(){
 	}
 }
 
-
+//--------------------------------------------------------------
 void calibrationManager::clear(){
 	screenPoints.clear();
 	eyePoints.clear();
@@ -431,116 +436,36 @@ void calibrationManager::advancePosition(){
 
 
 
+//--------------------------------------------------------------
 void calibrationManager::calculateWeights(vector <ofPoint> trackedPoints, vector <ofPoint> knownPoints){
 	
 	int length = trackedPoints.size();
+		
+	ls.clear();
 	
-	int nTerms = 6;
-	
-	gsl_matrix * x = gsl_matrix_alloc(length,nTerms);
-	gsl_vector * yx = gsl_vector_alloc(length);
-	gsl_vector * yy = gsl_vector_alloc(length);
-	gsl_vector * w = gsl_vector_alloc(nTerms);
-	
-	double * ptr;
-	double * ptrScreenX;
-	double * ptrScreenY;
-
-	
-	ptr = gsl_matrix_ptr(x,0,0);
-	ptrScreenX = gsl_vector_ptr(yx,0);
-	ptrScreenY = gsl_vector_ptr(yy,0);
-	
-	
-	for (int i = 0; i < length; i++){
-
-		float xPosEye = trackedPoints[i].x;
-		float yPosEye = trackedPoints[i].y;
-		
-		
-		// was -- Ax + Bx^2 + Cy + Dy^2 + Exy + Fx^3 + Gy^3 + H
-		// now -- Ax + Bx^2 + Cy + Dy^2 + Exy + F
-		
-		
-		*ptr++ = xPosEye;
-		*ptr++ = xPosEye*xPosEye;
-		*ptr++ = yPosEye;
-		*ptr++ = yPosEye*yPosEye;
-		*ptr++ = xPosEye*yPosEye;
-		
-		//*ptr++ = xPosEye*xPosEye*xPosEye;			// the cubed term was too much, it seemed like. 
-		//*ptr++ = yPosEye*yPosEye*yPosEye;
-		
-		*ptr++ = 1;
-		
-		*ptrScreenX++ = knownPoints[i].x;
-		*ptrScreenY++ = knownPoints[i].y;
-		
+	for(int i = 0; i < length; i++) {
+		ofPoint& ipt = trackedPoints[i];
+		ofPoint& opt = knownPoints[i];
+		ls.add(makeInput(ipt.x, ipt.y), makeOutput(opt.x, opt.y));
 	}
 	
-	
-	gsl_vector *cx = gsl_vector_calloc(nTerms);
-	gsl_vector *cy = gsl_vector_calloc(nTerms);
-	
-	
-    gsl_matrix *cov = gsl_matrix_calloc(nTerms, nTerms); 
-	double chisq;
-	
-	gsl_multifit_linear_workspace *work = gsl_multifit_linear_alloc(length, nTerms); 
+	ls.update();
 
-	int res = gsl_multifit_linear (x,
-								   yx,
-								   cx,
-								   cov,
-								   &chisq,
-								   work);
-	
-	int res2 = gsl_multifit_linear (x,
-								   yy,
-								   cy,
-								   cov,
-								   &chisq,
-								   work);
-	
-	
-	
-	double * xptr = gsl_vector_ptr(cx,0);
-	double * yptr = gsl_vector_ptr(cy,0);
-	
-	printf("-------------------------------------------- \n");
-	for (int i = 0; i < nTerms; i++){
-		printf("cx %i = %f \n", i, xptr[i]);
-		cxfit[i] =  xptr[i];
-	}
-	
-	for (int i = 0; i < nTerms; i++){
-		printf("cy %i = %f \n", i, yptr[i]);
-		cyfit[i] =  yptr[i];
-	}
-	
-	printf("-------------------------------------------- \n");
-	
-	
 	bBeenFit = true;
-	
-	
-	//std::exit(0);
-	
-	
-	//return ;
-	
 	
 }
 
 
+//--------------------------------------------------------------
 ofPoint calibrationManager::getCalibratedPoint (float x, float y){
 
 	if (bBeenFit == true){
-		float calibratedx = (x) * cxfit[0] + (x*x) * cxfit[1] + (y) * cxfit[2] + (y*y) * cxfit[3] 
-		+ (x*y) * cxfit[4] + cxfit[5];			//+ (x*x*x) * cxfit[5] + (y*y*y) * cxfit[6] + cxfit[7];
-		float calibratedy = (x) * cyfit[0] + (x*x) * cyfit[1] + (y) * cyfit[2] + (y*y) * cyfit[3] 
-		+ (x*y) * cyfit[4] + cyfit[5];			//(x*x*x) * cyfit[5] + (y*y*y) * cyfit[6] + cyfit[7];
 		
+		vector<float> out = ls.map(makeInput(x, y));
+		
+		float calibratedx = out[0];
+		float calibratedy =	out[1];
+
 		// ---------------------------------------------------
 		// let's fix "offscreen" or very bad values, since we are smoothing them in....
 		// and nans, etc will screw us up bad. 
@@ -561,6 +486,29 @@ ofPoint calibrationManager::getCalibratedPoint (float x, float y){
 	return ofPoint(0,0);
 }
 
+
+//--------------------------------------------------------------
+// Ax + Bx^2 + Cy + Dy^2 + Exy + F
+vector<float> calibrationManager::makeInput(float x, float y) {
+	vector<float> in;
+	in.resize(inputCount);
+	in[0] = x;
+	in[1] = x * x;
+	in[2] = y;
+	in[3] = y * y;
+	in[4] = x * y;
+	in[5] = 1;
+	return in;
+}
+
+//--------------------------------------------------------------
+vector<float> calibrationManager::makeOutput(float x, float y) {
+	vector<float> out;
+	out.resize(outputCount);
+	out[0] = x;
+	out[1] = y;
+	return out;
+}
 
 //--------------------------------------------------------------
 void calibrationManager::mouseDragged(int x, int y, int button){
@@ -585,6 +533,13 @@ void calibrationManager::keyPressed(int key){
 			bPreAutomatic = false;
 			start();
 		}
+	}
+	
+	if (bPreAutomatic == false){
+		if (key == ' '){
+			bPreAutomatic = true;
+		}
+	
 	}
 	
 	if (key == 'x'){

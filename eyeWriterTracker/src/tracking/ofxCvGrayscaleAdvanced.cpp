@@ -1,5 +1,3 @@
-
-
 #include "ofxCvGrayscaleAdvanced.h"
 
 
@@ -26,6 +24,7 @@ void  ofxCvGrayscaleAdvanced::drawBlobIntoMe( ofxCvBlob &blob, int color ) {
 }
 
 
+//--------------------------------------------------------------
 void ofxCvGrayscaleAdvanced::swapTemp() {
 	
 	if (getROI().x != 0 ||
@@ -42,6 +41,7 @@ void ofxCvGrayscaleAdvanced::swapTemp() {
 }
 
 
+//--------------------------------------------------------------
 void ofxCvGrayscaleAdvanced::applyMinMaxGamma(float gamma){
 	
 	// for this, we will search for the minimum and maximum values, and apply a gamma, ie: 
@@ -80,12 +80,13 @@ void ofxCvGrayscaleAdvanced::applyMinMaxGamma(float gamma){
 	cvLUT( cvImage, cvImageTemp, gammaLutMatrix); 
 	swapTemp();
     flagImageChanged();
-
+	
 }
 
 
+//--------------------------------------------------------------
 void ofxCvGrayscaleAdvanced::applyBrightnessContrast(float brightness, float contrast){
-
+	
 	int i;
 	
 	/*
@@ -124,7 +125,7 @@ void ofxCvGrayscaleAdvanced::applyBrightnessContrast(float brightness, float con
 	}
 	
 	cvSetData( briConLutMatrix, briConLut, 0 );
-
+	
 	cvLUT( cvImage, cvImageTemp, briConLutMatrix); 
 	swapTemp();
     flagImageChanged();

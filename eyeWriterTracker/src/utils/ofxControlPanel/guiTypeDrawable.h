@@ -5,96 +5,42 @@
 #include "simpleColor.h"
 #include "guiValue.h"
 
+//alows you to stack ofBaseDraw objects as layers on top of each other and then pass it to guiTypeDrawable::setup
+//handy if you want to render drawing from one class ontop of a video of another class. 
 
 class drawableStacker : public ofBaseDraws{
     public:
 
-    void addDrawer(ofBaseDraws * drawer){
-        drawers.push_back(drawer);
-    }
+    void addDrawer(ofBaseDraws * drawer);
 
-    void setWidth(float w){
-        width = w;
-    }
+    void setWidth(float w);
 
-    void setHeight(float h){
-        height = h;
-    }
+    void setHeight(float h);
 
-    float getWidth(){
-        return width;
-    }
+    float getWidth();
 
-    float getHeight(){
-        return height;
-    }
+    float getHeight();
 
-    void draw(float x, float y, float w, float h){
-        ofSetColor(0xFFFFFF);
-        for(int i = 0; i < drawers.size(); i++){
-            drawers[i]->draw(x, y, w, h);
-        }
-    }
-
-    void draw(float x, float y){
-        ofSetColor(0xFFFFFF);
-        for(int i = 0; i < drawers.size(); i++){
-            drawers[i]->draw(x, y, width, height);
-        }
-    }
+    void draw(float x, float y, float w, float h);
+    void draw(float x, float y);
 
     vector <ofBaseDraws *> drawers;
     float width;
     float height;
 };
 
+//pass in any ofBaseDraws class ( videoPlayer, videoGrabber, image, or your own class ) 
 class guiTypeDrawable : public guiBaseObject{
 
      public:
 
-        guiTypeDrawable(){
-            vid = NULL;
-            bgColor.setSelectedColor(0, 0, 0, 255);
-            bgColor.setColor(0, 0, 0, 255);
-        }
+        guiTypeDrawable();
 
-        //------------------------------------------------
-        void setup(string videoName, ofBaseDraws * vidIn, float videoWidth, float videoHeight){
-            vid = vidIn;
-            name = videoName;
-            updateText();
+        void setup(string videoName, ofBaseDraws * vidIn, float videoWidth, float videoHeight);
+        void updateGui(float x, float y, bool firstHit, bool isRelative);
 
-            setDimensions(videoWidth, videoHeight);
-
-        }
-
-        //-----------------------------------------------.
-        void updateGui(float x, float y, bool firstHit, bool isRelative){
-
-        }
-
-        //-----------------------------------------------.
-        void render(){
-            ofPushStyle();
-
-                glPushMatrix();
-                //glTranslatef(boundingBox.x, boundingBox.y, 0);
-                    guiBaseObject::renderText();
-
-                    //draw the background
-                    ofFill();
-                    glColor4fv(bgColor.getColorF());
-                    ofRect(hitArea.x, hitArea.y, hitArea.width, hitArea.height);
-
-                    ofDisableAlphaBlending();
-
-                    ofSetColor(0xFFFFFF);
-                    vid->draw(hitArea.x, hitArea.y, hitArea.width, hitArea.height);
-
-                glPopMatrix();
-
-            ofPopStyle();
-        }
+        void render();
 
         ofBaseDraws * vid;
 };
+

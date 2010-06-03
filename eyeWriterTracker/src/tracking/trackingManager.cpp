@@ -1,266 +1,149 @@
 #include "trackingManager.h"
-
-
+//--------------------------------------------------------------
 trackingManager::trackingManager(){
-
+	
 }
 
+//--------------------------------------------------------------
 trackingManager::~trackingManager(){
 	
 }
 
+//--------------------------------------------------------------
 void trackingManager::setup(){
-	
-	
 	
 	IM.setup();
 	
 	setupGui();
 	
 	//--- set up tracking
+	printf("VideoWidth, VideoHeight = %d, %d \n", IM.width, IM.height);
 	tracker.setup(IM.width, IM.height);
+	
 	minBlob		= 10*10;
 	maxBlob		= 100*100;
-	threshold	= 21;
+	threshold		= 21;
 	
-	bFoundEye = false;
+	bFoundEye		= false;
 	eyePoint.set(0,0,0);
+
+	scanX = 0;
+	scanY = 0;
+	
+	
 }
 
+//--------------------------------------------------------------
 void trackingManager::update(){
 	//--- update video/camera input
 	IM.update();
 	
 	//--- eye tracking (on new frames)	
-	if (IM.bIsFrameNew){
+	if (IM.bIsFrameNew){									// check new frame.
 		trackEyes();
 	}
+	
+	glintPupilVector = tracker.getVectorGlintToPupil(true);
+
+	
+	// to make trail
+	currentdrawPoint.x = currentdrawPoint.x * 0.80 + glintPupilVector.x * 0.20;
+	currentdrawPoint.y = currentdrawPoint.y * 0.80 + glintPupilVector.y * 0.20;
+	
+	ofPoint	tempPoint(currentdrawPoint.x * 20, currentdrawPoint.y * 20);
+	trail.push_back(tempPoint);
+	if (trail.size() > 100) trail.erase(trail.begin());
 	
 	//--- gui
 	panel.update();
 	updateGui();
 	
-	
 }
 
-
-
+//--------------------------------------------------------------
 ofPoint	trackingManager::getEyePoint(){
 	return eyePoint;
 }
 
+//--------------------------------------------------------------
 bool trackingManager::bGotAnEyeThisFrame(){
 	return bFoundEye;
 }
 
 //--------------------------------------------------------------
 void trackingManager::trackEyes(){
-	tracker.update(IM.grayImage, threshold, minBlob, maxBlob, 0.5f);
-	bFoundEye	= tracker.bFoundOne;
-	eyePoint	= tracker.getEyePoint();
+	tracker.update(IM.grayImage);
+	
+	bFoundEye	= tracker.bFoundOne;						
+	eyePoint	= tracker.getVectorGlintToPupil(false);					// TODO: CHECK here.
+
 }
 
-
-void trackingManager::setupGui(){
-	
-	panel.setup("cv panel", 700, 20, 300, 450);
-	panel.addPanel("image adjustment", 1, false);
-	panel.addPanel("edge fixer", 1, false);
-	panel.addPanel("blob detection", 1, false);
-	
-	if (IM.mode == INPUT_VIDEO){
-		panel.addPanel("video file settings", 1, false);
-	} else {
-		panel.addPanel("live video settings", 1, false);
-	}
-	
-	//---- gaze
-	panel.setWhichPanel("image adjustment");
-	panel.setWhichColumn(0);
-		
-	panel.addToggle("flip horizontal ", "B_RIGHT_FLIP_X", false);
-	panel.addToggle("flip vertical ", "B_RIGHT_FLIP_Y", false);
-	
-	panel.addToggle("use contrast / bri", "B_USE_CONTRAST", true);
-	panel.addSlider("contrast ", "CONTRAST", 0.28f, 0.0, 1.0f, false);
-	panel.addSlider("brightness ", "BRIGHTNESS", -0.02f, -1.0, 3.0f, false);
-		
-	panel.addToggle("use gamma ", "B_USE_GAMMA", true);
-	panel.addSlider("gamma ", "GAMMA", 0.57f, 0.01, 3.0f, false);
-	
-	panel.addSlider("threshold ", "THRESHOLD_GAZE", threshold, 0, 255, true);
-
-	
-	
-	
-	panel.setWhichPanel("blob detection");
-	panel.addToggle("use dilate", "B_USE_DILATE", true);
-	panel.addSlider("dilate num ", "N_DILATIONS", 0, 0, 10, true);
-    panel.addSlider("min blob","MIN_BLOB",10*10,0,5000,true);
-    panel.addSlider("max blob","MAX_BLOB",100*100,0,50500,true);
-	
-	//---- tracker edges
-	panel.setWhichPanel("edge fixer");
-	panel.setWhichColumn(0);
-	panel.addSlider("x position ", "EDGE_MASK_X", 320, 0, 640, true);
-	panel.addSlider("y position ", "EDGE_MASK_Y", 240, 0, 640, true);
-	panel.addSlider("inner radius ", "EDGE_MASK_INNER_RADIUS", 250, 0, 500, true);
-	panel.addSlider("outer radius ", "EDGE_MASK_OUTER_RADIUS", 350, 0, 600, true);
-	
-	
-	if (IM.mode == INPUT_VIDEO){
-		panel.setWhichPanel("video file settings");
-		// TODO: add theo's video playing things.... [zach]
-	} else {
-		panel.setWhichPanel("live video settings");
-		panel.addToggle("load video settings", "VIDEO_SETTINGS", false);
-	}
-	
-	
-	
-	panel.loadSettings("settings/trackingSettings.xml");
-	
-	
-}
-
-void trackingManager::updateGui(){
-	
-	tracker.flip(  panel.getValueB("B_RIGHT_FLIP_X"),  panel.getValueB("B_RIGHT_FLIP_Y") );
-	
-	minBlob = panel.getValueI("MIN_BLOB");
-	maxBlob = panel.getValueI("MAX_BLOB");
-	
-	threshold				= panel.getValueI("THRESHOLD_GAZE");
-	
-	tracker.gamma			= panel.getValueF("GAMMA");
-	tracker.bUseGamma		= panel.getValueB("B_USE_GAMMA");
-
-	tracker.contrast		= panel.getValueF("CONTRAST");
-	tracker.brightness		= panel.getValueF("BRIGHTNESS");
-	tracker.bUseContrast	= panel.getValueB("B_USE_CONTRAST");
-
-	tracker.nDilations		= panel.getValueI("N_DILATIONS");
-	tracker.bUseDilate		= panel.getValueB("B_USE_DILATE");
-
-	int oldx				= tracker.edgeMaskStartPos.x;
-	int oldy				= tracker.edgeMaskStartPos.y;
-	int oldir				= tracker.edgeMaskInnerRadius;
-	int oldor				= tracker.edgeMaskOuterRadius;
-
-	tracker.edgeMaskStartPos.x		= panel.getValueI("EDGE_MASK_X");
-	tracker.edgeMaskStartPos.y		= panel.getValueI("EDGE_MASK_Y");
-	tracker.edgeMaskInnerRadius	= panel.getValueI("EDGE_MASK_INNER_RADIUS");
-	tracker.edgeMaskOuterRadius	= panel.getValueI("EDGE_MASK_OUTER_RADIUS");
-
-	if (	oldx	!= tracker.edgeMaskStartPos.x  ||
-			oldy	!= tracker.edgeMaskStartPos.y  ||
-			oldir	!= tracker.edgeMaskInnerRadius ||
-			oldor	!= tracker.edgeMaskOuterRadius	){		
-
-			tracker.calculateEdgePixels();
-		
-	}
-
-	if (IM.mode != INPUT_VIDEO){
-		panel.setWhichPanel("live video settings");
-		if (panel.getValueB("VIDEO_SETTINGS") == true){
-			
-#ifdef TARGET_OSX
-	// since macs fuck up bad fullscreen with video settings
-			ofSetFullscreen(false);
-#endif
-			IM.vidGrabber.videoSettings();
-			panel.setValueB("VIDEO_SETTINGS", false);
-		}
-	}
-	
-}
-
+//--------------------------------------------------------------
 void trackingManager::videoSettings(){
-	
 	
 	// TODO: fix this!! [zach]
 	//if( !bUseVideoFiles ) ((ofVideoGrabber *)videoSource)->videoSettings();
-
+	
 }
 
+//--------------------------------------------------------------
 void trackingManager::draw(){
 	
+	// Draw Input
+//	IM.grayOddImage.draw(0, 0, IM.width/4, IM.height/4);
+//	IM.grayEvenImage.draw(IM.width/4,0, IM.width/4, IM.height/4);
+	drawInput(0, 0, IM.width/4, IM.height/4, IM.width/4, 0, IM.width/4, IM.height/4);	
+	
+	//test draw input
+//	IM.grayOddImage.draw(IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 0, IM.width/4, IM.height/4);
+//	IM.grayEvenImage.draw(IM.width/2 + IM.width/4 + tracker.pFinder.imgBeforeThreshold.width + 40,0, IM.width/4, IM.height/4);
 	
 	
-	ofSetColor(255,255,255);
+	// Draw EyeFinder
+	drawEyeFinder(0, IM.height/4+30, IM.width/2, IM.height/2);
+//	tracker.diffImg.draw(0, IM.height/4+30, IM.width/2, IM.height/2);
 	
-	
-	//---------------------------------------------------------------- edge
-	if (panel.getSelectedPanelName() == "image adjustment" || panel.getSelectedPanelName() == "live video settings"){
-		ofSetColor(255,255,255);
-	
-		tracker.grayImgPreModification.draw(10,10,320,240);
-		tracker.grayImg.draw(320+20, 10, 320,240);
-		
-		
-		tracker.threshImg.draw(10,20+240,320,240);
-		
-		ofSetColor(255,255,255); //, <#int g#>, <#int b#>)
-		ofFill();
-		ofRect( 320+20,240+20,320, 240);
-		
-		ofEnableAlphaBlending();
-		ofSetColor(255,255,255, 80);
-		tracker.grayImgPreModification.draw( 320+20,240+20,320, 240);
-		tracker.eyeTrackedEllipse.draw( 320+20,240+20,320, 240);
+	// Draw Pupil Finder	
+	drawEyeImageBeforePupilThreshold(IM.width/2 + 20, 0, tracker.pFinder.imgBeforeThreshold.width, tracker.pFinder.imgBeforeThreshold.height);
+	drawPupilFinder(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height + 30);
 
-	}
+	// Draw Glint Finder
+	drawGlintFinder(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height*2 + 60);
 	
-	if (panel.getSelectedPanelName() == "edge fixer"){
-		ofSetColor(255,255,255);
-		tracker.edgeMaskInverted.draw(10,10, 320, 240);
-		tracker.grayImg.draw(320+20, 10, 320,240);
-	}
-
+	// Draw BrightEye, DarkEye
+	drawBrightDarkPupil(0, IM.height/4 + IM.height/2 + 60, tracker.targetWidth, IM.height/4 + IM.height/2 + 60);
 	
-	if (panel.getSelectedPanelName() == "blob detection"){
-		ofSetColor(255,255,255);
-		
-		tracker.grayImg.draw(10, 10, 320,240);
-		
-		tracker.threshImg.draw(10 + 10 + 320,10,320,240);
-		tracker.contourFinder.draw(10 + 10 + 320,10,320,240);
-	}
+	// Draw auto threshold Line for bright/dark eye.
+	drawAutoThresholdBrightnessGraph(0, IM.height/4 + IM.height/2 + 60);
+	
+	// Draw brightness graph
+	unsigned char * pupilpixels = tracker.pFinder.imgBeforeThreshold.getPixels();
+	drawBrighnessScanGraph(pupilpixels, IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 0, scanY, false, "BrightnessScan/Horizontal");
+	drawBrighnessScanGraph(pupilpixels, IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 255 + 30, scanX, true, "BrightnessScan/Vertical");
 	
 	ofSetColor(0, 0, 0);
-	ofRect(700,530, 300,135);
-	ofSetColor(255, 255, 255);
-	ofDrawBitmapString("key commands: ", 720,550);
 	
-	ofDrawBitmapString("          (f) - toggle fullscreen",			700,550+30);
-	ofDrawBitmapString("     (return) - change mode",	700,550+50);
-	ofDrawBitmapString("        (esc) - exit",			700,550+70);
 	
-
-	
+	// Draw trail circles.
+	drawCircles();
 	
 	panel.draw();
 	
-	
-	
-	
 }
-
-
 //--------------------------------------------------------------
 void trackingManager::mouseDragged(int x, int y, int button){
 	
 	panel.mouseDragged(x, y, button);
 	
 }
-
 //--------------------------------------------------------------
 void trackingManager::mousePressed(int x, int y, int button){
 	
 	panel.mousePressed(x, y, button);
+	trail.clear();
+	
 }
-
 //--------------------------------------------------------------
 void trackingManager::mouseReleased(){
 	

@@ -6,6 +6,7 @@
 
 #include "ofxXmlSettings.h"
 #include "ofxControlPanel.h"
+#include "ofxLeastSquares.h"
 
 
 class calibrationManager {
@@ -33,6 +34,9 @@ class calibrationManager {
 		void		calculateWeights(vector <ofPoint> trackedPoints, vector <ofPoint> knownPoints);		// calculate the weights for an equation that goes from tracked points to known points. 
 	
 		ofPoint		getCalibratedPoint (float x, float y);
+		vector<float> makeOutput(float x, float y);
+		vector<float> makeInput(float x, float y);
+
 		
 		vector <ofPoint> screenPoints;
 		vector <ofPoint> eyePoints;
@@ -79,6 +83,9 @@ class calibrationManager {
 	
 		ofxControlPanel			panel;
 	
+		ofxLeastSquares			ls;
+	int						inputCount;
+	int						outputCount;
 	
 	
 };

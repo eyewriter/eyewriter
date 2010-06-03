@@ -1,11 +1,11 @@
 /*
-* ofxCvGrayscaleImage.h
-* by stefanix, zach
-*
-* This is essentially an IPL_DEPTH_8U with one channel.
-* Pixel values are typically from 0-255.
-*
-*/
+ * ofxCvGrayscaleImage.h
+ * by stefanix, zach
+ *
+ * This is essentially an IPL_DEPTH_8U with one channel.
+ * Pixel values are typically from 0-255.
+ *
+ */
 
 
 #ifndef OFX_CV_GRAYSCALE_ADV_IMAGE_H
@@ -28,10 +28,10 @@
 // 
 
 class ofxCvGrayscaleAdvanced : public ofxCvGrayscaleImage {
-
-
-  public:
-
+	
+	
+public:
+	
     ofxCvGrayscaleAdvanced();
     ~ofxCvGrayscaleAdvanced(){};
 	
@@ -40,16 +40,16 @@ class ofxCvGrayscaleAdvanced : public ofxCvGrayscaleImage {
 	void	drawBlobIntoMe( ofxCvBlob & blob, int color );
 	void	applyMinMaxGamma(float gamma);
 	void	applyBrightnessContrast(float brightness, float contrast);
-
+	
 	
 private:
-		
+	
     uchar		gammaLut[256];
 	CvMat*		gammaLutMatrix;
 	
 	uchar		briConLut[256];
 	CvMat*		briConLutMatrix;
-
+	
     
 };
 

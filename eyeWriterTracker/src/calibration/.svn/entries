@@ -1,0 +1,55 @@
+8
+
+dir
+74
+http://zach@svn.openframeworks.cc/projects/TEMPT/trunk/trackingApp/src/calibration
+http://zach@svn.openframeworks.cc/projects
+
+
+
+2009-04-07T17:10:22.734540Z
+73
+chris
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+030cd615-180d-4681-8b50-cadb9aecf725
+
+sphereCalibrator.h
+file
+
+
+
+
+2009-04-06T21:00:44.000000Z
+c4516413a9de56eb8afb0bdacbb56690
+2009-04-06T21:28:52.249328Z
+53
+zach
+
+antiGrainGeometryWarping
+dir
+
+sphereCalibrator.cpp
+file
+75
+
+
+
+2009-04-07T16:29:46.000000Z
+91150a3cf6bf7de7bab6ff5f31e2100e
+2009-04-07T17:52:04.933074Z
+75
+zach
+
