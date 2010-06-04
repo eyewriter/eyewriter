@@ -1,1 +1,0 @@
-../specfunc/gsl_sf_pow_int.h

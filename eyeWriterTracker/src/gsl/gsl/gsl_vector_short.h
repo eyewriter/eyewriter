@@ -1,1 +1,0 @@
-../vector/gsl_vector_short.h

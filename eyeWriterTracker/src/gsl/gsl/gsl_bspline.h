@@ -1,1 +1,0 @@
-../bspline/gsl_bspline.h

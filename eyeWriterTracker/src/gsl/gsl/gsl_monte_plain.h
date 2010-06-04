@@ -1,1 +1,0 @@
-../monte/gsl_monte_plain.h

@@ -1,1 +1,0 @@
-../specfunc/gsl_sf_exp.h

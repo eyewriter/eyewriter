@@ -1,1 +1,0 @@
-../wavelet/gsl_wavelet2d.h

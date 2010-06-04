@@ -1,1 +1,0 @@
-../interpolation/gsl_interp.h
