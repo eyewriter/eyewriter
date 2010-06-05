@@ -37,9 +37,6 @@ I changed only the order of 2 lines in findContour method as below.
     inputCopy.setROI( input.getROI() );
     inputCopy = input;
 
-
-
-
 2.
 To change the input mode to camera input (movie file input is chosen by default input),
 please change the line 5 of (PROJECT FOLDER)/bin/data/Settings/inputSettings.xml as below.
