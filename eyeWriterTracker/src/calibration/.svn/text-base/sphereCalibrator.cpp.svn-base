@@ -1,0 +1,260 @@
+#include "sphereCalibrator.h"
+
+sphereCalibrator::sphereCalibrator()
+{
+    latStart       = 0;
+    latEnd         = 160;
+    lonStart       = 42;
+    lonEnd         = 140;
+    radius         = 180;
+    xpos           = 432;
+    ypos           = 294;
+    xrot           = 104;
+    yrot           = 0;
+	zrot			= 0;
+}
+
+sphereCalibrator::~sphereCalibrator()
+{
+    //dtor
+}
+void sphereCalibrator::draw(float x, float y )
+{
+    //drawSphere( radius );
+}
+
+void sphereCalibrator::draw(float x, float y, float w, float h)
+{
+	//printf("x = %f, y = %f \n", x,y);
+	glPushMatrix();
+	glTranslatef(x,y,0);
+    drawSphere( radius );
+	glPopMatrix();
+}
+
+
+ofPoint twodPointForThreeDPoint(float x, float y, float z){
+
+
+
+}
+
+
+void sphereCalibrator::drawSphereInto2d( float radius )
+{
+    float x, y, z;
+
+	spherePoints.clear();
+
+
+
+	ofSetColor(255,0,0);
+
+    glPushMatrix();
+
+	glTranslatef(xpos + 20,ypos + 38,0);
+	glRotatef(xrot,1,0,0);
+	glRotatef(yrot,0,1,0);
+	glRotatef(zrot,0,0,1);
+
+	GLint viewport[4];
+    double mvmatrix[16], projmatrix[16], wincoord[3];
+    glGetIntegerv (GL_VIEWPORT, viewport);
+    glGetDoublev (GL_MODELVIEW_MATRIX, mvmatrix);
+    glGetDoublev (GL_PROJECTION_MATRIX, projmatrix);
+
+
+	for( float i = latStart; i < latEnd; i+=0.15f )
+	{
+		//glBegin(GL_LINE_STRIP);
+		for( float j = lonStart; j < lonEnd; j+=0.15f )
+		{
+			x = radius * cosf(DEG_TO_RAD*i) * sinf(DEG_TO_RAD*j) ;
+			y = radius * sinf(DEG_TO_RAD*i) * sinf(DEG_TO_RAD*j) ;
+			z = radius * cosf(DEG_TO_RAD*j);
+
+
+			gluProject (x,y,z,
+						mvmatrix, projmatrix, viewport,
+						&wincoord[0], &wincoord[1], &wincoord[2]);
+
+			ofPoint temp(wincoord[0], ofGetHeight() - wincoord[1], wincoord[2]);
+			//= twodPointForThreeDPoint(x,y,z);
+
+
+			spherePoint pt;
+			pt.myLatitude = i;
+			pt.myLongitude = j;
+			pt.my2dPt.set(temp.x -20, temp.y -38, 0);
+
+			spherePoints.push_back( pt );
+			//pts.push_back(temp);
+			//ofRect(temp.x-1, temp.y-1,3,3);
+		}
+		//glEnd();
+	}
+
+
+	glPopMatrix();
+
+	//printf("%f \n", - 100 * sin(ofGetElapsedTimef()/6.0));
+}
+
+
+void sphereCalibrator::drawSphere( float radius )
+{
+
+	//ofRect(10,10,10,10);
+	//drawSphereInto2d(radius);
+	//return;
+
+    float x, y, z;
+
+
+
+    glPushMatrix();
+
+        glTranslatef(xpos,ypos,0);
+        glRotatef(xrot,1,0,0);
+        glRotatef(yrot,0,1,0);
+		glRotatef(zrot,0,0,1);
+
+
+	int nDivisionsLat = 20; //(latEnd - latStart) / 10;
+	int nDivisionsLon = 20; //(lonEnd - lonStart) / 10;
+
+	if (nDivisionsLon == 0) nDivisionsLon = 1;
+	if (nDivisionsLat == 0) nDivisionsLat = 1;
+
+		float latScale = (latEnd - latStart) / nDivisionsLat;
+		float lonScale = (lonEnd - lonStart)  / nDivisionsLon;
+
+		for( int i = 0; i < nDivisionsLat; i++ )
+        {
+
+			float lat = latStart + i * latScale;
+            glBegin(GL_LINE_STRIP);
+
+
+			if (i == nDivisionsLat/2) ofSetColor(0,0,0);
+			else ofSetColor(255,255,0);
+
+            for( int j = 0; j < nDivisionsLon; j++ )
+            {
+
+
+
+				float lon = lonStart + j * lonScale;
+
+                x = radius * cosf(DEG_TO_RAD*lat) * sinf(DEG_TO_RAD*lon) ;
+                y = radius * sinf(DEG_TO_RAD*lat) * sinf(DEG_TO_RAD*lon) ;
+                z = radius * cosf(DEG_TO_RAD*lon);
+
+                glVertex3f(x,y,z);
+
+            }
+            glEnd();
+        }
+
+
+
+	for( int j = 0; j < nDivisionsLon; j++ )
+	{
+		if (j == nDivisionsLon/2) ofSetColor(0,0,0);
+		else ofSetColor(255,255,0);
+
+
+		glBegin(GL_LINE_STRIP);
+		for( int i = 0; i < nDivisionsLat; i++ )
+		{
+
+
+
+			float lat = latStart + i * latScale;
+
+			float lon = lonStart + j * lonScale;
+
+			x = radius * cosf(DEG_TO_RAD*lat) * sinf(DEG_TO_RAD*lon) ;
+			y = radius * sinf(DEG_TO_RAD*lat) * sinf(DEG_TO_RAD*lon) ;
+			z = radius * cosf(DEG_TO_RAD*lon);
+
+			glVertex3f(x,y,z);
+
+		}
+		glEnd();
+	}
+
+
+
+		/*
+        for( int i = lonStart; i < lonEnd; i+=4 )
+        {
+            glBegin(GL_LINE_STRIP);
+            for( int j = latStart; j < latEnd; j+=4 )
+            {
+
+				int midi = (lonEnd - lonStart)/2;
+				if (i == midi) ofSetColor(0, 255, 0);
+				else ofSetColor(255, 0, 0);
+
+                x = radius * cosf(DEG_TO_RAD*j) * sinf(DEG_TO_RAD*i) ;
+                y = radius * sinf(DEG_TO_RAD*j) * sinf(DEG_TO_RAD*i) ;
+                z = radius * cosf(DEG_TO_RAD*i);
+
+                glVertex3f(x,y,z);
+
+            }
+            glEnd();
+        }
+		 */
+	x = radius * cosf(DEG_TO_RAD*myTrackedPointLat) * sinf(DEG_TO_RAD*myTrackedPointLon) ;
+	y = radius * sinf(DEG_TO_RAD*myTrackedPointLat) * sinf(DEG_TO_RAD*myTrackedPointLon) ;
+	z = radius * cosf(DEG_TO_RAD*myTrackedPointLon);
+	
+	
+	
+	glPushMatrix();
+	glTranslatef(x,y,z);
+	ofRect(-5,-5,10,10);
+	glPopMatrix();
+	
+	glPopMatrix();
+	
+	float xx =  ((180+myTrackedPointLat)/360.0f)*640.0f ;
+	float yy =  480 - ((90+myTrackedPointLon)/180.0f)*480.0f ;
+	
+	//float xx =  ((180+myTrackedPointLat)/360.0f)*640;
+	//	float yy  =  480 - ((90+myTrackedPointLon)/180.0f)*480 + 500;
+	pts.push_back(ofPoint(xx,yy));
+	if (pts.size() > 80) pts.erase(pts.begin());
+
+   
+	ofEnableAlphaBlending();
+	ofSetColor(255, 0, 0,255);
+	ofNoFill();
+	ofBeginShape();
+	for (int i = 0; i < pts.size()-1; i++){
+		ofVertex(pts[i].x, pts[i].y);
+	}
+	ofEndShape();
+	ofFill();
+	
+	
+	/*
+	ofEnableAlphaBlending();
+	ofSetColor(255, 0, 0,40);
+	ofFill();
+	ofBeginShape();
+	for (int i = 0; i < spherePoints.size(); i++){
+		ofRect(spherePoints[i].my2dPt.x-1, spherePoints[i].my2dPt.y-1,3,3);
+	}
+	ofEndShape();
+	ofFill();
+	*/
+	//ofRect(xx,yy,10,10);
+
+
+
+
+}
+

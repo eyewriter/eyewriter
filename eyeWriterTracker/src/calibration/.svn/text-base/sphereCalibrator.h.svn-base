@@ -1,0 +1,55 @@
+#pragma once
+
+#include "ofMain.h"
+#include "ofxControlPanel.h"
+
+
+typedef struct {	
+	ofPoint		my2dPt;
+	float		myLatitude;
+	float		myLongitude;
+} spherePoint;
+
+
+
+class sphereCalibrator : public ofBaseDraws
+{
+    public:
+        sphereCalibrator();
+         ~sphereCalibrator();
+
+        virtual void drawSphere( float radius );
+		virtual void drawSphereInto2d(float radius);
+        virtual void draw(float x, float y, float w, float h);
+        virtual void draw(float x, float y);
+
+        virtual float getWidth(){
+			return 1.0;
+		}
+
+		virtual float getHeight(){
+			return 1.0;
+		}
+
+		float latStart, latEnd, lonStart, lonEnd;
+        float radius;
+        float xpos,ypos,xrot,yrot,zrot;
+	
+		
+		GLint viewport[4];
+		double mvmatrix[16], projmatrix[16], wincoord[3];
+	
+		vector <spherePoint> spherePoints;
+	
+		float myTrackedPointLat;
+		float myTrackedPointLon;
+		vector <ofPoint> pts;
+	
+		//bool	bDrawSphere2d;
+	
+	
+
+    protected:
+    private:
+};
+

@@ -1,0 +1,22 @@
+<app>
+	
+	<!-- mode, input 0 = live, 1 = video  -->
+
+	<mode>1</mode>
+	
+	<!-- some per mode settings -->
+
+    	<videoFile>movies/EyeTestVideo.mov</videoFile>
+        <videoFrameRate>30</videoFrameRate>
+
+	<videoGrabber>
+
+		<!-- set device id if you need to work with a different camera -->
+
+		<deviceId></deviceId>
+
+		<width>640</width>
+		<height>480</height>
+	</videoGrabber>
+
+</app>
