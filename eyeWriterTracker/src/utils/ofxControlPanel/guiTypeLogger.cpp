@@ -10,7 +10,7 @@ void guiTypeLogger::setup(string loggerName, simpleLogger * logger, float logger
 	log = logger;
 	name = loggerName;
 	updateText();
-	
+
 	toggle = 2;
 
 	setDimensions(loggerWidth, loggerHeight);
@@ -24,7 +24,7 @@ void guiTypeLogger::updateGui(float x, float y, bool firstHit, bool isRelative){
 		pct = ( y - ( hitArea.y ) ) / hitArea.height;
 		pct = ofClamp(pct, 0, 1);
 	}
-	
+
 	if( firstHit && x >= boundingBox.x + boundingBox.width-20 && y > boundingBox.y && y<= boundingBox.y + 20 ){
 		toggle++;
 		if( toggle > 3 ){
@@ -37,24 +37,24 @@ void guiTypeLogger::updateGui(float x, float y, bool firstHit, bool isRelative){
 void guiTypeLogger::drawRecords(float x, float y, float width, float height){
 	if( log == NULL)return;
 	if( log->logs.size() == 0)return;
-	
+
 	float textH = MAX(8, displayText.getTextSingleLineHeight() + 2);
 	float charW = MAX(4, displayText.stringWidth("abcdefg")/7.0);
-		
+
 	ofPushStyle();
 		float yPos = textH;
-		int startPos = (float)(log->logs.size()-1) * (1.0-pct);
+		int startPos = (int) ((float)(log->logs.size()-1) * (1.0-pct));
 		for(int i = startPos; i >= 0; i--){
-		
+
 			string str;
-			
+
 			if( toggle == 0 ) str = log->logs[i].logStr;
 			else if( toggle == 1 ) str = log->logs[i].timeStr + log->logs[i].levelStr + log->logs[i].msg;
 			else if( toggle == 2 ) str = log->logs[i].levelStr + log->logs[i].msg;
 			else if( toggle == 3 ) str = log->logs[i].msg;
-			
+
 			if( str.length() * charW > width ){
-				int newLen = (float)width / charW;
+				int newLen = (int) ((float) width / charW);
 				str = str.substr(0, newLen);
 			}
 
@@ -75,23 +75,23 @@ void guiTypeLogger::render(){
 			ofFill();
 			glColor4fv(bgColor.getColorF());
 			ofRect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
-			
+
 			float xx = boundingBox.x + boundingBox.width - 20;
 			float yy = boundingBox.y;
-			
+
 			ofFill();
-			for(int i = 0; i < 4; i++){				
-				
+			for(int i = 0; i < 4; i++){
+
 				if( toggle == 0 || i >= toggle ){
 					glColor4fv(fgColor.getSelectedColorF());
 					ofFill();
 					ofRect(xx, yy, 5, 10);
 				}
-				
+
 				glColor4fv(outlineColor.getColorF());
 				ofNoFill();
-				ofRect(xx, yy, 5, 10);				
-				
+				ofRect(xx, yy, 5, 10);
+
 				xx += 5;
 			}
 

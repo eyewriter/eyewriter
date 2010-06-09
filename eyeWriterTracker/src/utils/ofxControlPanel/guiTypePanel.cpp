@@ -31,7 +31,7 @@ void guiTypePanel::addColumn(float minWidth){
 
 //-----------------------------------------------
 bool guiTypePanel::selectColumn(int which){
-	col = ofClamp(which, 0, columns.size()-1);
+	col = (int) ofClamp(which, 0, columns.size()-1);
 	return true;
 }
 
@@ -136,7 +136,7 @@ void guiTypePanel::addElement( guiBaseObject * element ){
 	columns[col].y += element->getHeight() + spacingAmntY;
 
 	float checkWidth = element->getWidth();
-		
+
 	if(checkWidth >= columns[col].width && !element->bRemoveFromLayout ){
 		float amnt = checkWidth - columns[col].width;
 		columns[col].width += amnt;
@@ -144,7 +144,7 @@ void guiTypePanel::addElement( guiBaseObject * element ){
 		for(unsigned int i = col+1; i < columns.size(); i++){
 			columns[i].x += amnt;
 		}
-		
+
 	}
 
 	//see if we need to resize!

@@ -23,11 +23,11 @@ ofxControlPanel::ofxControlPanel(){
 	eventsEnabled	= false;
 	bEventsSetup	= false;
 	bIgnoreLayout	= false;
-	
+
     currentXmlFile = "";
     incrementSaveName = "";
     xmlObjects.clear();
-	
+
 	ofxControlPanel::globalPanelList.push_back(this);
 }
 
@@ -41,21 +41,21 @@ ofxControlPanel::~ofxControlPanel(){
 		}
     }
 	guiObjects.clear();
-	
+
 	for(int i = 0; i < ofxControlPanel::globalPanelList.size(); i++){
-		if( ofxControlPanel::globalPanelList[i] != NULL && ofxControlPanel::globalPanelList[i]->name == name ){			
+		if( ofxControlPanel::globalPanelList[i] != NULL && ofxControlPanel::globalPanelList[i]->name == name ){
 			ofxControlPanel::globalPanelList.erase( ofxControlPanel::globalPanelList.begin()+i, ofxControlPanel::globalPanelList.begin()+i+1);
 			break;
 		}
 	}
-	
+
 	for(int i = 0; i < customEvents.size(); i++){
 		if( customEvents[i] != NULL ){
 			delete customEvents[i];
 			customEvents[i] = NULL;
 		}
 	}
-	
+
 	customEvents.clear();
 }
 
@@ -67,11 +67,11 @@ ofxControlPanel * ofxControlPanel::getPanelInstance(string panelName){
 		}
 	}
 	return NULL;
-}	
-		
+}
+
 //-----------------------------
 void ofxControlPanel::setup(string controlPanelName, float panelX, float panelY, float width, float height){
-	
+
 	name = controlPanelName;
 
 	setPosition(panelX, panelY);
@@ -79,9 +79,9 @@ void ofxControlPanel::setup(string controlPanelName, float panelX, float panelY,
 	setShowText(true);
 
 	fgColor			= gFgColor;
-	outlineColor	= gOutlineColor;				
+	outlineColor	= gOutlineColor;
 	bgColor			= gBgColor;
-	textColor		= gTextColor;	  
+	textColor		= gTextColor;
 
 }
 
@@ -248,7 +248,7 @@ guiTypeSlider * ofxControlPanel::addSlider(string sliderName, string xmlName, fl
 
     //add a new slider to our list
     guiTypeSlider * tmp = new guiTypeSlider();
-	
+
 	setLayoutFlag(tmp);
 
     //setup and dimensions
@@ -521,7 +521,7 @@ guiTypeFileLister * ofxControlPanel::addFileLister(string name, simpleFileLister
 
 // ############################################################## //
 // ##
-// ##       events 
+// ##       events
 // ##
 // ############################################################## //
 
@@ -532,21 +532,21 @@ void ofxControlPanel::setupEvents(){
 	for(int i = 0; i < guiObjects.size(); i++){
 		ofAddListener(guiObjects[i]->guiEvent, this, &ofxControlPanel::eventsIn);
 	}
-	
+
 	//setup an event group for each panel
 	for(int i = 0; i < panels.size(); i++){
-	
+
 		vector <string> xmlNames;
-		
+
 		for(int j = 0; j < panels[i]->children.size(); j++){
 			xmlNames.push_back(panels[i]->children[j]->xmlName);
 		}
-		
+
 		string groupName = "PANEL_EVENT_"+ofToString(i);
 		createEventGroup(groupName, xmlNames);
 		printf("creating %s\n", groupName.c_str());
 	}
-	
+
 	bEventsSetup = true;
 }
 
@@ -556,7 +556,7 @@ void ofxControlPanel::createEventGroup(string eventGroupName, vector <string> xm
 	customEvents.push_back( new guiCustomEvent() );
 	customEvents.back()->group = eventGroupName;
 	customEvents.back()->names = xmlNames;
-}		
+}
 
 //---------------------------------------------
 void ofxControlPanel::enableEvents(){
@@ -576,7 +576,7 @@ void ofxControlPanel::disableEvents(){
 ofEvent <guiCallbackData> & ofxControlPanel::getEventsForPanel(int panelNo){
 	if( panelNo < panels.size() ){
 		return getEventGroup("PANEL_EVENT_"+ofToString(panelNo));
-	}else{			
+	}else{
 		return guiEvent;
 	}
 }
@@ -584,7 +584,7 @@ ofEvent <guiCallbackData> & ofxControlPanel::getEventsForPanel(int panelNo){
 //---------------------------------------------
 ofEvent <guiCallbackData> & ofxControlPanel::getAllEvents(){
 	return guiEvent;
- } 
+ }
 
 
 // Use the name you made for your custom group to get back the event object
@@ -595,7 +595,7 @@ ofEvent <guiCallbackData> & ofxControlPanel::getEventGroup(string eventGroupName
 			return customEvents[i]->guiEvent;
 		}
 	}
-	
+
 	//if we don't find a match we return the global event
 	ofLog(OF_LOG_ERROR, "error eventGroup %s does not exist - returning the global event instead", eventGroupName.c_str());
 	return guiEvent;
@@ -605,10 +605,10 @@ ofEvent <guiCallbackData> & ofxControlPanel::getEventGroup(string eventGroupName
 //---------------------------------------------
 void ofxControlPanel::eventsIn(guiCallbackData & data){
 	if( !eventsEnabled ) return;
-	
+
 	//we notify the ofxControlPanel event object - aka the global ALL events callback
 	ofNotifyEvent(guiEvent, data, this);
-	
+
 	//we then check custom event groups
 	for(int i = 0; i < customEvents.size(); i++){
 		for(int k = 0; k < customEvents[i]->names.size(); k++){
@@ -618,7 +618,7 @@ void ofxControlPanel::eventsIn(guiCallbackData & data){
 		}
 	}
 }
-		
+
 // ############################################################## //
 // ##
 // ##       get and set values
@@ -693,7 +693,7 @@ int ofxControlPanel::getValueI(string xmlName, int whichParam){
     for(int i = 0; i < (int) xmlObjects.size(); i++){
         if( xmlObjects[i].guiObj != NULL && xmlName == xmlObjects[i].xmlName ){
             if( whichParam >= 0 && whichParam < xmlObjects[i].numParams ){
-                return xmlObjects[i].guiObj->value.getValueI(whichParam);
+                return (int) (xmlObjects[i].guiObj->value.getValueI(whichParam));
             }
         }
     }
@@ -1087,7 +1087,11 @@ void ofxControlPanel::draw(){
 
             //don't let gui elements go out of their panels
             glEnable(GL_SCISSOR_TEST);
-            glScissor(boundingBox.x, ofGetHeight() - ( boundingBox.y + boundingBox.height - (-2 + topSpacing) ), boundingBox.width - borderWidth , boundingBox.height);
+            glScissor(
+							(int) boundingBox.x,
+							(int) (ofGetHeight() - ( boundingBox.y + boundingBox.height - (-2 + topSpacing) )),
+							(int) (boundingBox.width - borderWidth),
+							(int) boundingBox.height);
 
                 for(int i = 0; i < (int) panelTabs.size(); i++){
                     if( i == selectedPanel){

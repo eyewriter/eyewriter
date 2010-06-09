@@ -11,9 +11,9 @@
 #include "buttonRect.h"
 
 class buttonTrigger : public buttonRect{
-	
+
 	public:
-	
+
 	buttonTrigger(){
 		active  = false;
 		hasLeft = true;
@@ -25,10 +25,10 @@ class buttonTrigger : public buttonRect{
 	void setMaxCounter(float nCounter){
 		maxCount = nCounter;
 	}
-	
+
 	void setup( string onName, float xIn, float yIn, float w, float h ){
 		displayText = onName;
-		
+
 		x		= xIn;
 		y		= yIn;
 		width	= w;
@@ -36,16 +36,16 @@ class buttonTrigger : public buttonRect{
 	}
 
 	bool update(float xIn, float yIn){
-	
+
 		bool changed = false;
 		pct *= 0.85f;
-		
+
 		if( inRect(xIn, yIn) ){
-			
+
 			if( hasLeft ){
 				counter += 0.6f;
 				pct = counter;
-				if(counter >= maxCount ){					
+				if(counter >= maxCount ){
 					hasLeft = false;
 					changed = true;
 				}
@@ -57,22 +57,22 @@ class buttonTrigger : public buttonRect{
 				counter *= 0.93f;
 			}
 		}
-		
+
 		return changed;
-	}	
-	
-	
+	}
+
+
 	void draw(){
 		ofFill();
-		
-		float pctActive = ofMap(pct, 0.0, maxCount, 0.0, 80.0);			
-		ofSetColor(180 - pctActive, 180.0, 180 - pctActive);
-		
-		ofRect(x, y, width, height); 
+
+		float pctActive = ofMap(pct, 0.0, maxCount, 0.0, 80.0);
+		ofSetColor((int) (180 - pctActive), 180, (int) (180 - pctActive));
+
+		ofRect(x, y, width, height);
 
 		ofNoFill();
 		ofSetColor(30, 30, 30);
-		ofRect(x, y, width, height); 
+		ofRect(x, y, width, height);
 
 		float textWidth = 8.0f * displayText.length();
 		float remainX = (width - textWidth)/2;
@@ -84,14 +84,14 @@ class buttonTrigger : public buttonRect{
 		ofDrawBitmapString(displayText, x + remainX, y + remainY);
 
 	}
-	
+
 	float maxCount;
-	
+
 	float pct;
 	bool trigger;
 	float counter;
 	bool hasLeft;
 	string displayText;
 	bool active;
-	
+
 };

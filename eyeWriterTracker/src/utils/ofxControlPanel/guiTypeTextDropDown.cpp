@@ -8,32 +8,32 @@ void guiTypeTextDropDown::setup(string dropDownName, int defaultBox, vector <str
 	value.addValue( (int)defaultBox, 0, vecDropList.size()-1);
 	name = dropDownName;
 
-	boxHeight = MAX(15, displayText.getTextHeight());
+	boxHeight = (int) MAX(15, displayText.getTextHeight());
 	hitArea.height = boundingBox.height = boxHeight;
 
-	bShowDropDown = false;	
+	bShowDropDown = false;
 }
 
 //-----------------------------------------------
 void guiTypeTextDropDown::updateValue(){
 	//CB
-	notify();	
+	notify();
 }
 
 //-----------------------------------------------.
 void guiTypeTextDropDown::update(){
 
-	boxHeight = MAX(15, displayText.getTextHeight());
+	boxHeight = (int) MAX(15, displayText.getTextHeight());
 	hitArea.height = boundingBox.height = boxHeight;
-	
+
 	int minSize = 0;
 	for(int i = 0; i < vecDropList.size(); i++){
-		minSize = MAX(minSize, displayText.getTextWidth(vecDropList[i]));
+		minSize = (int) MAX(minSize, displayText.getTextWidth(vecDropList[i]));
 	}
-	
+
 	boundingBox.width = MAX(boundingBox.width, minSize + boxHeight + 5);
 	hitArea			= boundingBox;
-	
+
 	//setShowText(false);
 	updateText();
 	if(bShowDropDown) {
@@ -56,9 +56,9 @@ void guiTypeTextDropDown::release(){
 void guiTypeTextDropDown::notify(){
 	guiCallbackData cbVal;
 	cbVal.setup(xmlName);
-	cbVal.addInt(value.getValueI());
+	cbVal.addInt((int) value.getValueI());
 	if( value.getValueI() < vecDropList.size() ){
-		cbVal.addString(vecDropList[value.getValueI()]);
+		cbVal.addString(vecDropList[(int) value.getValueI()]);
 	}
 	ofNotifyEvent(guiEvent,cbVal,this);
 }
@@ -154,7 +154,7 @@ void guiTypeTextDropDown::render(){
 			ofRect(bx + boundingBox.width - boxHeight*0.5, by, boxHeight*0.5, boxHeight*0.5);
 
 			glColor4fv(textColor.getColorF());
-			displayText.renderString(vecDropList[value.getValueI()], bx + 2, by + boxHeight -4);
+			displayText.renderString(vecDropList[(int) value.getValueI()], bx + 2, by + boxHeight -4);
 
 		}
 

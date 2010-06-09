@@ -19,7 +19,7 @@ guiTypeFileLister::guiTypeFileLister(){
 	usingSlider		= false;
 
 	lineSpacing		= 12;
-	dblClickTime	= 500;	
+	dblClickTime	= 500;
 }
 
 //------------------------------------------------
@@ -58,7 +58,7 @@ void guiTypeFileLister::updateGui(float x, float y, bool firstHit, bool isRelati
 			selectPct  = ( ypos ) / (float)(numVisible * lineSpacing);
 			selectPct  = ofClamp(selectPct, 0, 1);
 
-			int select =  startPos + selectPct * (float)numVisible;
+			int select = (int) (startPos + selectPct * (float) numVisible);
 
 			if( select == selectionTmp && (ofGetElapsedTimeMillis() - lastClickTime) < dblClickTime ){
 				selection = select;
@@ -82,17 +82,17 @@ void guiTypeFileLister::release(){
 void guiTypeFileLister::drawRecords(float x, float y, float width, float height){
 	if( lister == NULL)return;
 	if( lister->entries.size() == 0)return;
-	
+
 	float textW = MAX(5, displayText.stringWidth("abcdefg")/7.0);
 	float textH = MAX(lineSpacing, displayText.getTextSingleLineHeight() + 2);
-	lineSpacing = textH;
-	
+	lineSpacing = (int) textH;
+
 	ofPushStyle();
 		float yPos = textH;
-		startPos = (float)(lister->entries.size()-1) * (pct);
+		startPos = (int) ((float)(lister->entries.size()-1) * (pct));
 		endPos = 0;
 
-		int numCanFit = (height / textH)- 1;
+		int numCanFit = (int) ((height / textH)- 1);
 		endPos = startPos + numCanFit;
 		endPos = MIN(lister->entries.size(), endPos);
 
@@ -100,7 +100,7 @@ void guiTypeFileLister::drawRecords(float x, float y, float width, float height)
 
 			string str = lister->entries[i].filename;
 			if( str.length() * textW > width ){
-				int newLen = (float)width / textW;
+				int newLen = (int) ((float)width / textW);
 
 				str = str.substr(0, newLen);
 			}

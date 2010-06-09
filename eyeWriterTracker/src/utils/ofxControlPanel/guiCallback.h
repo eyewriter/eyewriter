@@ -15,6 +15,6 @@ class guiCustomEvent{
 	public:
 		vector <string> names;
 		string group;
-		
-		ofEvent <guiCallbackData> guiEvent;		
+
+		ofEvent <guiCallbackData> guiEvent;
 };

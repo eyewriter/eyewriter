@@ -127,7 +127,7 @@ void simpleLogger::draw(float x, float y, float width, float height){
 
 			string str = logs[i].logStr;
 			if( str.length() * 8> width ){
-				int newLen = (float)width / 8;
+				int newLen = (int) ((float) width / 8);
 				//newLen = ofClamp(newLen, 1, 999999);
 				str = str.substr(0, newLen);
 			}

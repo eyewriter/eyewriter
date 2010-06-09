@@ -24,18 +24,18 @@ class guiVariablePointer{
 			dataType	= GUI_VAR_NONE;
 			precision   = 7;
 		}
-		
+
 		guiVariablePointer( string displayNameIn, void * varPtr, guiVarType theDataType, float floatPrecision = 7){
 			displayName = displayNameIn;
 			ptr			= varPtr;
-			dataType	= theDataType;		
-			precision   = floatPrecision;
-		} 
-	
+			dataType	= theDataType;
+			precision   = (int) floatPrecision;
+		}
+
 		ofRectangle bounds;
 		string varAsString;
 		string displayName;
 		void * ptr;
 		guiVarType dataType;
-		float precision;
+		int precision;
 };
