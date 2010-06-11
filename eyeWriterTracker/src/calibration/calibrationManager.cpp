@@ -449,8 +449,6 @@ void calibrationManager::calculateWeights(vector <ofPoint> trackedPoints, vector
 		ls.add(makeInput(ipt.x, ipt.y), makeOutput(opt.x, opt.y));
 	}
 
-	ls.update();
-
 	bBeenFit = true;
 
 }
