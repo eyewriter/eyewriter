@@ -34,6 +34,7 @@ public:
 	const vector<float>& getError() const;
 	const vector<bool>& getOutliers() const;
 
+	void resetOutliers();
 	void removeOutliers(float standardDeviations);
 
 	vector< vector<float> > getMap() const;

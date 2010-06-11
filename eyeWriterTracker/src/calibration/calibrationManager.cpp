@@ -74,11 +74,13 @@ void calibrationManager::setup(){
 
 
 	panel.setWhichPanel("smoothing");
+	panel.addSlider("remove outliers", "REMOVE_OUTLIERS", 2, .1, 4, false);
 	panel.addSlider("smoothing amount", "AMOUNT_SMOOTHING", 0.97, 0.01, 1.0f, false);
 
 
 	smoothing = 1.0f;
 	menuEnergy = 1;
+	lastRemoveOutliers = 0;
 }
 
 
@@ -150,7 +152,6 @@ void calibrationManager::loadCalibration(){
 //--------------------------------------------------------------
 void calibrationManager::update(){
 
-
 	calibrationRectangle.x = 0;
 	calibrationRectangle.y = 0;
 	calibrationRectangle.width = ofGetWidth();
@@ -174,15 +175,19 @@ void calibrationManager::update(){
 	recordTimePerDot = panel.getValueF("RECORD_TIME");;
 	smoothing = panel.getValueF("AMOUNT_SMOOTHING");
 
+	removeOutliers = panel.getValueF("REMOVE_OUTLIERS");
+	if(bBeenFit && lastRemoveOutliers != removeOutliers) {
+		ls.resetOutliers();
+		ls.removeOutliers(removeOutliers);
+		lastRemoveOutliers = removeOutliers;
+	}
+
 	totalTimePerDot = preTimePerDot + recordTimePerDot;
 
 	if (panel.getValueB("START_AUTO")){
 		bPreAutomatic = true;
 		panel.setValueB("START_AUTO", false);
 	}
-
-
-
 
 	if (panel.getValueB("RESET_CALIB")){
 		clear();

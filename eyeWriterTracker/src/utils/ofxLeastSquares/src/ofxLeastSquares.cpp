@@ -136,6 +136,11 @@ void ofxLeastSquares::removeOutlier() {
 	errorUpdated = false;
 }
 
+void ofxLeastSquares::resetOutliers() {
+	for(int i = 0; i < outliers.size(); i++)
+		outliers[i] = false;
+}
+
 /*
  This isn't quite right, because after every iteration you should mark
  everything as a non-outlier and get rid of the n worst outliers. But this
