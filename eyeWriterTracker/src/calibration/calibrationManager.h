@@ -41,8 +41,6 @@ class calibrationManager {
 		vector <ofPoint> screenPoints;
 		vector <ofPoint> eyePoints;
 
-		double		cxfit[6];
-		double		cyfit[6];
 		bool		bBeenFit;
 
 		int			nDivisionsWidth;

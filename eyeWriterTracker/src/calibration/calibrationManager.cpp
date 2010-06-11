@@ -107,11 +107,13 @@ void calibrationManager::stop(){
 //--------------------------------------------------------------
 void calibrationManager::saveCalibration(){
 	ofxXmlSettings xml;
-	for (int i = 0; i < 6; i++){
-		xml.addTag("pt");
-		xml.pushTag("pt", i);
-		xml.addValue("x", cxfit[i]*10000);
-		xml.addValue("y", cyfit[i]*10000);
+	vector< vector<float> > map = ls.getMap();
+	for (int i = 0; i < map.size(); i++){
+		xml.addTag("term");
+		xml.pushTag("term", i);
+		vector<float>& cur = map[i];
+		xml.addValue("x", cur[0]);
+		xml.addValue("y", cur[1]);
 		xml.popTag();
 	}
 	xml.saveFile("settings/calibration.xml");
@@ -120,17 +122,18 @@ void calibrationManager::saveCalibration(){
 
 //--------------------------------------------------------------
 void calibrationManager::loadCalibration(){
-
-
-
 	ofxXmlSettings xml;
 	xml.loadFile("settings/calibration.xml");
-	for (int i = 0; i < 6; i++){
-		xml.pushTag("pt", i);
-		cxfit[i] = xml.getValue("x", 0.0f ) / 10000.0f;
-		cyfit[i] = xml.getValue("y", 0.0f ) / 10000.0f;
+	vector< vector<float> > map;
+	for (int i = 0; i < 6; i++) { // ideally this shouldn't be fixed at 6
+		xml.pushTag("term", i);
+		vector<float> cur;
+		cur.push_back(xml.getValue("x", 0.0f ));
+		cur.push_back(xml.getValue("y", 0.0f ));
+		map.push_back(cur);
 		xml.popTag();
 	}
+	ls.setMap(map);
 	bBeenFit = true;
 
 	/*
@@ -144,8 +147,6 @@ void calibrationManager::loadCalibration(){
 	}
 	printf("-------------------------------------------- \n");
 	*/
-
-
 }
 
 
