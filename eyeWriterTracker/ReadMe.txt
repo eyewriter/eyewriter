@@ -1,22 +1,23 @@
-README 6/3/2010 by ito
+README 6/12/2010 by ito + kyle
 EyeWriter Remote Eye Tracker
 
-To use realtime eye tracking system, you need a camera and IR LEDs and some electronics parts.
-For the information for the hardware, see this (for now).
+To use this realtime eye tracking system, you need a camera and IR LEDs and some electronics hardware.
+For information on the hardware, please see (for now):
 http://collab.eyewriter.org/?p=123
 http://collab.eyewriter.org/?p=102
 
-This software is made by openFrameworks and based on the original EyeWriter software.
-about openFrameworks, eyeWriter project please check this.
+Arduino code for driving the hardware is at /StrobeEye/StrobeEye.pde
+
+This software is made with Open Frameworks and based on the original EyeWriter software.
+For more information about Open Frameworks and the Eye Writer project please see:
 http://www.openframeworks.cc/
 http://www.eyewriter.org/
 
-Following openFrameworks AddOns are needed.
+To compile the code, the following openFrameworks addons are needed:
 - ofxDirList
 - ofxVectorMath
 - ofxXmlSettings
 - ofxOpenCv
-
 
 Note:
 
