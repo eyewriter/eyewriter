@@ -515,10 +515,10 @@
 			isa = PBXGroup;
 			children = (
 				CF94B3AD11B83B4E00C3115A /* EllipseFit */,
-				CF94B3B211B83B4E00C3115A /* eyeFinder.cpp */,
-				CF94B3B311B83B4E00C3115A /* eyeFinder.h */,
 				CF94B3B411B83B4E00C3115A /* eyeTracker.cpp */,
 				CF94B3B511B83B4E00C3115A /* eyeTracker.h */,
+				CF94B3B211B83B4E00C3115A /* eyeFinder.cpp */,
+				CF94B3B311B83B4E00C3115A /* eyeFinder.h */,
 				CF94B3B611B83B4E00C3115A /* glintFinder.cpp */,
 				CF94B3B711B83B4E00C3115A /* glintFinder.h */,
 				CF94B3B811B83B4E00C3115A /* inputManager.cpp */,

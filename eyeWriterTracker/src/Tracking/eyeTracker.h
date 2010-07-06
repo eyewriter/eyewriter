@@ -16,31 +16,30 @@
 #include "glintFinder.h"
 #include "EllipseCalcurator.h"
 
-
 class eyeTracker {
-
+	
 public:
 	
 	eyeTracker();
 	void		setup(int width, int height);
 	void		update(ofxCvGrayscaleImage & grayImgFromCam);
-
+	
 	void		drawGlintLine(float x, float y, float width, float height);
 	void		drawPupilLine(float x, float y, float width, float height);
 	void		drawEllipse(float x, float y, float width, float height);
 	
 	ofPoint	getEyePoint();
-	ofPoint	getGlintPoint(bool bIsLeftOrTop);
-	ofPoint	getVectorGlintToPupil(bool bIsLeftOrTopGlint);		
-
+	ofPoint	getGlintPoint(int glintID);
+	ofPoint	getVectorGlintToPupil(int glintID);		
 	
 	ofxCvGrayscaleAdvanced			currentImg;
 	
 	ofxCvGrayscaleImage				brightEyeImg;
 	ofxCvGrayscaleImage				darkEyeImg;
-		
-	ofxCvGrayscaleAdvanced			magCurrent;
 	
+	ofxCvGrayscaleAdvanced			magCurrent;
+	ofxCvGrayscaleAdvanced			warpedImg;
+
 	eyeFinder						eFinder;
 	pupilFinder						pFinder;
 	glintFinder						gFinder;
@@ -52,7 +51,7 @@ public:
 	int				targetHeight;
 	float			magRatio;
 	float			divisorEyeFinder;
-				
+	
 	int				w, h;
 	int				bigEyeSizeWidth;
 	int				bigEyeSizeHeight;
@@ -67,7 +66,7 @@ public:
 	float			threshold_p;
 	float			minBlobSize_p;
 	float			maxBlobSize_p;
-		
+	
 	//glint Tracking
 	float			threshold_g;
 	float			minBlobSize_g;
@@ -75,7 +74,7 @@ public:
 	
 	//Bright/Dark Threshold
 	float			threshold_bd;
-
+	
 	bool			bFoundOne;
 	bool			firstFrame;
 	
@@ -89,16 +88,18 @@ public:
 	
 	bool			bIsBrightEye;
 	
+	// Warp
+	bool			bUseHomography;	
+	ofPoint			srcPos[4];
+	ofPoint			dstPos[4];
+
+	
 	
 protected:
 	
 	bool	getBrightEyeDarkEye();
 	
-	ofPoint		leftOrTopGlintPos;
-	ofPoint		rightOrBottomGlintPos;
 	
-	
-
 };
 
 #endif //_EYE_TRACKER_

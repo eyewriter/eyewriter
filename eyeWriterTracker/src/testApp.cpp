@@ -51,7 +51,7 @@ void testApp::update(){
 	// smooth eye data in...
 	if (CM.bBeenFit){									// become true after calibration
 		ofPoint trackedEye = TM.getEyePoint();
-		ofPoint screenPoint = CM.getCalibratedPoint(trackedEye.x, trackedEye.y);
+		screenPoint = CM.getCalibratedPoint(trackedEye.x, trackedEye.y);
 		eyeSmoothed.x = CM.smoothing * eyeSmoothed.x + (1-CM.smoothing) * screenPoint.x;
 		eyeSmoothed.y = CM.smoothing * eyeSmoothed.y + (1-CM.smoothing) * screenPoint.y;
 	}

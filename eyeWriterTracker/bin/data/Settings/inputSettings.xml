@@ -6,7 +6,7 @@
 	
 	<!-- some per mode settings -->
 
-    	<videoFile>movies/EyeTestVideo.mov</videoFile>
+    	<videoFile>movies/FourGlints2.mov</videoFile>
         <videoFrameRate>30</videoFrameRate>
 
 	<videoGrabber>

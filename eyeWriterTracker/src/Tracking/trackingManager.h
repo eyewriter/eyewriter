@@ -25,7 +25,8 @@ public:
 	void drawBrightDarkPupil(int xBright, int yBright, int xDark, int yDark);
 	void drawAutoThresholdBrightnessGraph(int x, int y);
 	void drawBrighnessScanGraph(const unsigned char * pupilpixels, int x, int y, int nLine, bool bIsVertical, string graphname);
-	void drawCircles();
+	void drawRawInput(int offsetX, int offsetY, float scale);
+	void drawWarpedImg(int x, int y, int w, int h);
 	
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
@@ -43,6 +44,7 @@ public:
 	ofPoint	getEyePoint();
 	bool	bGotAnEyeThisFrame();
 	
+	bool	bFocusScreenMode;
 	
 	ofxControlPanel	panel;	
 	inputManager		IM;
@@ -58,13 +60,14 @@ public:
 	bool				bDrawContour;
 	
 	bool				bFoundEye;
+	
 	ofPoint			eyePoint;
 	ofPoint			glintPoint[2];
 	
 	ofPoint			glintPupilVector;
 	ofPoint			currentdrawPoint;
 	vector <ofPoint> trail;
-		
+	
 	int					scanX;
 	int					scanY;
 	

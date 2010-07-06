@@ -54,7 +54,7 @@ public:
 
 	bool		bUseBlur;
 	int			blur;
-
+	
 	float		maxWidth;						// need?
 	float		maxHeight;
 

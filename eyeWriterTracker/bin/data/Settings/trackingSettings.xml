@@ -77,7 +77,7 @@
     <val_0>0.000000</val_0>
 </THRESHOLD_BD>
 <THRESHOLD_GLINT>
-    <val_0>174.250000</val_0>
+    <val_0>221.000000</val_0>
 </THRESHOLD_GLINT>
 <B_USE_COMPACTNESS>
     <val_0>0.000000</val_0>
@@ -185,7 +185,7 @@
     <val_0>10.000000</val_0>
 </BLUR_PUPIL>
 <THRESHOLD_PUPIL>
-    <val_0>22.666668</val_0>
+    <val_0>121.833336</val_0>
 </THRESHOLD_PUPIL>
 <MIN_BLOB_PUPIL>
     <val_0>5000.000000</val_0>
@@ -200,10 +200,10 @@
     <val_0>300.000000</val_0>
 </MAX_BLOB_HEIGHT_PUPIL>
 <MIN_BLOB_GLINT>
-    <val_0>33.333336</val_0>
+    <val_0>100.000000</val_0>
 </MIN_BLOB_GLINT>
 <MAX_BLOB_GLINT>
-    <val_0>6222.222656</val_0>
+    <val_0>10000.000000</val_0>
 </MAX_BLOB_GLINT>
 <N_EROSIONS_EYEPOS>
     <val_0>0.000000</val_0>
@@ -253,3 +253,21 @@
 <RANGE_MAX_GLINT>
     <val_0>253.972198</val_0>
 </RANGE_MAX_GLINT>
+<B_FOCUS_SCREEN>
+    <val_0>0.000000</val_0>
+</B_FOCUS_SCREEN>
+<B_FOUR_GLINTS>
+    <val_0>1.000000</val_0>
+</B_FOUR_GLINTS>
+<B_USE_HOMOGRAPHY>
+    <val_0>0.000000</val_0>
+</B_USE_HOMOGRAPHY>
+<VIDEOSPEED>
+    <val_0>1.000000</val_0>
+</VIDEOSPEED>
+<WH_RATIO>
+    <val_0>0.600000</val_0>
+</WH_RATIO>
+<B_USE_STRETCH_PUPIL>
+    <val_0>0.000000</val_0>
+</B_USE_STRETCH_PUPIL>

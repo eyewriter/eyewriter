@@ -26,9 +26,10 @@ void trackingManager::setup(){
 	
 	bFoundEye		= false;
 	eyePoint.set(0,0,0);
-
+	
 	scanX = 0;
 	scanY = 0;
+	
 	
 	
 }
@@ -43,16 +44,15 @@ void trackingManager::update(){
 		trackEyes();
 	}
 	
-	glintPupilVector = tracker.getVectorGlintToPupil(true);
-
+	glintPupilVector = tracker.getVectorGlintToPupil(GLINT_BOTTOM_LEFT);
 	
 	// to make trail
-	currentdrawPoint.x = currentdrawPoint.x * 0.80 + glintPupilVector.x * 0.20;
-	currentdrawPoint.y = currentdrawPoint.y * 0.80 + glintPupilVector.y * 0.20;
+	//	currentdrawPoint.x = currentdrawPoint.x * 0.80 + glintPupilVector.x * 0.20;
+	//	currentdrawPoint.y = currentdrawPoint.y * 0.80 + glintPupilVector.y * 0.20;
 	
-	ofPoint	tempPoint(currentdrawPoint.x * 20, currentdrawPoint.y * 20);
+	ofPoint	tempPoint(glintPupilVector.x, glintPupilVector.y);
 	trail.push_back(tempPoint);
-	if (trail.size() > 100) trail.erase(trail.begin());
+	if (trail.size() > 200) trail.erase(trail.begin());
 	
 	//--- gui
 	panel.update();
@@ -75,8 +75,8 @@ void trackingManager::trackEyes(){
 	tracker.update(IM.grayImage);
 	
 	bFoundEye	= tracker.bFoundOne;						
-	eyePoint	= tracker.getVectorGlintToPupil(false);					// TODO: CHECK here.
-
+	eyePoint	= tracker.getVectorGlintToPupil(GLINT_BOTTOM_LEFT);					// TODO: CHECK here.
+	
 }
 
 //--------------------------------------------------------------
@@ -90,43 +90,58 @@ void trackingManager::videoSettings(){
 //--------------------------------------------------------------
 void trackingManager::draw(){
 	
-	// Draw Input
-//	IM.grayOddImage.draw(0, 0, IM.width/4, IM.height/4);
-//	IM.grayEvenImage.draw(IM.width/4,0, IM.width/4, IM.height/4);
-	drawInput(0, 0, IM.width/4, IM.height/4, IM.width/4, 0, IM.width/4, IM.height/4);	
-	
-	//test draw input
-//	IM.grayOddImage.draw(IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 0, IM.width/4, IM.height/4);
-//	IM.grayEvenImage.draw(IM.width/2 + IM.width/4 + tracker.pFinder.imgBeforeThreshold.width + 40,0, IM.width/4, IM.height/4);
-	
-	
-	// Draw EyeFinder
-	drawEyeFinder(0, IM.height/4+30, IM.width/2, IM.height/2);
-//	tracker.diffImg.draw(0, IM.height/4+30, IM.width/2, IM.height/2);
-	
-	// Draw Pupil Finder	
-	drawEyeImageBeforePupilThreshold(IM.width/2 + 20, 0, tracker.pFinder.imgBeforeThreshold.width, tracker.pFinder.imgBeforeThreshold.height);
-	drawPupilFinder(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height + 30);
-
-	// Draw Glint Finder
-	drawGlintFinder(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height*2 + 60);
-	
-	// Draw BrightEye, DarkEye
-	drawBrightDarkPupil(0, IM.height/4 + IM.height/2 + 60, tracker.targetWidth, IM.height/4 + IM.height/2 + 60);
-	
-	// Draw auto threshold Line for bright/dark eye.
-	drawAutoThresholdBrightnessGraph(0, IM.height/4 + IM.height/2 + 60);
-	
-	// Draw brightness graph
-	unsigned char * pupilpixels = tracker.pFinder.imgBeforeThreshold.getPixels();
-	drawBrighnessScanGraph(pupilpixels, IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 0, scanY, false, "BrightnessScan/Horizontal");
-	drawBrighnessScanGraph(pupilpixels, IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 255 + 30, scanX, true, "BrightnessScan/Vertical");
-	
-	ofSetColor(0, 0, 0);
-	
-	
-	// Draw trail circles.
-	drawCircles();
+	if (!bFocusScreenMode){
+		
+		// Draw Input
+		//	IM.grayOddImage.draw(0, 0, IM.width/4, IM.height/4);
+		//	IM.grayEvenImage.draw(IM.width/4,0, IM.width/4, IM.height/4);
+		drawInput(0, 0, IM.width/4, IM.height/4, IM.width/4, 0, IM.width/4, IM.height/4);	
+		
+		//test draw input
+		//	IM.grayOddImage.draw(IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 0, IM.width/4, IM.height/4);
+		//	IM.grayEvenImage.draw(IM.width/2 + IM.width/4 + tracker.pFinder.imgBeforeThreshold.width + 40,0, IM.width/4, IM.height/4);
+		
+		
+		// Draw EyeFinder
+		drawEyeFinder(0, IM.height/4+30, IM.width/2, IM.height/2);
+		//	tracker.diffImg.draw(0, IM.height/4+30, IM.width/2, IM.height/2);
+		
+		// Draw Pupil Finder	
+		drawEyeImageBeforePupilThreshold(IM.width/2 + 20, 0, tracker.pFinder.imgBeforeThreshold.width, tracker.pFinder.imgBeforeThreshold.height);
+		drawPupilFinder(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height + 30);
+		
+		// Draw Glint Finder
+		drawGlintFinder(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height*2 + 60);
+		
+		// Draw BrightEye, DarkEye
+		drawBrightDarkPupil(0, IM.height/4 + IM.height/2 + 60, tracker.targetWidth, IM.height/4 + IM.height/2 + 60);
+		
+		// Draw auto threshold Line for bright/dark eye.
+		drawAutoThresholdBrightnessGraph(0, IM.height/4 + IM.height/2 + 60);
+		
+		// Draw brightness graph
+		unsigned char * pupilpixels = tracker.pFinder.imgBeforeThreshold.getPixels();
+		drawBrighnessScanGraph(pupilpixels, IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 0, scanY, false, "BrightnessScan/Horizontal");
+		drawBrighnessScanGraph(pupilpixels, IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 255 + 30, scanX, true, "BrightnessScan/Vertical");
+		
+		// Draw warpedImg
+		
+		if(tracker.bUseHomography && tracker.gFinder.bFourGlints){
+			drawWarpedImg(IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 255 * 2 + 60, 88*4, 64*4);
+		}
+		
+		ofSetColor(0, 0, 0);
+		
+		
+		// Draw trail circles.
+		drawRawInput(ofGetWidth()/2, ofGetHeight()/2, 20);
+		
+	} else {
+		
+		IM.grayOddImage.draw(0, 0, IM.width, IM.height);
+		IM.grayEvenImage.draw(IM.width, 0, IM.width, IM.height);
+		
+	}
 	
 	panel.draw();
 	
