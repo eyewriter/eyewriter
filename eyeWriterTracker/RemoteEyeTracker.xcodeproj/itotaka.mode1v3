@@ -274,8 +274,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>13</integer>
-									<integer>11</integer>
+									<integer>30</integer>
 									<integer>8</integer>
 									<integer>0</integer>
 								</array>
@@ -300,7 +299,7 @@
 							<real>238</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>91 -20 1440 819 0 0 1440 878 </string>
+						<string>142 -2 1440 819 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -318,7 +317,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>eyeTracker.cpp</string>
+								<string>testApp.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +325,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>eyeTracker.cpp</string>
+										<string>testApp.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CF0F511911E3A3FE00F4537E</string>
+										<string>CFECE93211E3AA1900F39EF3</string>
 										<key>history</key>
 										<array>
 											<string>CFE6D594117F5FB100D92167</string>
@@ -342,7 +341,6 @@
 											<string>CF94B3EE11B83E0200C3115A</string>
 											<string>CF94B3F111B83E0200C3115A</string>
 											<string>CF4FEA6A11B84F03002AC074</string>
-											<string>CF2556D811D94A8600118740</string>
 											<string>CF2556D911D94A8600118740</string>
 											<string>CF25570F11D94C9100118740</string>
 											<string>CF25571311D94C9100118740</string>
@@ -368,7 +366,8 @@
 											<string>CFA59F9A11DED41400DBD18C</string>
 											<string>CFA59F9B11DED41400DBD18C</string>
 											<string>CFA59F9C11DED41400DBD18C</string>
-											<string>CFA59F9E11DED41400DBD18C</string>
+											<string>CFDA113E11E3A6B600647FB7</string>
+											<string>CFECE91411E3A8DC00F39EF3</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -382,7 +381,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1180, 773}}</string>
 								<key>RubberWindowFrame</key>
-								<string>91 -20 1440 819 0 0 1440 878 </string>
+								<string>142 -2 1440 819 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -402,7 +401,7 @@
 								<key>Frame</key>
 								<string>{{0, 778}, {1180, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>91 -20 1440 819 0 0 1440 878 </string>
+								<string>142 -2 1440 819 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -426,9 +425,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>CF0F511A11E3A3FE00F4537E</string>
+				<string>CFECE92511E3AA1100F39EF3</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>CF0F511B11E3A3FE00F4537E</string>
+				<string>CFECE92611E3AA1100F39EF3</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -566,11 +565,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>CFECE93011E3AA1100F39EF3</string>
+		<string>CFECE93111E3AA1100F39EF3</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>CFFD8A0E11639A2B0042B330</string>
 		<string>/Users/itotaka/Codes/EyeWriter-GitHub/apps/eyewriter-app/eyeWriterTracker/RemoteEyeTracker.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>91 -20 1440 819 0 0 1440 878 </string>
+	<string>142 -2 1440 819 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -647,7 +650,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>CFFD8A0E11639A2B0042B330</string>
-				<string>CF0F511C11E3A3FE00F4537E</string>
+				<string>CFECE92711E3AA1100F39EF3</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -769,13 +772,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>CFA59F7E11DEC4CE00DBD18C</string>
+				<string>CFECE92811E3AA1100F39EF3</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>CFA59F7F11DEC4CE00DBD18C</string>
-				<string>CFA59F8011DEC4CE00DBD18C</string>
-				<string>CFA59F8111DEC4CE00DBD18C</string>
-				<string>CFA59F8211DEC4CE00DBD18C</string>
-				<string>CFA59F8311DEC4CE00DBD18C</string>
+				<string>CFECE92911E3AA1100F39EF3</string>
+				<string>CFECE92A11E3AA1100F39EF3</string>
+				<string>CFECE92B11E3AA1100F39EF3</string>
+				<string>CFECE92C11E3AA1100F39EF3</string>
+				<string>CFECE92D11E3AA1100F39EF3</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -929,7 +932,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>CFA59F8411DEC4CE00DBD18C</string>
+				<string>CFECE92E11E3AA1100F39EF3</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

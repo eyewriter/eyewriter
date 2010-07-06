@@ -1,2 +1,0 @@
-/Users/itotaka/Codes/EyeWriter-GitHub/apps/eyewriter-app/eyeWriterTracker/src/testApp.cpp: In member function 'virtual void testApp::update()':
-/Users/itotaka/Codes/EyeWriter-GitHub/apps/eyewriter-app/eyeWriterTracker/src/testApp.cpp:54: error: 'screenPoint' was not declared in this scope

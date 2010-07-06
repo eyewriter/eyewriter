@@ -31,7 +31,7 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
 	
-	ofBackground(70,70,70);
+	ofBackground(72,72,72);
 	
 	// update the tracking manager (and internally, its input manager)
 	TM.update();
