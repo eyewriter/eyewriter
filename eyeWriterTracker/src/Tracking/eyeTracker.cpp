@@ -121,7 +121,6 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam){
 					bFoundPupil = pFinder.update(magCurrent, threshold_p, minBlobSize_p, maxBlobSize_p);
 
 				}
-
 				
 				//		bool bFoundPupil = pFinder.update(magCurrent, pixelAvginTenframes - threshold_p, minBlobSize_p, maxBlobSize_p);
 				
