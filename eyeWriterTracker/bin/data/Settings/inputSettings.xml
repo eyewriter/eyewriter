@@ -2,7 +2,7 @@
 	
 	<!-- mode, input 0 = live, 1 = video  -->
 
-	<mode>1</mode>
+	<mode>0</mode>
 	
 	<!-- some per mode settings -->
 

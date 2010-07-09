@@ -252,7 +252,7 @@
 						<dict>
 							<key>PBXSmartGroupTreeModuleColumnWidthsKey</key>
 							<array>
-								<real>238</real>
+								<real>235</real>
 							</array>
 							<key>PBXSmartGroupTreeModuleColumnsKey_v4</key>
 							<array>
@@ -266,21 +266,21 @@
 								<string>E4B69B4A0A3A1720003C02F2</string>
 								<string>CFE6D592117F5F9500D92167</string>
 								<string>E4B69E1C0A3A1BDC003C02F2</string>
-								<string>CFB4A6CA11986312004299B8</string>
-								<string>E4C2422310CC54B6004149E2</string>
+								<string>CFD80A9311A1F29900417256</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>30</integer>
+									<integer>12</integer>
+									<integer>10</integer>
 									<integer>8</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {238, 760}}</string>
+							<string>{{0, 0}, {235, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -292,19 +292,19 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {255, 778}}</string>
+						<string>{{0, 0}, {252, 778}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
-							<real>238</real>
+							<real>235</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>142 -2 1440 819 0 0 1440 878 </string>
+						<string>15 45 1440 819 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
 					<key>Proportion</key>
-					<string>255pt</string>
+					<string>252pt</string>
 				</dict>
 				<dict>
 					<key>Dock</key>
@@ -317,7 +317,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>testApp.cpp</string>
+								<string>calibrationManager.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,23 +325,18 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>testApp.cpp</string>
+										<string>calibrationManager.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CFECE93211E3AA1900F39EF3</string>
+										<string>CFBEC81111E7CAE4007A4A8C</string>
 										<key>history</key>
 										<array>
-											<string>CFE6D594117F5FB100D92167</string>
 											<string>CF456F6411A2FC1B002E6C4C</string>
 											<string>CF961BF711AC753500963BAB</string>
 											<string>CFF5EDDF11B16F1A004FF5AD</string>
 											<string>CF9335F711B7499A00AC2BFA</string>
-											<string>CFC2F53E11B82BC90000F8D8</string>
-											<string>CF94B3EE11B83E0200C3115A</string>
-											<string>CF94B3F111B83E0200C3115A</string>
 											<string>CF4FEA6A11B84F03002AC074</string>
-											<string>CF2556D911D94A8600118740</string>
 											<string>CF25570F11D94C9100118740</string>
 											<string>CF25571311D94C9100118740</string>
 											<string>CF25571411D94C9100118740</string>
@@ -353,21 +348,31 @@
 											<string>CFFE73D211DE5B26009D4F92</string>
 											<string>CFFE73D311DE5B26009D4F92</string>
 											<string>CFFE73EB11DE73C6009D4F92</string>
-											<string>CFFE744611DE7DF0009D4F92</string>
 											<string>CFFE747911DEA9B9009D4F92</string>
 											<string>CFFE747B11DEA9B9009D4F92</string>
 											<string>CFFE747C11DEA9B9009D4F92</string>
 											<string>CFFE747D11DEA9B9009D4F92</string>
 											<string>CFFE747E11DEA9B9009D4F92</string>
-											<string>CFFE748111DEA9B9009D4F92</string>
-											<string>CFA59F8E11DEC5D900DBD18C</string>
 											<string>CFA59F8F11DEC5D900DBD18C</string>
-											<string>CFA59F9911DED41400DBD18C</string>
-											<string>CFA59F9A11DED41400DBD18C</string>
-											<string>CFA59F9B11DED41400DBD18C</string>
-											<string>CFA59F9C11DED41400DBD18C</string>
-											<string>CFDA113E11E3A6B600647FB7</string>
-											<string>CFECE91411E3A8DC00F39EF3</string>
+											<string>CFD7C00811E403A500EDCAD8</string>
+											<string>CFD7C00911E403A500EDCAD8</string>
+											<string>CFBEC71C11E78604007A4A8C</string>
+											<string>CFBEC71D11E78604007A4A8C</string>
+											<string>CFBEC71E11E78604007A4A8C</string>
+											<string>CFBEC72011E78604007A4A8C</string>
+											<string>CFBEC76A11E7A20F007A4A8C</string>
+											<string>CFBEC78611E7B131007A4A8C</string>
+											<string>CFBEC78711E7B131007A4A8C</string>
+											<string>CFBEC78811E7B131007A4A8C</string>
+											<string>CFBEC78911E7B131007A4A8C</string>
+											<string>CFBEC7D711E7C1B9007A4A8C</string>
+											<string>CFBEC80A11E7CAE4007A4A8C</string>
+											<string>CFBEC80B11E7CAE4007A4A8C</string>
+											<string>CFBEC80C11E7CAE4007A4A8C</string>
+											<string>CFBEC80D11E7CAE4007A4A8C</string>
+											<string>CFBEC80E11E7CAE4007A4A8C</string>
+											<string>CFBEC80F11E7CAE4007A4A8C</string>
+											<string>CFBEC81011E7CAE4007A4A8C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -379,9 +384,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1180, 773}}</string>
+								<string>{{0, 0}, {1183, 773}}</string>
 								<key>RubberWindowFrame</key>
-								<string>142 -2 1440 819 0 0 1440 878 </string>
+								<string>15 45 1440 819 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -399,9 +404,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 778}, {1180, 0}}</string>
+								<string>{{0, 778}, {1183, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>142 -2 1440 819 0 0 1440 878 </string>
+								<string>15 45 1440 819 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -410,7 +415,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>1180pt</string>
+					<string>1183pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -425,9 +430,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>CFECE92511E3AA1100F39EF3</string>
+				<string>CFBEC81211E7CAE4007A4A8C</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>CFECE92611E3AA1100F39EF3</string>
+				<string>CFBEC81311E7CAE4007A4A8C</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -565,15 +570,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>CFECE93011E3AA1100F39EF3</string>
-		<string>CFECE93111E3AA1100F39EF3</string>
+		<string>CFBEC81C11E7CAE4007A4A8C</string>
+		<string>CFBEC81D11E7CAE4007A4A8C</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>CFFD8A0E11639A2B0042B330</string>
 		<string>/Users/itotaka/Codes/EyeWriter-GitHub/apps/eyewriter-app/eyeWriterTracker/RemoteEyeTracker.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>142 -2 1440 819 0 0 1440 878 </string>
+	<string>15 45 1440 819 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -650,7 +655,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>CFFD8A0E11639A2B0042B330</string>
-				<string>CFECE92711E3AA1100F39EF3</string>
+				<string>CFBEC81411E7CAE4007A4A8C</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -772,13 +777,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>CFECE92811E3AA1100F39EF3</string>
+				<string>CFBEC81511E7CAE4007A4A8C</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>CFECE92911E3AA1100F39EF3</string>
-				<string>CFECE92A11E3AA1100F39EF3</string>
-				<string>CFECE92B11E3AA1100F39EF3</string>
-				<string>CFECE92C11E3AA1100F39EF3</string>
-				<string>CFECE92D11E3AA1100F39EF3</string>
+				<string>CFBEC81611E7CAE4007A4A8C</string>
+				<string>CFBEC81711E7CAE4007A4A8C</string>
+				<string>CFBEC81811E7CAE4007A4A8C</string>
+				<string>CFBEC81911E7CAE4007A4A8C</string>
+				<string>CFBEC81A11E7CAE4007A4A8C</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -810,25 +815,25 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>glintFinder.cpp</string>
+										<string></string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{0, 0}, {781, 24}}</string>
+										<string>{{0, 0}, {902, 55}}</string>
 										<key>RubberWindowFrame</key>
-										<string>642 331 781 470 0 0 1440 878 </string>
+										<string>482 85 902 793 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
 									<key>Proportion</key>
-									<string>781pt</string>
+									<string>902pt</string>
 								</dict>
 							</array>
 							<key>Proportion</key>
-							<string>24pt</string>
+							<string>55pt</string>
 						</dict>
 						<dict>
 							<key>BecomeActive</key>
@@ -843,18 +848,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 29}, {781, 400}}</string>
+								<string>{{0, 60}, {902, 692}}</string>
 								<key>RubberWindowFrame</key>
-								<string>642 331 781 470 0 0 1440 878 </string>
+								<string>482 85 902 793 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXProjectFindModule</string>
 							<key>Proportion</key>
-							<string>400pt</string>
+							<string>692pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>429pt</string>
+					<string>752pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -868,13 +873,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>CF25572211D94D4D00118740</string>
-				<string>CF25572311D94D4D00118740</string>
+				<string>CFBEC76711E7A1F7007A4A8C</string>
+				<string>CFBEC76811E7A1F7007A4A8C</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
 			<key>WindowString</key>
-			<string>642 331 781 470 0 0 1440 878 </string>
+			<string>482 85 902 793 0 0 1440 878 </string>
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>
@@ -909,7 +914,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {665, 674}}</string>
 								<key>RubberWindowFrame</key>
-								<string>635 163 665 715 0 0 1440 878 </string>
+								<string>534 163 665 715 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugCLIModule</string>
@@ -932,13 +937,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>CFECE92E11E3AA1100F39EF3</string>
+				<string>CFBEC81B11E7CAE4007A4A8C</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.consoleV3</string>
 			<key>WindowString</key>
-			<string>635 163 665 715 0 0 1440 878 </string>
+			<string>534 163 665 715 0 0 1440 878 </string>
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>

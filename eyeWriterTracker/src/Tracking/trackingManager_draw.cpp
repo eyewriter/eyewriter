@@ -199,7 +199,7 @@ void trackingManager::drawRawInput(int offsetX, int offsetY, float scale){
 	
 	ofCircle(trail[trail.size()-1].x*20 + ofGetWidth()/2, ofGetHeight()/2 + trail[trail.size()-1].y*20, 5);
 	
-	ofDisableAlphaBlending();
+	//ofDisableAlphaBlending();
 }
 //--------------------------------------------------------------
 void trackingManager::drawWarpedImg(int x, int y, int w, int h){

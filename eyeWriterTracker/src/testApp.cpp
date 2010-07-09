@@ -1,8 +1,5 @@
-
 #include "testApp.h"
 #include "stdio.h"
-
-
 
 //--------------------------------------------------------------
 testApp::testApp(){
@@ -11,7 +8,6 @@ testApp::testApp(){
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	
 	
 	//---- setup standard application settings
 	
@@ -22,7 +18,6 @@ void testApp::setup(){
 	CM.setup();
 	
 	eyeSmoothed.set(0,0,0);
-	
 	
 	BT.setup("catch me!", 50,50,180,180);
 	
@@ -68,15 +63,15 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
 	
-	
 	ofSetColor(255, 255, 255);
 	
 	if (mode == MODE_TRACKING)			TM.draw();
 	if (mode == MODE_CALIBRATING)		CM.draw();
 	if (mode == MODE_TEST)				BT.draw();
 	
-//	if (mode != MODE_TRACKING)	TM.drawBrightDarkPupil(0, 0, TM.tracker.targetWidth, 0);
-	if (mode != MODE_TRACKING) TM.drawInput(0, 0, TM.IM.width/4, TM.IM.height/4, TM.IM.width/4, 0, TM.IM.width/4, TM.IM.height/4);
+	if ((mode == MODE_CALIBRATING && CM.bDrawEyeInput) || mode == MODE_TEST){
+		TM.drawInput(0, 0, TM.IM.width/4, TM.IM.height/4, TM.IM.width/4, 0, TM.IM.width/4, TM.IM.height/4);
+	}
 	
 	// draw a green dot to see how good the tracking is:
 	if (CM.bBeenFit){
@@ -85,9 +80,10 @@ void testApp::draw(){
 		ofCircle(eyeSmoothed.x, eyeSmoothed.y, 20);
 	}
 	
+	// draw raw input
+	if (CM.bDrawRawInput) TM.drawRawInput(CM.rawDataOffset.x, CM.rawDataOffset.y, CM.rawDataScale);
+
 }
-
-
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){

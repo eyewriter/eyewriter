@@ -185,7 +185,7 @@
     <val_0>10.000000</val_0>
 </BLUR_PUPIL>
 <THRESHOLD_PUPIL>
-    <val_0>121.833336</val_0>
+    <val_0>48.166668</val_0>
 </THRESHOLD_PUPIL>
 <MIN_BLOB_PUPIL>
     <val_0>5000.000000</val_0>
@@ -257,7 +257,7 @@
     <val_0>0.000000</val_0>
 </B_FOCUS_SCREEN>
 <B_FOUR_GLINTS>
-    <val_0>1.000000</val_0>
+    <val_0>0.000000</val_0>
 </B_FOUR_GLINTS>
 <B_USE_HOMOGRAPHY>
     <val_0>0.000000</val_0>

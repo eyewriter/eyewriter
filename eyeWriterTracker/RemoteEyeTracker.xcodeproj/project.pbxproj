@@ -30,6 +30,8 @@
 		CF9840E4117CCFB00030247F /* ofxCvGrayscaleImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF9840D8117CCFB00030247F /* ofxCvGrayscaleImage.cpp */; };
 		CF9840E5117CCFB00030247F /* ofxCvImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF9840DA117CCFB00030247F /* ofxCvImage.cpp */; };
 		CF9840E6117CCFB00030247F /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF9840DD117CCFB00030247F /* ofxCvShortImage.cpp */; };
+		CFBEC7D311E7C195007A4A8C /* calibrationFileSaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBEC7D011E7C195007A4A8C /* calibrationFileSaver.cpp */; };
+		CFBEC7D411E7C195007A4A8C /* calibrationManager_controlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBEC7D211E7C195007A4A8C /* calibrationManager_controlPanel.cpp */; };
 		CFD80A7911A1F27500417256 /* guiBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFD80A4411A1F27500417256 /* guiBaseObject.cpp */; };
 		CFD80A7A11A1F27500417256 /* guiCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFD80A4611A1F27500417256 /* guiCallback.cpp */; };
 		CFD80A7B11A1F27500417256 /* guiCallbackValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFD80A4811A1F27500417256 /* guiCallbackValue.cpp */; };
@@ -203,6 +205,9 @@
 		CF9840DD117CCFB00030247F /* ofxCvShortImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvShortImage.cpp; sourceTree = "<group>"; };
 		CF9840DE117CCFB00030247F /* ofxCvShortImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvShortImage.h; sourceTree = "<group>"; };
 		CF9840DF117CCFB00030247F /* ofxOpenCv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOpenCv.h; sourceTree = "<group>"; };
+		CFBEC7D011E7C195007A4A8C /* calibrationFileSaver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = calibrationFileSaver.cpp; path = calibration/calibrationFileSaver.cpp; sourceTree = "<group>"; };
+		CFBEC7D111E7C195007A4A8C /* calibrationFileSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calibrationFileSaver.h; path = calibration/calibrationFileSaver.h; sourceTree = "<group>"; };
+		CFBEC7D211E7C195007A4A8C /* calibrationManager_controlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = calibrationManager_controlPanel.cpp; path = calibration/calibrationManager_controlPanel.cpp; sourceTree = "<group>"; };
 		CFD80A4411A1F27500417256 /* guiBaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
 		CFD80A4511A1F27500417256 /* guiBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guiBaseObject.h; sourceTree = "<group>"; };
 		CFD80A4611A1F27500417256 /* guiCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guiCallback.cpp; sourceTree = "<group>"; };
@@ -599,8 +604,11 @@
 		CFD80A9311A1F29900417256 /* calibration */ = {
 			isa = PBXGroup;
 			children = (
-				CFD80AA911A1F2A600417256 /* calibrationManager.cpp */,
 				CFD80AAA11A1F2A600417256 /* calibrationManager.h */,
+				CFD80AA911A1F2A600417256 /* calibrationManager.cpp */,
+				CFBEC7D211E7C195007A4A8C /* calibrationManager_controlPanel.cpp */,
+				CFBEC7D111E7C195007A4A8C /* calibrationFileSaver.h */,
+				CFBEC7D011E7C195007A4A8C /* calibrationFileSaver.cpp */,
 			);
 			name = calibration;
 			sourceTree = "<group>";
@@ -1087,6 +1095,8 @@
 				CF94B3CC11B83B4E00C3115A /* trakingManager_controlPanel.cpp in Sources */,
 				CF94B3E311B83C0100C3115A /* ofxLeastSquares.cpp in Sources */,
 				CF4FEA7611B84F0D002AC074 /* ofxDirList.cpp in Sources */,
+				CFBEC7D311E7C195007A4A8C /* calibrationFileSaver.cpp in Sources */,
+				CFBEC7D411E7C195007A4A8C /* calibrationManager_controlPanel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
