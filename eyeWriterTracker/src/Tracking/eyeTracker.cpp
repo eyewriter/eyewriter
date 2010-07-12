@@ -138,21 +138,8 @@ bool	eyeTracker::getBrightEyeDarkEye(){
 	
 	currentImg.setROI(eFinder.boundingRect);
 	
-	/////////// temporary, get pixel average //////////
-	// or maybe using just rising or falling is OK?? //
-	// all pixels are not needed to make avg.		 //
-	//	maybe one-tenth(1/10) are enough?			 //
-	///////////////////////////////////////////////////
-	
-	unsigned char * tempPixels = currentImg.getRoiPixels();
-	pixelAvg = 0;
-	
-	for (int i = 0; i < eFinder.boundingRect.width * eFinder.boundingRect.height; i++){
-		pixelAvg += tempPixels[i];
-	}
-	pixelAvg /= eFinder.boundingRect.width * eFinder.boundingRect.height;
-	
-	float	tempAvg = pixelAvg;
+	IplImage* tempImage = currentImg.getCvImage();
+	float	tempAvg = 	cvMean(tempImage);
 	averageVec.push_back(tempAvg);
 	
 	if (averageVec.size() > 320) averageVec.erase(averageVec.begin());
@@ -164,15 +151,12 @@ bool	eyeTracker::getBrightEyeDarkEye(){
 			pixelAvginTenframes += averageVec[averageVec.size()-i-1];
 		}
 		pixelAvginTenframes /= 10;
-		
 	}
-	
-	///////////////////////////////////////////////////
-	
+		
 	currentImg.resetROI();	
 	currentImg.setROI(targetRect);
 	
-	if (pixelAvginTenframes < pixelAvg){
+	if (pixelAvginTenframes < tempAvg){
 		brightEyeImg.setFromPixels(currentImg.getRoiPixels(), targetWidth, targetHeight);
 		currentImg.resetROI();
 		return true;
@@ -222,7 +206,6 @@ void eyeTracker::drawGlintLine(float x, float y, float width, float height){
 	ofLine(x + getGlintPoint(GLINT_BOTTOM_RIGHT).x * width/w, y, x + getGlintPoint(GLINT_BOTTOM_RIGHT).x * width/w, y+height);
 	ofLine(x, y + getGlintPoint(GLINT_BOTTOM_RIGHT).y * height/h, x + width, y + (getGlintPoint(GLINT_BOTTOM_RIGHT).y * height/h));
 	
-	
 	if (gFinder.bFourGlints) {
 		
 		ofSetColor(0, 200, 200, 100);
@@ -246,14 +229,12 @@ void eyeTracker::drawPupilLine(float x, float y, float width, float height){
 	ofLine(x, y + pupilCentroid.y, x + width, y + pupilCentroid.y);
 	
 	ofDisableAlphaBlending();
-	
 }
 
 //----------------------------------------------------
 void eyeTracker::drawEllipse(float x, float y, float width, float height){
 	
 	pFinder.ellipseCal.draw(x + targetRect.x* (width/w), y + targetRect.y* (width/w), targetWidth * (width/w), targetHeight * (height/h));
-	
 }
 
 //----------------------------------------------------
