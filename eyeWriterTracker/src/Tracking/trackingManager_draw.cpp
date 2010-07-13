@@ -13,8 +13,9 @@
 //--------------------------------------------------------------
 void trackingManager::drawInput(int xBright, int yBright, int wBright, int hBright, int xDark, int yDark, int wDark, int hDark){
 	
-	ofSetColor(255,255,255);	
-	if ((tracker.bIsBrightEye && IM.fcount == 0) || (!tracker.bIsBrightEye && IM.fcount ==1)){		//Bright Eye => Left, Dark Eye =>Right
+	ofSetColor(255,255,255);
+	if ((tracker.bIsBrightEye && IM.fcount == 0) || (!tracker.bIsBrightEye && IM.fcount ==1) ||
+			(IM.grabberType == INPUT_OFXLIBDC && IM.mode == INPUT_LIVE_VIDEO)) { //Bright Eye => Left, Dark Eye =>Right
 		IM.drawEvenFrame(xBright, yBright, wBright, hBright);
 		IM.drawOddFrame(xDark, yDark, wDark, hDark);		
 	} else {
@@ -27,7 +28,7 @@ void trackingManager::drawInput(int xBright, int yBright, int wBright, int hBrig
 	
 	
 }
-
+ 
 //--------------------------------------------------------------
 void trackingManager::drawEyeFinder(int x, int y, int w, int h){
 	

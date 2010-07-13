@@ -4,6 +4,7 @@
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "ofxOpenCv.h"
+#include "ofxLibdcPtGrey.h"
 
 enum {
 	
@@ -11,12 +12,18 @@ enum {
 
 };
 
+enum {
+	INPUT_OFVIDEOGRABBER = 0,
+	INPUT_OFXLIBDC = 1
+};
 
-
+#define INPUT_FIREFLY_WIDTH 752
 
 class inputManager {
 
 	public:
+		inputManager();
+		~inputManager();
 
 		void setup();
 		void update();
@@ -25,8 +32,9 @@ class inputManager {
 	
 
 		int						mode;
+		int grabberType;
 	
-		ofVideoGrabber			vidGrabber;
+		ofBaseVideo*			vidGrabber;
 		ofVideoPlayer			vidPlayer;
 		int						width,height;
 	

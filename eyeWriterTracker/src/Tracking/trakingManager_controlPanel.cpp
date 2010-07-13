@@ -261,7 +261,10 @@ void trackingManager::updateGui(){
 			// since macs fuck up bad fullscreen with video settings
 			ofSetFullscreen(false);
 #endif
-			IM.vidGrabber.videoSettings();
+			if(IM.grabberType == INPUT_OFVIDEOGRABBER) {
+				ofVideoGrabber& cam = *((ofVideoGrabber*) IM.vidGrabber);
+				cam.videoSettings();
+			}
 			panel.setValueB("VIDEO_SETTINGS", false);
 			
 		} 		
