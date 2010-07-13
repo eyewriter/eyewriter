@@ -147,7 +147,6 @@ void inputManager::update(){
 			ofxLibdcPtGrey& cam = *((ofxLibdcPtGrey*) vidGrabber);
 			// in the case of a ptgrey camera, we *know* which frame is which.
 			fcount = cam.getEmbeddedStrobeCounter(grayImage.getPixels());
-			cout << fcount;
 		} else {
 			// otherwise we're just going to guess
 			fcount++;

@@ -71,6 +71,8 @@ public:
 	int					scanX;
 	int					scanY;
 	
+	// ideally we would have hasValueChanged() in ofxControlPanel
+	float lastShutter, lastGain, lastExposure, lastBrightness, lastGamma;
 	
 };
 
