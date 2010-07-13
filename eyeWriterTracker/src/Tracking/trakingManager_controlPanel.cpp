@@ -46,8 +46,20 @@ void trackingManager::setupGui(){
 	
 	panel.addToggle("num of glints(0: 2, 1: 4)", "B_FOUR_GLINTS", true);
 	panel.addToggle("Use Homography", "B_USE_HOMOGRAPHY", false);
-
 	
+	if(IM.mode == INPUT_LIVE_VIDEO && IM.grabberType == INPUT_OFXLIBDC) {
+		ofxLibdcPtGrey& cam = *((ofxLibdcPtGrey*) IM.vidGrabber);
+		lastShutter = cam.getShutterNorm();
+		lastGain = cam.getGainNorm();
+		lastExposure = cam.getExposureNorm();
+		lastGamma = cam.getGammaNorm();
+		lastBrightness = cam.getBrightnessNorm();
+		panel.addSlider("shutter", "INPUT_SHUTTER", lastShutter, 0, 1, false);
+		panel.addSlider("gain", "INPUT_GAIN", lastGain, 0, 1, false);
+		panel.addSlider("exposure", "INPUT_EXPOSURE", lastExposure, 0, 1, false);
+		panel.addSlider("gamma", "INPUT_GAMMA", lastGamma, 0, 1, false);
+		panel.addSlider("brightness", "INPUT_BRIGHTNESS", lastBrightness, 0, 1, false);
+	}
 	
 	// eye positon
 	
@@ -168,6 +180,35 @@ void trackingManager::updateGui(){
 	
 	bFocusScreenMode = panel.getValueB("B_FOCUS_SCREEN");
 	
+	// check to see if the camera parameters have been adjusted
+	// if so, apply them to the camera
+	if(IM.mode == INPUT_LIVE_VIDEO && IM.grabberType == INPUT_OFXLIBDC) {
+		float curShutter = panel.getValueF("INPUT_SHUTTER");
+		float curGain = panel.getValueF("INPUT_GAIN");
+		float curBrightness = panel.getValueB("INPUT_BRIGHTNESS");
+		float curExposure = panel.getValueF("INPUT_EXPOSURE");
+		float curGamma = panel.getValueF("INPUT_GAMMA");
+		
+		ofxLibdcPtGrey& cam = *((ofxLibdcPtGrey*) IM.vidGrabber);
+		
+		if(curShutter != lastShutter)
+			cam.setShutterNorm(curShutter);
+		if(curGain != lastGain)
+			cam.setGainNorm(curGain);
+		if(curBrightness != lastBrightness)
+			cam.setBrightnessNorm(curBrightness);
+		if(curExposure != lastExposure)
+			cam.setExposureNorm(curExposure);
+		if(curGamma != lastGamma)
+			cam.setGammaNorm(curGamma);
+		
+		lastShutter = curShutter;
+		lastGain = curGain;
+		lastBrightness = curBrightness;
+		lastExposure = curExposure;
+		lastGamma = curGamma;
+	}
+	
 	
 	// eye position
 	
@@ -261,7 +302,10 @@ void trackingManager::updateGui(){
 			// since macs fuck up bad fullscreen with video settings
 			ofSetFullscreen(false);
 #endif
-			IM.vidGrabber.videoSettings();
+			if(IM.grabberType == INPUT_OFVIDEOGRABBER) {
+				ofVideoGrabber& cam = *((ofVideoGrabber*) IM.vidGrabber);
+				cam.videoSettings();
+			}
 			panel.setValueB("VIDEO_SETTINGS", false);
 			
 		} 		

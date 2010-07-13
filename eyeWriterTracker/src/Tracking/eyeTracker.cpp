@@ -10,7 +10,6 @@ eyeTracker::eyeTracker(){
 	
 	bFoundOne	= false;
 	firstFrame = true;
-	
 }
 
 //----------------------------------------------------
@@ -139,10 +138,11 @@ bool	eyeTracker::getBrightEyeDarkEye(){
 	currentImg.setROI(eFinder.boundingRect);
 	
 	IplImage* tempImage = currentImg.getCvImage();
-	float	tempAvg = 	cvMean(tempImage);
+	float	tempAvg = 	cvAvg(tempImage).val[0];
+	
 	averageVec.push_back(tempAvg);
 	
-	if (averageVec.size() > 320) averageVec.erase(averageVec.begin());
+	if (averageVec.size() > 320) averageVec.erase(averageVec.begin()); // calculation needs only 10, use 320 just for displaying.
 	
 	pixelAvginTenframes = 0;
 	
