@@ -3,6 +3,7 @@
 	<!-- mode, input 0 = live, 1 = video  -->
 
 	<mode>1</mode>
+    
 	
 	<!-- some per mode settings -->
 
@@ -10,6 +11,8 @@
         <videoFrameRate>30</videoFrameRate>
 
 	<videoGrabber>
+        <!-- use ofVideoGrabber = 0, use ofxLibdc = 1 -->
+        <grabberType>0</grabberType>
 
 		<!-- set device id if you need to work with a different camera -->
 
