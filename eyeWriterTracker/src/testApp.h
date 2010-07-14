@@ -49,6 +49,8 @@ public:
 
 	//------ drawing
 	void drawHelp();
+	
+	static const float rotSmooth = .9;
 
 };
 
