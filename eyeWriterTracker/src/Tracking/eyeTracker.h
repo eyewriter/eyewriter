@@ -39,7 +39,7 @@ public:
 	
 	ofxCvGrayscaleAdvanced			magCurrent;
 	ofxCvGrayscaleAdvanced			warpedImg;
-
+	
 	eyeFinder						eFinder;
 	pupilFinder						pFinder;
 	glintFinder						gFinder;
@@ -58,6 +58,7 @@ public:
 	bool			bFirstFrame;
 	
 	//eye Tracking
+	float			divisor;
 	float			threshold_e;
 	float			minBlobSize_e;
 	float			maxBlobSize_e;

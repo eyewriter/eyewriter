@@ -1,13 +1,3 @@
-/*
- *  controlPanelSettings.cpp
- *  EyeTrackDTTest
- *
- *  Created by itotaka on 5/18/10.
- *  Copyright 2010 YCAM. All rights reserved.
- *
- */
-
-
 #include "trackingManager.h"
 //--------------------------------------------------------------
 void trackingManager::setupGui(){
@@ -103,6 +93,7 @@ void trackingManager::setupGui(){
 	// pupil position 1
 	panel.setWhichPanel("pupil detection 1");
 	
+	panel.addToggle("use auto threshold", "B_USE_AUTOTHRESHOLD_PUPIL", true);
 	panel.addSlider("threshold_pupil", "THRESHOLD_PUPIL", 60, 0, 255, true);
 	
 	panel.addSlider("min blob(pupil)","MIN_BLOB_PUPIL",50*10,0,5000,true);
@@ -260,6 +251,7 @@ void trackingManager::updateGui(){
 	
 	tracker.pFinder.bUseContrastStretch = panel.getValueB("B_USE_STRETCH_PUPIL");
 	
+	tracker.pFinder.bUseAutoThreshold = panel.getValueB("B_USE_AUTOTHRESHOLD_PUPIL");
 	tracker.threshold_p				= panel.getValueF("THRESHOLD_PUPIL");
 	tracker.minBlobSize_p			= panel.getValueF("MIN_BLOB_PUPIL");
 	tracker.maxBlobSize_p			= panel.getValueF("MAX_BLOB_PUPIL");

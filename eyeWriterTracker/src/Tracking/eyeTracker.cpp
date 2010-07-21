@@ -19,6 +19,7 @@ void eyeTracker::setup(int width, int height){
 	w = width;					// IM.width
 	h = height;					// IM.height
 	magRatio = 4;				// for accurate detection. width x magRatio, height x magRatio
+	divisor =2;					// for eyeFinder, make the picture smaller to reduce computation
 	
 	
 	printf("VideoWidth, VideoHeight = %d, %d \n", w, h);
@@ -43,8 +44,8 @@ void eyeTracker::setup(int width, int height){
 	
 	// filtering: 
 	
-	eFinder.setup(w, h, targetWidth, targetHeight, 2);
-	pFinder.setup(targetWidth, targetHeight, magRatio);
+	eFinder.setup(w, h, targetWidth, targetHeight, divisor);
+	pFinder.setup(targetWidth, targetHeight, magRatio, divisor);
 	gFinder.setup(targetWidth, targetHeight, magRatio);
 	
 }
@@ -54,6 +55,7 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam){
 	
 	currentImg.setFromPixels(grayImgFromCam.getPixels(), grayImgFromCam.width, grayImgFromCam.height);
 	
+	// get the eye position
 	bFoundOne = eFinder.update(currentImg, threshold_e, minBlobSize_e, maxBlobSize_e, true);	
 	
 	if (eFinder.centroid.x > w - (targetWidth/2) || eFinder.centroid.x < (targetWidth/2) ||
@@ -114,15 +116,17 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam){
 										
 					warpedImg.warpIntoMe(magCurrent, srcPos, dstPos);
 					
-					bFoundPupil = pFinder.update(warpedImg, threshold_p, minBlobSize_p, maxBlobSize_p);
+					bFoundPupil = pFinder.update(warpedImg, eFinder, targetRect,threshold_p, minBlobSize_p, maxBlobSize_p);
 					
 				} else {
 					
-					bFoundPupil = pFinder.update(magCurrent, threshold_p, minBlobSize_p, maxBlobSize_p);
+					bFoundPupil = pFinder.update(magCurrent, eFinder, targetRect, threshold_p, minBlobSize_p, maxBlobSize_p);
+					
+					// not good -  of course, too high  
+//					bFoundPupil = pFinder.update(magCurrent, pixelAvginTenframes, minBlobSize_p, maxBlobSize_p);
 
 				}
 				
-				//		bool bFoundPupil = pFinder.update(magCurrent, pixelAvginTenframes - threshold_p, minBlobSize_p, maxBlobSize_p);
 				
 				if (bFoundPupil){
 					pupilCentroid = pFinder.currentPupilCenter;
@@ -137,10 +141,8 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam){
 bool	eyeTracker::getBrightEyeDarkEye(){
 	
 	currentImg.setROI(eFinder.boundingRect);
-	
-	IplImage* tempImage = currentImg.getCvImage();
-	float	tempAvg = 	cvAvg(tempImage).val[0];
-	
+	float	tempAvg = 	cvAvg(currentImg.getCvImage()).val[0];
+
 	averageVec.push_back(tempAvg);
 	
 	if (averageVec.size() > 320) averageVec.erase(averageVec.begin()); // calculation needs only 10, use 320 just for displaying.

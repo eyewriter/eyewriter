@@ -3,7 +3,6 @@
  *  EyeTrackDTTest
  *
  *  Created by itotaka on 5/19/10.
- *  Copyright 2010 YCAM. All rights reserved.
  *
  */
 

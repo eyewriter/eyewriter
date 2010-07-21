@@ -1,13 +1,3 @@
-/*
- *  trackingManager_draw.cpp
- *  EyeTrackDTTest
- *
- *  Created by itotaka on 5/26/10.
- *  Copyright 2010 YCAM. All rights reserved.
- *
- */
-
-
 #include "trackingManager.h"
 
 //--------------------------------------------------------------
@@ -175,7 +165,14 @@ void trackingManager::drawBrighnessScanGraph(const unsigned char * pupilpixels, 
 	
 	ofEndShape(false);
 	ofSetColor(255, 0, 0, 80);
-	ofLine(x, y + 255 - tracker.threshold_p, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.threshold_p);
+	ofLine(x, y + 255 - tracker.pFinder.threshold, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.pFinder.threshold);
+	
+	ofSetColor(120, 120, 120, 80);
+	ofLine(x, y + 255 - tracker.pFinder.whiteAvg, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.pFinder.whiteAvg);
+	ofLine(x, y + 255 - tracker.pFinder.pupilAvg, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.pFinder.pupilAvg);
+
+	//	ofSetColor(0,0,255,80);
+	//	ofLine(x, y + 255 - tracker.pixelAvginTenframes, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.pixelAvginTenframes);
 	
 	ofSetColor(255, 255, 255);
 	ofRect(x, y, tracker.pFinder.imgBeforeThreshold.width, tracker.pFinder.imgBeforeThreshold.height);

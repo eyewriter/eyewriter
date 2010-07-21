@@ -3,7 +3,6 @@
  *  EyeTrackDTTest
  *
  *  Created by itotaka on 5/19/10.
- *  Copyright 2010 YCAM. All rights reserved.
  *
  */
 
@@ -15,27 +14,33 @@
 #include "ofxOpenCv.h"
 #include "ofxVectorMath.h"
 #include "EllipseCalcurator.h"
+#include "eyeFinder.h"
 
 class pupilFinder {
 public:
 
-	void setup(int width, int height, float magRatio);
-	bool update(ofxCvGrayscaleAdvanced & _currentImg, int threshold, int minBlobSize, int maxBlobSize);
+	void setup(int width, int height, float magRatio, float divisor);
+	bool update(ofxCvGrayscaleAdvanced & _currentImg, eyeFinder& eFinder, ofRectangle targetRect, int threshold, int minBlobSize, int maxBlobSize);
 
 	ofxCvGrayscaleAdvanced	currentImg;
 	ofxCvGrayscaleAdvanced	previousImg;
 	ofxCvGrayscaleAdvanced	diffImg;
+	ofxCvGrayscaleImage		notDiffImg;
+	ofxCvGrayscaleImage		smallCurrentImg;
 
-	//!!!:temporary!
-	ofxCvGrayscaleImage		imgBeforeThreshold;
-
+	ofxCvGrayscaleImage		imgBeforeThreshold;			// only for displaying in tracking mode
+	
 	ofxCvContourFinder		contourFinder;
 	ofxCvBlob				foundPupilBlob;
 
 	bool					firstFrame;
 
 	ellipseCalcurator		ellipseCal;
-
+	
+	bool		bUseAutoThreshold;
+	float		pupilAvg;
+	float		whiteAvg;
+	
 	float		convMin;
 	float		convMax;
 
@@ -61,10 +66,15 @@ public:
 	bool		bUseCompactnessTest;
 	float		maxCompactness;
 
+	float		smallTargetWidth;				// targetRect size in eyeFinder
+	float		smallTargetHeight;
+	
+		
 	bool		bUseAdaptiveThreshold;
 	int			offset;
 	int			blocksize;
 	int			bGauss;
+	int			threshold;
 
 	bool		bUseContrastStretch;
 

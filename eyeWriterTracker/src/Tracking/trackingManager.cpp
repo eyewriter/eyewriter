@@ -132,9 +132,15 @@ void trackingManager::draw(){
 		
 		ofSetColor(0, 0, 0);
 		
-		
 		// Draw trail circles.
 		drawRawInput(ofGetWidth()/2, ofGetHeight()/2, 20);
+		
+		// Draw Masks to get avg
+//		ofSetColor(255, 255, 255);
+//		tracker.pFinder.tempMaskPositive.draw(0, IM.height/4 + IM.height + 120);
+//		tracker.pFinder.tempMaskNegative.draw(88/2 + 10, IM.height/4 + IM.height + 120);
+//		tracker.pFinder.tempCopyCurrentImg.draw(88 + 20, IM.height/4 + IM.height + 120);
+		
 		
 	} else {
 		

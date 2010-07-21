@@ -3,7 +3,6 @@
  *  EyeTrackDTTest
  *
  *  Created by itotaka on 5/19/10.
- *  Copyright 2010 YCAM. All rights reserved.
  *
  */
 
@@ -28,6 +27,7 @@ public:
 	ofxCvGrayscaleAdvanced		currentImg;
 	ofxCvGrayscaleAdvanced		previousImg;
 	ofxCvGrayscaleAdvanced		diffImg;
+
 	
 	//!!!: only to check
 	//	ofxCvGrayscaleAdvanced		tempCurrent;
