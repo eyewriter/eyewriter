@@ -143,7 +143,7 @@
     <val_0>300.000000</val_0>
 </MAX_BLOB_HEIGHT_EYEPOS>
 <B_USE_COMPACTNESS_EYEPOS>
-    <val_0>0.000000</val_0>
+    <val_0>1.000000</val_0>
 </B_USE_COMPACTNESS_EYEPOS>
 <MAX_COMPACTNESS_EYEPOS>
     <val_0>2.000000</val_0>
@@ -185,7 +185,7 @@
     <val_0>10.000000</val_0>
 </BLUR_PUPIL>
 <THRESHOLD_PUPIL>
-    <val_0>82.166672</val_0>
+    <val_0>77.916664</val_0>
 </THRESHOLD_PUPIL>
 <MIN_BLOB_PUPIL>
     <val_0>5000.000000</val_0>
