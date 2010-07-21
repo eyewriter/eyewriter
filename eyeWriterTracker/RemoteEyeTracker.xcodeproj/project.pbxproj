@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CF4AA8D311F676C500182337 /* libdc1394.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF4AA8A111F676C500182337 /* libdc1394.a */; };
-		CF4AA8D411F676C500182337 /* ofxLibdc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4AA8A411F676C500182337 /* ofxLibdc.cpp */; };
-		CF4AA8D511F676C500182337 /* ofxLibdcGrabber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4AA8A611F676C500182337 /* ofxLibdcGrabber.cpp */; };
-		CF4AA8D611F676C500182337 /* ofxLibdcPtGrey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4AA8A811F676C500182337 /* ofxLibdcPtGrey.cpp */; };
-		CF4AA8D711F676C500182337 /* openCV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF4AA8C111F676C500182337 /* openCV.a */; };
-		CF4AA8D811F676C500182337 /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4AA8C411F676C500182337 /* ofxCvColorImage.cpp */; };
-		CF4AA8D911F676C500182337 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4AA8C711F676C500182337 /* ofxCvContourFinder.cpp */; };
-		CF4AA8DA11F676C500182337 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4AA8C911F676C500182337 /* ofxCvFloatImage.cpp */; };
-		CF4AA8DB11F676C500182337 /* ofxCvGrayscaleImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4AA8CB11F676C500182337 /* ofxCvGrayscaleImage.cpp */; };
-		CF4AA8DC11F676C500182337 /* ofxCvImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4AA8CD11F676C500182337 /* ofxCvImage.cpp */; };
-		CF4AA8DD11F676C500182337 /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4AA8D011F676C500182337 /* ofxCvShortImage.cpp */; };
 		CF4FEA7611B84F0D002AC074 /* ofxDirList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEA7411B84F0D002AC074 /* ofxDirList.cpp */; };
+		CF82F0A511F680E700414F46 /* libdc1394.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF82F07311F680E700414F46 /* libdc1394.a */; };
+		CF82F0A611F680E700414F46 /* ofxLibdc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F07611F680E700414F46 /* ofxLibdc.cpp */; };
+		CF82F0A711F680E700414F46 /* ofxLibdcGrabber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F07811F680E700414F46 /* ofxLibdcGrabber.cpp */; };
+		CF82F0A811F680E700414F46 /* ofxLibdcPtGrey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F07A11F680E700414F46 /* ofxLibdcPtGrey.cpp */; };
+		CF82F0A911F680E700414F46 /* openCV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF82F09311F680E700414F46 /* openCV.a */; };
+		CF82F0AA11F680E700414F46 /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F09611F680E700414F46 /* ofxCvColorImage.cpp */; };
+		CF82F0AB11F680E700414F46 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F09911F680E700414F46 /* ofxCvContourFinder.cpp */; };
+		CF82F0AC11F680E700414F46 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F09B11F680E700414F46 /* ofxCvFloatImage.cpp */; };
+		CF82F0AD11F680E700414F46 /* ofxCvGrayscaleImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F09D11F680E700414F46 /* ofxCvGrayscaleImage.cpp */; };
+		CF82F0AE11F680E700414F46 /* ofxCvImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F09F11F680E700414F46 /* ofxCvImage.cpp */; };
+		CF82F0AF11F680E700414F46 /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F0A211F680E700414F46 /* ofxCvShortImage.cpp */; };
 		CF93B0A911988E3200ACC3A3 /* ofxMatrix3x3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF93B09C11988E3200ACC3A3 /* ofxMatrix3x3.cpp */; };
 		CF93B0AA11988E3200ACC3A3 /* ofxMatrix4x4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF93B09E11988E3200ACC3A3 /* ofxMatrix4x4.cpp */; };
 		CF93B0AB11988E3200ACC3A3 /* ofxQuaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF93B0A311988E3200ACC3A3 /* ofxQuaternion.cpp */; };
@@ -139,67 +139,67 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CF4AA88D11F676C500182337 /* dc1394.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394.h; sourceTree = "<group>"; };
-		CF4AA88E11F676C500182337 /* dc1394_camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_camera.h; sourceTree = "<group>"; };
-		CF4AA88F11F676C500182337 /* dc1394_capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_capture.h; sourceTree = "<group>"; };
-		CF4AA89011F676C500182337 /* dc1394_control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_control.h; sourceTree = "<group>"; };
-		CF4AA89111F676C500182337 /* dc1394_conversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_conversions.h; sourceTree = "<group>"; };
-		CF4AA89211F676C500182337 /* dc1394_format7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_format7.h; sourceTree = "<group>"; };
-		CF4AA89311F676C500182337 /* dc1394_iso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_iso.h; sourceTree = "<group>"; };
-		CF4AA89411F676C500182337 /* dc1394_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_log.h; sourceTree = "<group>"; };
-		CF4AA89511F676C500182337 /* dc1394_register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_register.h; sourceTree = "<group>"; };
-		CF4AA89611F676C500182337 /* dc1394_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_types.h; sourceTree = "<group>"; };
-		CF4AA89711F676C500182337 /* dc1394_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_utils.h; sourceTree = "<group>"; };
-		CF4AA89811F676C500182337 /* dc1394_video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_video.h; sourceTree = "<group>"; };
-		CF4AA89A11F676C500182337 /* capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = capture.h; sourceTree = "<group>"; };
-		CF4AA89C11F676C500182337 /* avt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avt.h; sourceTree = "<group>"; };
-		CF4AA89D11F676C500182337 /* basler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basler.h; sourceTree = "<group>"; };
-		CF4AA89E11F676C500182337 /* basler_sff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basler_sff.h; sourceTree = "<group>"; };
-		CF4AA89F11F676C500182337 /* pixelink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pixelink.h; sourceTree = "<group>"; };
-		CF4AA8A111F676C500182337 /* libdc1394.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdc1394.a; sourceTree = "<group>"; };
-		CF4AA8A211F676C500182337 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		CF4AA8A411F676C500182337 /* ofxLibdc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLibdc.cpp; sourceTree = "<group>"; };
-		CF4AA8A511F676C500182337 /* ofxLibdc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLibdc.h; sourceTree = "<group>"; };
-		CF4AA8A611F676C500182337 /* ofxLibdcGrabber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLibdcGrabber.cpp; sourceTree = "<group>"; };
-		CF4AA8A711F676C500182337 /* ofxLibdcGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLibdcGrabber.h; sourceTree = "<group>"; };
-		CF4AA8A811F676C500182337 /* ofxLibdcPtGrey.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLibdcPtGrey.cpp; sourceTree = "<group>"; };
-		CF4AA8A911F676C500182337 /* ofxLibdcPtGrey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLibdcPtGrey.h; sourceTree = "<group>"; };
-		CF4AA8AB11F676C500182337 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
-		CF4AA8AF11F676C500182337 /* cv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cv.h; sourceTree = "<group>"; };
-		CF4AA8B011F676C500182337 /* cv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cv.hpp; sourceTree = "<group>"; };
-		CF4AA8B111F676C500182337 /* cvaux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvaux.h; sourceTree = "<group>"; };
-		CF4AA8B211F676C500182337 /* cvaux.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvaux.hpp; sourceTree = "<group>"; };
-		CF4AA8B311F676C500182337 /* cvcompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvcompat.h; sourceTree = "<group>"; };
-		CF4AA8B411F676C500182337 /* cvmat.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvmat.hpp; sourceTree = "<group>"; };
-		CF4AA8B511F676C500182337 /* cvstreams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvstreams.h; sourceTree = "<group>"; };
-		CF4AA8B611F676C500182337 /* cvtypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvtypes.h; sourceTree = "<group>"; };
-		CF4AA8B711F676C500182337 /* cvver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvver.h; sourceTree = "<group>"; };
-		CF4AA8B811F676C500182337 /* cvvidsurv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvvidsurv.hpp; sourceTree = "<group>"; };
-		CF4AA8B911F676C500182337 /* cvwimage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvwimage.h; sourceTree = "<group>"; };
-		CF4AA8BA11F676C500182337 /* cxcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxcore.h; sourceTree = "<group>"; };
-		CF4AA8BB11F676C500182337 /* cxcore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cxcore.hpp; sourceTree = "<group>"; };
-		CF4AA8BC11F676C500182337 /* cxerror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxerror.h; sourceTree = "<group>"; };
-		CF4AA8BD11F676C500182337 /* cxmisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxmisc.h; sourceTree = "<group>"; };
-		CF4AA8BE11F676C500182337 /* cxtypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxtypes.h; sourceTree = "<group>"; };
-		CF4AA8C111F676C500182337 /* openCV.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = openCV.a; sourceTree = "<group>"; };
-		CF4AA8C311F676C500182337 /* ofxCvBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvBlob.h; sourceTree = "<group>"; };
-		CF4AA8C411F676C500182337 /* ofxCvColorImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvColorImage.cpp; sourceTree = "<group>"; };
-		CF4AA8C511F676C500182337 /* ofxCvColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvColorImage.h; sourceTree = "<group>"; };
-		CF4AA8C611F676C500182337 /* ofxCvConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvConstants.h; sourceTree = "<group>"; };
-		CF4AA8C711F676C500182337 /* ofxCvContourFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvContourFinder.cpp; sourceTree = "<group>"; };
-		CF4AA8C811F676C500182337 /* ofxCvContourFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvContourFinder.h; sourceTree = "<group>"; };
-		CF4AA8C911F676C500182337 /* ofxCvFloatImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvFloatImage.cpp; sourceTree = "<group>"; };
-		CF4AA8CA11F676C500182337 /* ofxCvFloatImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvFloatImage.h; sourceTree = "<group>"; };
-		CF4AA8CB11F676C500182337 /* ofxCvGrayscaleImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvGrayscaleImage.cpp; sourceTree = "<group>"; };
-		CF4AA8CC11F676C500182337 /* ofxCvGrayscaleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvGrayscaleImage.h; sourceTree = "<group>"; };
-		CF4AA8CD11F676C500182337 /* ofxCvImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvImage.cpp; sourceTree = "<group>"; };
-		CF4AA8CE11F676C500182337 /* ofxCvImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvImage.h; sourceTree = "<group>"; };
-		CF4AA8CF11F676C500182337 /* ofxCvMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvMain.h; sourceTree = "<group>"; };
-		CF4AA8D011F676C500182337 /* ofxCvShortImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvShortImage.cpp; sourceTree = "<group>"; };
-		CF4AA8D111F676C500182337 /* ofxCvShortImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvShortImage.h; sourceTree = "<group>"; };
-		CF4AA8D211F676C500182337 /* ofxOpenCv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOpenCv.h; sourceTree = "<group>"; };
 		CF4FEA7411B84F0D002AC074 /* ofxDirList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDirList.cpp; sourceTree = "<group>"; };
 		CF4FEA7511B84F0D002AC074 /* ofxDirList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxDirList.h; sourceTree = "<group>"; };
+		CF82F05F11F680E700414F46 /* dc1394.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394.h; sourceTree = "<group>"; };
+		CF82F06011F680E700414F46 /* dc1394_camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_camera.h; sourceTree = "<group>"; };
+		CF82F06111F680E700414F46 /* dc1394_capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_capture.h; sourceTree = "<group>"; };
+		CF82F06211F680E700414F46 /* dc1394_control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_control.h; sourceTree = "<group>"; };
+		CF82F06311F680E700414F46 /* dc1394_conversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_conversions.h; sourceTree = "<group>"; };
+		CF82F06411F680E700414F46 /* dc1394_format7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_format7.h; sourceTree = "<group>"; };
+		CF82F06511F680E700414F46 /* dc1394_iso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_iso.h; sourceTree = "<group>"; };
+		CF82F06611F680E700414F46 /* dc1394_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_log.h; sourceTree = "<group>"; };
+		CF82F06711F680E700414F46 /* dc1394_register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_register.h; sourceTree = "<group>"; };
+		CF82F06811F680E700414F46 /* dc1394_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_types.h; sourceTree = "<group>"; };
+		CF82F06911F680E700414F46 /* dc1394_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_utils.h; sourceTree = "<group>"; };
+		CF82F06A11F680E700414F46 /* dc1394_video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394_video.h; sourceTree = "<group>"; };
+		CF82F06C11F680E700414F46 /* capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = capture.h; sourceTree = "<group>"; };
+		CF82F06E11F680E700414F46 /* avt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avt.h; sourceTree = "<group>"; };
+		CF82F06F11F680E700414F46 /* basler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basler.h; sourceTree = "<group>"; };
+		CF82F07011F680E700414F46 /* basler_sff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basler_sff.h; sourceTree = "<group>"; };
+		CF82F07111F680E700414F46 /* pixelink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pixelink.h; sourceTree = "<group>"; };
+		CF82F07311F680E700414F46 /* libdc1394.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdc1394.a; sourceTree = "<group>"; };
+		CF82F07411F680E700414F46 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		CF82F07611F680E700414F46 /* ofxLibdc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLibdc.cpp; sourceTree = "<group>"; };
+		CF82F07711F680E700414F46 /* ofxLibdc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLibdc.h; sourceTree = "<group>"; };
+		CF82F07811F680E700414F46 /* ofxLibdcGrabber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLibdcGrabber.cpp; sourceTree = "<group>"; };
+		CF82F07911F680E700414F46 /* ofxLibdcGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLibdcGrabber.h; sourceTree = "<group>"; };
+		CF82F07A11F680E700414F46 /* ofxLibdcPtGrey.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLibdcPtGrey.cpp; sourceTree = "<group>"; };
+		CF82F07B11F680E700414F46 /* ofxLibdcPtGrey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLibdcPtGrey.h; sourceTree = "<group>"; };
+		CF82F07D11F680E700414F46 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		CF82F08111F680E700414F46 /* cv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cv.h; sourceTree = "<group>"; };
+		CF82F08211F680E700414F46 /* cv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cv.hpp; sourceTree = "<group>"; };
+		CF82F08311F680E700414F46 /* cvaux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvaux.h; sourceTree = "<group>"; };
+		CF82F08411F680E700414F46 /* cvaux.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvaux.hpp; sourceTree = "<group>"; };
+		CF82F08511F680E700414F46 /* cvcompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvcompat.h; sourceTree = "<group>"; };
+		CF82F08611F680E700414F46 /* cvmat.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvmat.hpp; sourceTree = "<group>"; };
+		CF82F08711F680E700414F46 /* cvstreams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvstreams.h; sourceTree = "<group>"; };
+		CF82F08811F680E700414F46 /* cvtypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvtypes.h; sourceTree = "<group>"; };
+		CF82F08911F680E700414F46 /* cvver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvver.h; sourceTree = "<group>"; };
+		CF82F08A11F680E700414F46 /* cvvidsurv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvvidsurv.hpp; sourceTree = "<group>"; };
+		CF82F08B11F680E700414F46 /* cvwimage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvwimage.h; sourceTree = "<group>"; };
+		CF82F08C11F680E700414F46 /* cxcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxcore.h; sourceTree = "<group>"; };
+		CF82F08D11F680E700414F46 /* cxcore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cxcore.hpp; sourceTree = "<group>"; };
+		CF82F08E11F680E700414F46 /* cxerror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxerror.h; sourceTree = "<group>"; };
+		CF82F08F11F680E700414F46 /* cxmisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxmisc.h; sourceTree = "<group>"; };
+		CF82F09011F680E700414F46 /* cxtypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxtypes.h; sourceTree = "<group>"; };
+		CF82F09311F680E700414F46 /* openCV.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = openCV.a; sourceTree = "<group>"; };
+		CF82F09511F680E700414F46 /* ofxCvBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvBlob.h; sourceTree = "<group>"; };
+		CF82F09611F680E700414F46 /* ofxCvColorImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvColorImage.cpp; sourceTree = "<group>"; };
+		CF82F09711F680E700414F46 /* ofxCvColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvColorImage.h; sourceTree = "<group>"; };
+		CF82F09811F680E700414F46 /* ofxCvConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvConstants.h; sourceTree = "<group>"; };
+		CF82F09911F680E700414F46 /* ofxCvContourFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvContourFinder.cpp; sourceTree = "<group>"; };
+		CF82F09A11F680E700414F46 /* ofxCvContourFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvContourFinder.h; sourceTree = "<group>"; };
+		CF82F09B11F680E700414F46 /* ofxCvFloatImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvFloatImage.cpp; sourceTree = "<group>"; };
+		CF82F09C11F680E700414F46 /* ofxCvFloatImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvFloatImage.h; sourceTree = "<group>"; };
+		CF82F09D11F680E700414F46 /* ofxCvGrayscaleImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvGrayscaleImage.cpp; sourceTree = "<group>"; };
+		CF82F09E11F680E700414F46 /* ofxCvGrayscaleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvGrayscaleImage.h; sourceTree = "<group>"; };
+		CF82F09F11F680E700414F46 /* ofxCvImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvImage.cpp; sourceTree = "<group>"; };
+		CF82F0A011F680E700414F46 /* ofxCvImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvImage.h; sourceTree = "<group>"; };
+		CF82F0A111F680E700414F46 /* ofxCvMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvMain.h; sourceTree = "<group>"; };
+		CF82F0A211F680E700414F46 /* ofxCvShortImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvShortImage.cpp; sourceTree = "<group>"; };
+		CF82F0A311F680E700414F46 /* ofxCvShortImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvShortImage.h; sourceTree = "<group>"; };
+		CF82F0A411F680E700414F46 /* ofxOpenCv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOpenCv.h; sourceTree = "<group>"; };
 		CF93B09C11988E3200ACC3A3 /* ofxMatrix3x3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMatrix3x3.cpp; sourceTree = "<group>"; };
 		CF93B09D11988E3200ACC3A3 /* ofxMatrix3x3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMatrix3x3.h; sourceTree = "<group>"; };
 		CF93B09E11988E3200ACC3A3 /* ofxMatrix4x4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMatrix4x4.cpp; sourceTree = "<group>"; };
@@ -373,201 +373,14 @@
 				E4C2429410CC5C38004149E2 /* freetype.a in Frameworks */,
 				E4C242CD10CC650E004149E2 /* libfmodex.dylib in Frameworks */,
 				E4C246DA10CCAE22004149E2 /* freeimage.a in Frameworks */,
-				CF4AA8D311F676C500182337 /* libdc1394.a in Frameworks */,
-				CF4AA8D711F676C500182337 /* openCV.a in Frameworks */,
+				CF82F0A511F680E700414F46 /* libdc1394.a in Frameworks */,
+				CF82F0A911F680E700414F46 /* openCV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CF4AA7FC11F676C500182337 /* ofxLibdc */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA88911F676C500182337 /* libs */,
-				CF4AA8A311F676C500182337 /* src */,
-				CF4AA8A211F676C500182337 /* README.txt */,
-			);
-			name = ofxLibdc;
-			path = src/addons/ofxLibdc;
-			sourceTree = "<group>";
-		};
-		CF4AA88911F676C500182337 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA88A11F676C500182337 /* osx */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		CF4AA88A11F676C500182337 /* osx */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA88B11F676C500182337 /* include */,
-				CF4AA8A011F676C500182337 /* lib */,
-			);
-			path = osx;
-			sourceTree = "<group>";
-		};
-		CF4AA88B11F676C500182337 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA88C11F676C500182337 /* dc1394 */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		CF4AA88C11F676C500182337 /* dc1394 */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA88D11F676C500182337 /* dc1394.h */,
-				CF4AA88E11F676C500182337 /* dc1394_camera.h */,
-				CF4AA88F11F676C500182337 /* dc1394_capture.h */,
-				CF4AA89011F676C500182337 /* dc1394_control.h */,
-				CF4AA89111F676C500182337 /* dc1394_conversions.h */,
-				CF4AA89211F676C500182337 /* dc1394_format7.h */,
-				CF4AA89311F676C500182337 /* dc1394_iso.h */,
-				CF4AA89411F676C500182337 /* dc1394_log.h */,
-				CF4AA89511F676C500182337 /* dc1394_register.h */,
-				CF4AA89611F676C500182337 /* dc1394_types.h */,
-				CF4AA89711F676C500182337 /* dc1394_utils.h */,
-				CF4AA89811F676C500182337 /* dc1394_video.h */,
-				CF4AA89911F676C500182337 /* macosx */,
-				CF4AA89B11F676C500182337 /* vendor */,
-			);
-			path = dc1394;
-			sourceTree = "<group>";
-		};
-		CF4AA89911F676C500182337 /* macosx */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA89A11F676C500182337 /* capture.h */,
-			);
-			path = macosx;
-			sourceTree = "<group>";
-		};
-		CF4AA89B11F676C500182337 /* vendor */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA89C11F676C500182337 /* avt.h */,
-				CF4AA89D11F676C500182337 /* basler.h */,
-				CF4AA89E11F676C500182337 /* basler_sff.h */,
-				CF4AA89F11F676C500182337 /* pixelink.h */,
-			);
-			path = vendor;
-			sourceTree = "<group>";
-		};
-		CF4AA8A011F676C500182337 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA8A111F676C500182337 /* libdc1394.a */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		CF4AA8A311F676C500182337 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA8A411F676C500182337 /* ofxLibdc.cpp */,
-				CF4AA8A511F676C500182337 /* ofxLibdc.h */,
-				CF4AA8A611F676C500182337 /* ofxLibdcGrabber.cpp */,
-				CF4AA8A711F676C500182337 /* ofxLibdcGrabber.h */,
-				CF4AA8A811F676C500182337 /* ofxLibdcPtGrey.cpp */,
-				CF4AA8A911F676C500182337 /* ofxLibdcPtGrey.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		CF4AA8AA11F676C500182337 /* ofxOpenCv */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA8AB11F676C500182337 /* install.xml */,
-				CF4AA8AC11F676C500182337 /* libs */,
-				CF4AA8C211F676C500182337 /* src */,
-			);
-			name = ofxOpenCv;
-			path = src/addons/ofxOpenCv;
-			sourceTree = "<group>";
-		};
-		CF4AA8AC11F676C500182337 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA8AD11F676C500182337 /* opencv */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		CF4AA8AD11F676C500182337 /* opencv */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA8AE11F676C500182337 /* include */,
-				CF4AA8BF11F676C500182337 /* lib */,
-			);
-			path = opencv;
-			sourceTree = "<group>";
-		};
-		CF4AA8AE11F676C500182337 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA8AF11F676C500182337 /* cv.h */,
-				CF4AA8B011F676C500182337 /* cv.hpp */,
-				CF4AA8B111F676C500182337 /* cvaux.h */,
-				CF4AA8B211F676C500182337 /* cvaux.hpp */,
-				CF4AA8B311F676C500182337 /* cvcompat.h */,
-				CF4AA8B411F676C500182337 /* cvmat.hpp */,
-				CF4AA8B511F676C500182337 /* cvstreams.h */,
-				CF4AA8B611F676C500182337 /* cvtypes.h */,
-				CF4AA8B711F676C500182337 /* cvver.h */,
-				CF4AA8B811F676C500182337 /* cvvidsurv.hpp */,
-				CF4AA8B911F676C500182337 /* cvwimage.h */,
-				CF4AA8BA11F676C500182337 /* cxcore.h */,
-				CF4AA8BB11F676C500182337 /* cxcore.hpp */,
-				CF4AA8BC11F676C500182337 /* cxerror.h */,
-				CF4AA8BD11F676C500182337 /* cxmisc.h */,
-				CF4AA8BE11F676C500182337 /* cxtypes.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		CF4AA8BF11F676C500182337 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA8C011F676C500182337 /* osx */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		CF4AA8C011F676C500182337 /* osx */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA8C111F676C500182337 /* openCV.a */,
-			);
-			path = osx;
-			sourceTree = "<group>";
-		};
-		CF4AA8C211F676C500182337 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				CF4AA8C311F676C500182337 /* ofxCvBlob.h */,
-				CF4AA8C411F676C500182337 /* ofxCvColorImage.cpp */,
-				CF4AA8C511F676C500182337 /* ofxCvColorImage.h */,
-				CF4AA8C611F676C500182337 /* ofxCvConstants.h */,
-				CF4AA8C711F676C500182337 /* ofxCvContourFinder.cpp */,
-				CF4AA8C811F676C500182337 /* ofxCvContourFinder.h */,
-				CF4AA8C911F676C500182337 /* ofxCvFloatImage.cpp */,
-				CF4AA8CA11F676C500182337 /* ofxCvFloatImage.h */,
-				CF4AA8CB11F676C500182337 /* ofxCvGrayscaleImage.cpp */,
-				CF4AA8CC11F676C500182337 /* ofxCvGrayscaleImage.h */,
-				CF4AA8CD11F676C500182337 /* ofxCvImage.cpp */,
-				CF4AA8CE11F676C500182337 /* ofxCvImage.h */,
-				CF4AA8CF11F676C500182337 /* ofxCvMain.h */,
-				CF4AA8D011F676C500182337 /* ofxCvShortImage.cpp */,
-				CF4AA8D111F676C500182337 /* ofxCvShortImage.h */,
-				CF4AA8D211F676C500182337 /* ofxOpenCv.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		CF4FEA6F11B84F0D002AC074 /* ofxDirList */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +395,193 @@
 			children = (
 				CF4FEA7411B84F0D002AC074 /* ofxDirList.cpp */,
 				CF4FEA7511B84F0D002AC074 /* ofxDirList.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		CF82F05A11F680E700414F46 /* ofxLibdc */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F05B11F680E700414F46 /* libs */,
+				CF82F07411F680E700414F46 /* README.txt */,
+				CF82F07511F680E700414F46 /* src */,
+			);
+			name = ofxLibdc;
+			path = src/addons/ofxLibdc;
+			sourceTree = "<group>";
+		};
+		CF82F05B11F680E700414F46 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F05C11F680E700414F46 /* osx */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		CF82F05C11F680E700414F46 /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F05D11F680E700414F46 /* include */,
+				CF82F07211F680E700414F46 /* lib */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
+		CF82F05D11F680E700414F46 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F05E11F680E700414F46 /* dc1394 */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		CF82F05E11F680E700414F46 /* dc1394 */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F05F11F680E700414F46 /* dc1394.h */,
+				CF82F06011F680E700414F46 /* dc1394_camera.h */,
+				CF82F06111F680E700414F46 /* dc1394_capture.h */,
+				CF82F06211F680E700414F46 /* dc1394_control.h */,
+				CF82F06311F680E700414F46 /* dc1394_conversions.h */,
+				CF82F06411F680E700414F46 /* dc1394_format7.h */,
+				CF82F06511F680E700414F46 /* dc1394_iso.h */,
+				CF82F06611F680E700414F46 /* dc1394_log.h */,
+				CF82F06711F680E700414F46 /* dc1394_register.h */,
+				CF82F06811F680E700414F46 /* dc1394_types.h */,
+				CF82F06911F680E700414F46 /* dc1394_utils.h */,
+				CF82F06A11F680E700414F46 /* dc1394_video.h */,
+				CF82F06B11F680E700414F46 /* macosx */,
+				CF82F06D11F680E700414F46 /* vendor */,
+			);
+			path = dc1394;
+			sourceTree = "<group>";
+		};
+		CF82F06B11F680E700414F46 /* macosx */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F06C11F680E700414F46 /* capture.h */,
+			);
+			path = macosx;
+			sourceTree = "<group>";
+		};
+		CF82F06D11F680E700414F46 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F06E11F680E700414F46 /* avt.h */,
+				CF82F06F11F680E700414F46 /* basler.h */,
+				CF82F07011F680E700414F46 /* basler_sff.h */,
+				CF82F07111F680E700414F46 /* pixelink.h */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
+		CF82F07211F680E700414F46 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F07311F680E700414F46 /* libdc1394.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		CF82F07511F680E700414F46 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F07611F680E700414F46 /* ofxLibdc.cpp */,
+				CF82F07711F680E700414F46 /* ofxLibdc.h */,
+				CF82F07811F680E700414F46 /* ofxLibdcGrabber.cpp */,
+				CF82F07911F680E700414F46 /* ofxLibdcGrabber.h */,
+				CF82F07A11F680E700414F46 /* ofxLibdcPtGrey.cpp */,
+				CF82F07B11F680E700414F46 /* ofxLibdcPtGrey.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		CF82F07C11F680E700414F46 /* ofxOpenCv */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F07D11F680E700414F46 /* install.xml */,
+				CF82F07E11F680E700414F46 /* libs */,
+				CF82F09411F680E700414F46 /* src */,
+			);
+			name = ofxOpenCv;
+			path = src/addons/ofxOpenCv;
+			sourceTree = "<group>";
+		};
+		CF82F07E11F680E700414F46 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F07F11F680E700414F46 /* opencv */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		CF82F07F11F680E700414F46 /* opencv */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F08011F680E700414F46 /* include */,
+				CF82F09111F680E700414F46 /* lib */,
+			);
+			path = opencv;
+			sourceTree = "<group>";
+		};
+		CF82F08011F680E700414F46 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F08111F680E700414F46 /* cv.h */,
+				CF82F08211F680E700414F46 /* cv.hpp */,
+				CF82F08311F680E700414F46 /* cvaux.h */,
+				CF82F08411F680E700414F46 /* cvaux.hpp */,
+				CF82F08511F680E700414F46 /* cvcompat.h */,
+				CF82F08611F680E700414F46 /* cvmat.hpp */,
+				CF82F08711F680E700414F46 /* cvstreams.h */,
+				CF82F08811F680E700414F46 /* cvtypes.h */,
+				CF82F08911F680E700414F46 /* cvver.h */,
+				CF82F08A11F680E700414F46 /* cvvidsurv.hpp */,
+				CF82F08B11F680E700414F46 /* cvwimage.h */,
+				CF82F08C11F680E700414F46 /* cxcore.h */,
+				CF82F08D11F680E700414F46 /* cxcore.hpp */,
+				CF82F08E11F680E700414F46 /* cxerror.h */,
+				CF82F08F11F680E700414F46 /* cxmisc.h */,
+				CF82F09011F680E700414F46 /* cxtypes.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		CF82F09111F680E700414F46 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F09211F680E700414F46 /* osx */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		CF82F09211F680E700414F46 /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F09311F680E700414F46 /* openCV.a */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
+		CF82F09411F680E700414F46 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				CF82F09511F680E700414F46 /* ofxCvBlob.h */,
+				CF82F09611F680E700414F46 /* ofxCvColorImage.cpp */,
+				CF82F09711F680E700414F46 /* ofxCvColorImage.h */,
+				CF82F09811F680E700414F46 /* ofxCvConstants.h */,
+				CF82F09911F680E700414F46 /* ofxCvContourFinder.cpp */,
+				CF82F09A11F680E700414F46 /* ofxCvContourFinder.h */,
+				CF82F09B11F680E700414F46 /* ofxCvFloatImage.cpp */,
+				CF82F09C11F680E700414F46 /* ofxCvFloatImage.h */,
+				CF82F09D11F680E700414F46 /* ofxCvGrayscaleImage.cpp */,
+				CF82F09E11F680E700414F46 /* ofxCvGrayscaleImage.h */,
+				CF82F09F11F680E700414F46 /* ofxCvImage.cpp */,
+				CF82F0A011F680E700414F46 /* ofxCvImage.h */,
+				CF82F0A111F680E700414F46 /* ofxCvMain.h */,
+				CF82F0A211F680E700414F46 /* ofxCvShortImage.cpp */,
+				CF82F0A311F680E700414F46 /* ofxCvShortImage.h */,
+				CF82F0A411F680E700414F46 /* ofxOpenCv.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -797,8 +797,8 @@
 		CFE6D592117F5F9500D92167 /* AddOn */ = {
 			isa = PBXGroup;
 			children = (
-				CF4AA7FC11F676C500182337 /* ofxLibdc */,
-				CF4AA8AA11F676C500182337 /* ofxOpenCv */,
+				CF82F05A11F680E700414F46 /* ofxLibdc */,
+				CF82F07C11F680E700414F46 /* ofxOpenCv */,
 				CF4FEA6F11B84F0D002AC074 /* ofxDirList */,
 				CF93B09911988E3200ACC3A3 /* ofxVectorMath */,
 				CFE6D566117F5F8600D92167 /* ofxXmlSettings */,
@@ -1221,15 +1221,15 @@
 				CF4FEA7611B84F0D002AC074 /* ofxDirList.cpp in Sources */,
 				CFBEC7D311E7C195007A4A8C /* calibrationFileSaver.cpp in Sources */,
 				CFBEC7D411E7C195007A4A8C /* calibrationManager_controlPanel.cpp in Sources */,
-				CF4AA8D411F676C500182337 /* ofxLibdc.cpp in Sources */,
-				CF4AA8D511F676C500182337 /* ofxLibdcGrabber.cpp in Sources */,
-				CF4AA8D611F676C500182337 /* ofxLibdcPtGrey.cpp in Sources */,
-				CF4AA8D811F676C500182337 /* ofxCvColorImage.cpp in Sources */,
-				CF4AA8D911F676C500182337 /* ofxCvContourFinder.cpp in Sources */,
-				CF4AA8DA11F676C500182337 /* ofxCvFloatImage.cpp in Sources */,
-				CF4AA8DB11F676C500182337 /* ofxCvGrayscaleImage.cpp in Sources */,
-				CF4AA8DC11F676C500182337 /* ofxCvImage.cpp in Sources */,
-				CF4AA8DD11F676C500182337 /* ofxCvShortImage.cpp in Sources */,
+				CF82F0A611F680E700414F46 /* ofxLibdc.cpp in Sources */,
+				CF82F0A711F680E700414F46 /* ofxLibdcGrabber.cpp in Sources */,
+				CF82F0A811F680E700414F46 /* ofxLibdcPtGrey.cpp in Sources */,
+				CF82F0AA11F680E700414F46 /* ofxCvColorImage.cpp in Sources */,
+				CF82F0AB11F680E700414F46 /* ofxCvContourFinder.cpp in Sources */,
+				CF82F0AC11F680E700414F46 /* ofxCvFloatImage.cpp in Sources */,
+				CF82F0AD11F680E700414F46 /* ofxCvGrayscaleImage.cpp in Sources */,
+				CF82F0AE11F680E700414F46 /* ofxCvImage.cpp in Sources */,
+				CF82F0AF11F680E700414F46 /* ofxCvShortImage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
