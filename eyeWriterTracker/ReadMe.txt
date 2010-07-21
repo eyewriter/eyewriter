@@ -6,6 +6,10 @@ For information on the hardware, please see (for now):
 http://collab.eyewriter.org/?p=123
 http://collab.eyewriter.org/?p=102
 
+to use PSEYE USB camera with this software, we recommend to use newest macam driver.
+the macam driver can be download from 
+http://sourceforge.net/projects/webcam-osx/files/cvs-build/2009-09-25/macam-cvs-build-2009-09-25.zip/download
+
 Arduino code for driving the hardware is at /StrobeEye/StrobeEye.pde
 
 This software is made with Open Frameworks and based on the original EyeWriter software.
