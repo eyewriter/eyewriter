@@ -10,6 +10,7 @@ eyeTracker::eyeTracker(){
 	
 	bFoundOne	= false;
 	firstFrame = true;
+	
 }
 
 //----------------------------------------------------
