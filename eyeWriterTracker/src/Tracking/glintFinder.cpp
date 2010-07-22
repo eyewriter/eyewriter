@@ -29,6 +29,8 @@ void glintFinder::setup(int bigEyeWidth,int bigEyeHeight, float _magRatio){
 	glintROI.width = w * magRatio;
 	glintROI.height = h * magRatio;
 	
+	bUseContrastStretch = true;			// overridden by controlpanel.
+	
 }
 
 //--------------------------------------------------------------------
@@ -49,10 +51,12 @@ bool glintFinder::update(ofxCvGrayscaleAdvanced & blackEyeImg, float threshold, 
 	}
 	
 	eyeImage = blackEyeImg;
-	
 	eyeImage.setROI(glintROI);
+		
+	if (bUseContrastStretch){
+		eyeImage.contrastStretch();
+	}
 	
-	eyeImage.contrastStretch();
 	eyeImage.threshold(threshold, false);
 	
 	int nGlints;

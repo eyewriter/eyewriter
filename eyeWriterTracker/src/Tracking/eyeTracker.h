@@ -30,7 +30,8 @@ public:
 	
 	ofPoint	getEyePoint();
 	ofPoint	getGlintPoint(int glintID);
-	ofPoint	getVectorGlintToPupil(int glintID);		
+	ofPoint	getVectorGlintToPupil(int glintID);
+	void	getAverages();								//get the brightness averages of pupil & white part
 	
 	ofxCvGrayscaleAdvanced			currentImg;
 	
@@ -40,9 +41,15 @@ public:
 	ofxCvGrayscaleAdvanced			magCurrent;
 	ofxCvGrayscaleAdvanced			warpedImg;
 	
+	ofxCvGrayscaleImage				notDiffImg;
+	ofxCvGrayscaleImage				smallCurrentImg;
+	
 	eyeFinder						eFinder;
 	pupilFinder						pFinder;
 	glintFinder						gFinder;
+	
+	float			smallTargetWidth;
+	float			smallTargetHeight;
 	
 	ofPoint		pupilCentroid;
 	ofRectangle	targetRect;
@@ -57,6 +64,10 @@ public:
 	int				bigEyeSizeHeight;
 	bool			bFirstFrame;
 	
+	float			pupilAvg;
+	float			whiteAvg;
+	float			maxBrightness;
+	
 	//eye Tracking
 	float			divisor;
 	float			threshold_e;
@@ -64,11 +75,15 @@ public:
 	float			maxBlobSize_e;
 	
 	//pupil Tracking
+	bool			bUseAutoThreshold_p;
+	float			threshold_p_frompanel;
 	float			threshold_p;
 	float			minBlobSize_p;
 	float			maxBlobSize_p;
 	
 	//glint Tracking
+	bool			bUseAutoThreshold_g;
+	float			threshold_g_frompanel;
 	float			threshold_g;
 	float			minBlobSize_g;
 	float			maxBlobSize_g;

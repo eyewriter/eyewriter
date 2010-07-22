@@ -28,7 +28,7 @@ class glintFinder {
 public:
 	
 	void		setup(int bigEyeWidth, int bigEyeHeight, float magRatio);
-	bool		update(ofxCvGrayscaleAdvanced & blackEyeImg, float threshold, float minBlobSize, float maxBlobSize);
+	bool		update(ofxCvGrayscaleAdvanced & blackEyeImg, float _threshold, float minBlobSize, float maxBlobSize);
 	ofPoint		getGlintPosition(int glintID);
 	
 	ofxCvContourFinder		contourFinder;
@@ -46,8 +46,10 @@ public:
 	
 	int					biggestID;
 	int					smallestID;
-	
 	float				limitratio;
+	
+	bool				bUseContrastStretch;
+	int					threshold;
 	
 	bool				bFound;
 	

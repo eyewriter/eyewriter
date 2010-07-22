@@ -13,13 +13,11 @@ void pupilFinder::setup(int width, int height, float _magRatio, float divisor){
 
 	magRatio = _magRatio;
 	
-	smallTargetWidth = (int)width / divisor;
-	smallTargetHeight = (int)height / divisor;
+//	smallTargetWidth = (int)width / divisor;
+//	smallTargetHeight = (int)height / divisor;
 
 	currentImg.allocate((int) (width * magRatio), (int) (height * magRatio));
 	imgBeforeThreshold.allocate((int) (width * magRatio), (int) (height * magRatio));
-	notDiffImg.allocate(smallTargetWidth, smallTargetHeight);
-	smallCurrentImg.allocate(smallTargetWidth, smallTargetHeight);
 		
 	ellipseCal.setup((int) (width * magRatio), (int) (height * magRatio));
 
@@ -50,7 +48,7 @@ void pupilFinder::setup(int width, int height, float _magRatio, float divisor){
 }
 
 //----------------------------------------------------
-bool pupilFinder::update(ofxCvGrayscaleAdvanced & _currentImg, eyeFinder& eFinder, ofRectangle targetRect, int _threshold, int minBlobSize, int maxBlobSize){
+bool pupilFinder::update(ofxCvGrayscaleAdvanced & _currentImg, int threshold, int minBlobSize, int maxBlobSize){
 
 	currentImg = _currentImg;
 
@@ -77,30 +75,30 @@ bool pupilFinder::update(ofxCvGrayscaleAdvanced & _currentImg, eyeFinder& eFinde
 	
 	// here's always dark eye.
 	// calcurate auto threshold value
-	if (bUseAutoThreshold){
+//	if (bUseAutoThreshold){
 		
-		targetRect.x /= eFinder.div;
-		targetRect.y /= eFinder.div;
-		targetRect.width = smallTargetWidth;
-		targetRect.height = smallTargetHeight;
+//		targetRect.x /= eFinder.div;
+//		targetRect.y /= eFinder.div;
+//		targetRect.width = smallTargetWidth;
+//		targetRect.height = smallTargetHeight;
+//		
+//		smallCurrentImg.scaleIntoMe(currentImg, CV_INTER_NN);			// which one is the fastest? NN? / LINEAR?
+//		eFinder.diffImg.setROI(targetRect);
+//		
+//		CvScalar tempPupilAvg = cvAvg(smallCurrentImg.getCvImage(), eFinder.diffImg.getCvImage());
+//		cvNot(eFinder.diffImg.getCvImage(), notDiffImg.getCvImage());
+//		CvScalar tempWhiteAvg = cvAvg(smallCurrentImg.getCvImage(), notDiffImg.getCvImage());
+//				
+//		eFinder.diffImg.resetROI();
+//		
+//		pupilAvg = tempPupilAvg.val[0];				// only for displaying
+//		whiteAvg = tempWhiteAvg.val[0];				// only for displaying
 		
-		smallCurrentImg.scaleIntoMe(currentImg, CV_INTER_NN);			// which one is the fastest? NN / LINEAR?
-		eFinder.diffImg.setROI(targetRect);
-		
-		CvScalar tempPupilAvg = cvAvg(smallCurrentImg.getCvImage(), eFinder.diffImg.getCvImage());
-		cvNot(eFinder.diffImg.getCvImage(), notDiffImg.getCvImage());
-		CvScalar tempWhiteAvg = cvAvg(smallCurrentImg.getCvImage(), notDiffImg.getCvImage());
-				
-		eFinder.diffImg.resetROI();
-		
-		pupilAvg = tempPupilAvg.val[0];				// only for displaying
-		whiteAvg = tempWhiteAvg.val[0];				// only for displaying
-		
-		threshold = (pupilAvg + whiteAvg) / 2;
-		
-	} else{
-		threshold = _threshold;
-	}
+//		threshold = (pupilAvg + whiteAvg) / 2;
+//		
+//	} else{
+//		threshold = _threshold;
+//	}
 	
 	if (bUseAdaptiveThreshold) {
 		currentImg.adaptiveThreshold(blocksize, offset, true, bGauss);

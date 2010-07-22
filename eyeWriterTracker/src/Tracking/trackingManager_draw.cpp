@@ -165,18 +165,23 @@ void trackingManager::drawBrighnessScanGraph(const unsigned char * pupilpixels, 
 	
 	ofEndShape(false);
 	ofSetColor(255, 0, 0, 80);
-	ofLine(x, y + 255 - tracker.pFinder.threshold, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.pFinder.threshold);
+	ofLine(x, y + 255 - tracker.threshold_p, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.threshold_p);
+	
+	ofSetColor(0, 0, 255, 80);
+	ofLine(x, y + 255 - tracker.threshold_g, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.threshold_g);
 	
 	ofSetColor(120, 120, 120, 80);
-	ofLine(x, y + 255 - tracker.pFinder.whiteAvg, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.pFinder.whiteAvg);
-	ofLine(x, y + 255 - tracker.pFinder.pupilAvg, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.pFinder.pupilAvg);
-
-	//	ofSetColor(0,0,255,80);
-	//	ofLine(x, y + 255 - tracker.pixelAvginTenframes, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.pixelAvginTenframes);
+	ofLine(x, y + 255 - tracker.whiteAvg, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.whiteAvg);
+	ofLine(x, y + 255 - tracker.pupilAvg, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.pupilAvg);
 	
 	ofSetColor(255, 255, 255);
 	ofRect(x, y, tracker.pFinder.imgBeforeThreshold.width, tracker.pFinder.imgBeforeThreshold.height);
 	
+//	ofSetColor(255, 255, 0);
+//	ofLine(x, y + 255 - tracker.maxBrightness, x + tracker.pFinder.imgBeforeThreshold.width, y + 255 - tracker.maxBrightness);
+	
+	ofSetColor(255, 255, 255);
+
 	ofDrawBitmapString(graphname, x + 1, y + 255 + 12);
 	
 }

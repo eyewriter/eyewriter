@@ -21,7 +21,6 @@ void eyeTracker::setup(int width, int height){
 	magRatio = 4;				// for accurate detection. width x magRatio, height x magRatio
 	divisor =2;					// for eyeFinder, make the picture smaller to reduce computation
 	
-	
 	printf("VideoWidth, VideoHeight = %d, %d \n", w, h);
 	
 	currentImg.allocate(w, h);
@@ -42,7 +41,11 @@ void eyeTracker::setup(int width, int height){
 	brightEyeImg.allocate(targetWidth, targetHeight);
 	darkEyeImg.allocate(targetWidth, targetHeight);
 	
-	// filtering: 
+	smallTargetWidth = targetWidth / divisor;
+	smallTargetHeight = targetHeight / divisor;
+	
+	smallCurrentImg.allocate(smallTargetWidth, smallTargetHeight);
+	notDiffImg.allocate(smallTargetWidth, smallTargetHeight);
 	
 	eFinder.setup(w, h, targetWidth, targetHeight, divisor);
 	pFinder.setup(targetWidth, targetHeight, magRatio, divisor);
@@ -85,12 +88,22 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam){
 		// find Pupil image again with the big eye image. (try double ellipse fit later?)
 		if (!bIsBrightEye){
 			
+			// get the averages of pupil & white part.
+			getAverages();
+			
+			if (bUseAutoThreshold_g) threshold_g = (maxBrightness + whiteAvg)/2;
+			else threshold_g = threshold_g_frompanel;
+			
 			// get glint position with dark eye image.
 			gFinder.update(magCurrent, threshold_g, minBlobSize_g, maxBlobSize_g);
 			
 			bool bFoundPupil;
 			
 			if (gFinder.bFound){
+				
+				if (bUseAutoThreshold_p) threshold_p = (pupilAvg + whiteAvg) / 2;
+				else threshold_p = threshold_p_frompanel;
+				
 				if (bUseHomography && gFinder.bFourGlints){
 					// Warp!!!
 										
@@ -116,11 +129,11 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam){
 										
 					warpedImg.warpIntoMe(magCurrent, srcPos, dstPos);
 					
-					bFoundPupil = pFinder.update(warpedImg, eFinder, targetRect,threshold_p, minBlobSize_p, maxBlobSize_p);
+					bFoundPupil = pFinder.update(warpedImg, threshold_p, minBlobSize_p, maxBlobSize_p);
 					
 				} else {
 					
-					bFoundPupil = pFinder.update(magCurrent, eFinder, targetRect, threshold_p, minBlobSize_p, maxBlobSize_p);
+					bFoundPupil = pFinder.update(magCurrent, threshold_p, minBlobSize_p, maxBlobSize_p);
 					
 					// not good -  of course, too high  
 //					bFoundPupil = pFinder.update(magCurrent, pixelAvginTenframes, minBlobSize_p, maxBlobSize_p);
@@ -175,7 +188,6 @@ bool	eyeTracker::getBrightEyeDarkEye(){
 ofPoint	eyeTracker::getEyePoint(){
 	
 	return (pupilCentroid + ofPoint(targetRect.x, targetRect.y));
-	
 }
 
 //----------------------------------------------------
@@ -186,7 +198,6 @@ ofPoint	eyeTracker::getGlintPoint(int glintID){
 	} else {
 		return gFinder.getGlintPosition(glintID) + ofPoint(targetRect.x, targetRect.y);
 	}
-	
 }
 
 //----------------------------------------------------
@@ -241,7 +252,27 @@ void eyeTracker::drawEllipse(float x, float y, float width, float height){
 }
 
 //----------------------------------------------------
+void eyeTracker::getAverages(){
+	
+	smallCurrentImg.scaleIntoMe(magCurrent, CV_INTER_NN);			// which one is the fastest? NN? / LINEAR?
 
+	eFinder.diffImg.setROI(targetRect.x/divisor, targetRect.y/divisor, smallTargetWidth, smallTargetHeight);
+	CvScalar tempPupilAvg = cvAvg(smallCurrentImg.getCvImage(), eFinder.diffImg.getCvImage());
+	cvNot(eFinder.diffImg.getCvImage(), notDiffImg.getCvImage());
+	CvScalar tempWhiteAvg = cvAvg(smallCurrentImg.getCvImage(), notDiffImg.getCvImage());
+	eFinder.diffImg.resetROI();
+	
+	currentImg.setROI(targetRect);
+	double tempMin, tempMax;
+	cvMinMaxLoc(currentImg.getCvImage(), &tempMin, &tempMax);
+	currentImg.resetROI();
+	
+	maxBrightness = (float)tempMax;
+	pupilAvg = tempPupilAvg.val[0];
+	whiteAvg = tempWhiteAvg.val[0];
+	
+}
+//----------------------------------------------------
 
 
 

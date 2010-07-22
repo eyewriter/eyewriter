@@ -20,13 +20,13 @@ class pupilFinder {
 public:
 
 	void setup(int width, int height, float magRatio, float divisor);
-	bool update(ofxCvGrayscaleAdvanced & _currentImg, eyeFinder& eFinder, ofRectangle targetRect, int threshold, int minBlobSize, int maxBlobSize);
+	bool update(ofxCvGrayscaleAdvanced & _currentImg, int threshold, int minBlobSize, int maxBlobSize);
 
 	ofxCvGrayscaleAdvanced	currentImg;
 	ofxCvGrayscaleAdvanced	previousImg;
 	ofxCvGrayscaleAdvanced	diffImg;
-	ofxCvGrayscaleImage		notDiffImg;
-	ofxCvGrayscaleImage		smallCurrentImg;
+//	ofxCvGrayscaleImage		notDiffImg;
+//	ofxCvGrayscaleImage		smallCurrentImg;
 
 	ofxCvGrayscaleImage		imgBeforeThreshold;			// only for displaying in tracking mode
 	
@@ -36,11 +36,7 @@ public:
 	bool					firstFrame;
 
 	ellipseCalcurator		ellipseCal;
-	
-	bool		bUseAutoThreshold;
-	float		pupilAvg;
-	float		whiteAvg;
-	
+		
 	float		convMin;
 	float		convMax;
 
@@ -66,15 +62,14 @@ public:
 	bool		bUseCompactnessTest;
 	float		maxCompactness;
 
-	float		smallTargetWidth;				// targetRect size in eyeFinder
-	float		smallTargetHeight;
+//	float		smallTargetWidth;				// targetRect size in eyeFinder
+//	float		smallTargetHeight;
 	
 		
 	bool		bUseAdaptiveThreshold;
 	int			offset;
 	int			blocksize;
 	int			bGauss;
-	int			threshold;
 
 	bool		bUseContrastStretch;
 

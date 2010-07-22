@@ -136,6 +136,8 @@ void trackingManager::setupGui(){
 	
 	// glint position
 	panel.setWhichPanel("glint detection");
+	
+	panel.addToggle("use auto threshold", "B_USE_AUTO_THRESHOLD_GLINT", true);
 	//	panel.addSlider("threshold(bright/dark) ", "THRESHOLD_BD", 170, 0, 255, true);
 	panel.addSlider("threshold(glint)", "THRESHOLD_GLINT", 190, 0, 255, true);
 		
@@ -152,14 +154,10 @@ void trackingManager::setupGui(){
 	panel.addSlider("range Min", "RANGE_MIN_GLINT", 0, -500, 500, false);
 	panel.addSlider("range Max", "RANGE_MAX_GLINT", 255, -255, 1000, false);
 	
-	
-	
 	panel.loadSettings("settings/trackingSettings.xml");
 	
 	
 }
-
-
 
 //--------------------------------------------------------------
 void trackingManager::updateGui(){
@@ -251,8 +249,8 @@ void trackingManager::updateGui(){
 	
 	tracker.pFinder.bUseContrastStretch = panel.getValueB("B_USE_STRETCH_PUPIL");
 	
-	tracker.pFinder.bUseAutoThreshold = panel.getValueB("B_USE_AUTOTHRESHOLD_PUPIL");
-	tracker.threshold_p				= panel.getValueF("THRESHOLD_PUPIL");
+	tracker.bUseAutoThreshold_p		= panel.getValueB("B_USE_AUTOTHRESHOLD_PUPIL");
+	tracker.threshold_p_frompanel	= panel.getValueF("THRESHOLD_PUPIL");
 	tracker.minBlobSize_p			= panel.getValueF("MIN_BLOB_PUPIL");
 	tracker.maxBlobSize_p			= panel.getValueF("MAX_BLOB_PUPIL");
 	
@@ -278,7 +276,8 @@ void trackingManager::updateGui(){
 	
 	tracker.gFinder.limitratio = panel.getValueF("WH_RATIO");
 	
-	tracker.threshold_g				= panel.getValueF("THRESHOLD_GLINT");
+	tracker.bUseAutoThreshold_g		= panel.getValueB("B_USE_AUTO_THRESHOLD_GLINT");
+	tracker.threshold_g_frompanel	= panel.getValueF("THRESHOLD_GLINT");
 	tracker.minBlobSize_g			= panel.getValueF("MIN_BLOB_GLINT");
 	tracker.maxBlobSize_g			= panel.getValueF("MAX_BLOB_GLINT");
 	
