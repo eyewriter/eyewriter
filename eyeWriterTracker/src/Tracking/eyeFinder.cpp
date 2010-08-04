@@ -1,11 +1,3 @@
-/*
- *  eyeFinder.cpp
- *  EyeTrackDTTest
- *
- *  Created by itotaka on 5/19/10.
- *
- */
-
 #include "eyeFinder.h"
 
 //------------------------------------------------------------------------------------
@@ -67,11 +59,8 @@ bool eyeFinder::update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, fl
 	
 	// TODO: change here to get the best one
 	
-	if (div !=1){
-		currentImg.scaleIntoMe(_currentImg, CV_INTER_LINEAR);
-	} else {
-		currentImg = _currentImg;
-	}
+	if (div !=1) currentImg.scaleIntoMe(_currentImg, CV_INTER_LINEAR);
+	else currentImg = _currentImg;
 	
 	if (bFirstFrame){
 		previousImg = currentImg;
@@ -80,18 +69,9 @@ bool eyeFinder::update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, fl
 	
 	// Image Filters
 	
-	// Gamma
-	if(bUseGamma){
-		currentImg.applyMinMaxGamma(gamma);
-	}
-	
-	if (bUseBlur) {
-		currentImg.blur(blur);							//Great!!(also for subtraction!!!)
-	}
-	
-	if (bUseContrast){
-		currentImg.applyBrightnessContrast(brightness,contrast);
-	}
+	if (bUseGamma) currentImg.applyMinMaxGamma(gamma);
+	if (bUseBlur) currentImg.blur(blur);							//Great!!(also for subtraction!!!)
+	if (bUseContrast) currentImg.applyBrightnessContrast(brightness,contrast);
 	
 	// get diff Image;		
 	diffImg.absDiff(currentImg, previousImg);
@@ -105,7 +85,6 @@ bool eyeFinder::update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, fl
 			
 			if (i < nErosions)	diffImg.erode();
 			if (i < nDilations)	diffImg.dilate();
-			
 		}
 	}
 	
@@ -223,7 +202,6 @@ bool eyeFinder::update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, fl
 void eyeFinder::drawFindingRect(float x, float y, float width, float height){
 	
 	ofRect(findingRect.x * div * width/w + x, findingRect.y * div * height/h + y, findingRect.width * div * width/w, findingRect.height * div * height/h);
-	
 }
 
 //------------------------------------------------------------------------------------

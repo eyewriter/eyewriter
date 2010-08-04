@@ -1,9 +1,3 @@
-/*
- *  eyeTracker.h
- *  EyeTrackDTTest
- *
- */
-
 #ifndef _EYE_TRACKER_
 #define _EYE_TRACKER_
 
@@ -15,6 +9,8 @@
 #include "pupilFinder.h"
 #include "glintFinder.h"
 #include "EllipseCalcurator.h"
+
+#include "homographyCalcurator.h"
 
 class eyeTracker {
 	
@@ -39,7 +35,6 @@ public:
 	ofxCvGrayscaleImage				darkEyeImg;
 	
 	ofxCvGrayscaleAdvanced			magCurrent;
-	ofxCvGrayscaleAdvanced			warpedImg;
 	
 	ofxCvGrayscaleImage				notDiffImg;
 	ofxCvGrayscaleImage				smallCurrentImg;
@@ -106,8 +101,8 @@ public:
 	
 	// Warp
 	bool			bUseHomography;	
-	ofPoint			srcPos[4];
-	ofPoint			dstPos[4];
+	homographyCalcurator	homographyCal;
+	
 
 	
 	

@@ -1,9 +1,3 @@
-/*
- *  eyeTracker.cpp
- *  EyeTrackDTTest
- *
- */
-
 #include "eyeTracker.h"
 //--------------------------------------------------------------
 eyeTracker::eyeTracker(){
@@ -36,7 +30,6 @@ void eyeTracker::setup(int width, int height){
 	targetRect.height = targetHeight;
 	
 	magCurrent.allocate(targetWidth * magRatio, targetHeight * magRatio);
-	warpedImg.allocate(targetWidth * magRatio, targetHeight * magRatio);
 	
 	brightEyeImg.allocate(targetWidth, targetHeight);
 	darkEyeImg.allocate(targetWidth, targetHeight);
@@ -50,6 +43,8 @@ void eyeTracker::setup(int width, int height){
 	eFinder.setup(w, h, targetWidth, targetHeight, divisor);
 	pFinder.setup(targetWidth, targetHeight, magRatio, divisor);
 	gFinder.setup(targetWidth, targetHeight, magRatio);
+	
+	homographyCal.setup(100, 50, targetWidth * magRatio, targetHeight * magRatio);
 	
 }
 
@@ -89,7 +84,9 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam){
 		if (!bIsBrightEye){
 			
 			// get the averages of pupil & white part.
-			getAverages();
+			if (bUseAutoThreshold_g || bUseAutoThreshold_p){
+				getAverages();
+			}
 			
 			if (bUseAutoThreshold_g) threshold_g = (maxBrightness + whiteAvg)/2;
 			else threshold_g = threshold_g_frompanel;
@@ -105,45 +102,17 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam){
 				else threshold_p = threshold_p_frompanel;
 				
 				if (bUseHomography && gFinder.bFourGlints){
-					// Warp!!!
-										
-					ofPoint averageSrcPos;
-					
-					float	hWidth = 100;
-					float	hHeight = 50;
-					
-					srcPos[0] = gFinder.getGlintPosition(GLINT_TOP_LEFT) * magRatio;
-					srcPos[1] = gFinder.getGlintPosition(GLINT_TOP_RIGHT) * magRatio;
-					srcPos[2] = gFinder.getGlintPosition(GLINT_BOTTOM_LEFT) * magRatio;
-					srcPos[3] = gFinder.getGlintPosition(GLINT_BOTTOM_RIGHT) * magRatio;
-					
-					averageSrcPos = (srcPos[0] + srcPos[1] + srcPos[2] + srcPos[3]) / 4;
-
-					// Destination positions(shape) should be calibrated when we calibrate..?
-					// like, just see one point on the screen, and get the shape of the glints. 
-					
-					dstPos[0] = ofPoint(averageSrcPos.x - hWidth / 2, averageSrcPos.y - hHeight / 2);
-					dstPos[1] = ofPoint(averageSrcPos.x + hWidth / 2, averageSrcPos.y - hHeight / 2);
-					dstPos[2] = ofPoint(averageSrcPos.x - hWidth / 2, averageSrcPos.y + hHeight / 2);
-					dstPos[3] = ofPoint(averageSrcPos.x + hWidth / 2, averageSrcPos.y + hHeight / 2);
-										
-					warpedImg.warpIntoMe(magCurrent, srcPos, dstPos);
-					
-					bFoundPupil = pFinder.update(warpedImg, threshold_p, minBlobSize_p, maxBlobSize_p);
+					// Homography..
+					ofxCvGrayscaleAdvanced* temp = homographyCal.getWarpedImage(magCurrent, gFinder, magRatio);
+					bFoundPupil = pFinder.update(*temp, threshold_p, minBlobSize_p, maxBlobSize_p);
 					
 				} else {
 					
 					bFoundPupil = pFinder.update(magCurrent, threshold_p, minBlobSize_p, maxBlobSize_p);
-					
-					// not good -  of course, too high  
-//					bFoundPupil = pFinder.update(magCurrent, pixelAvginTenframes, minBlobSize_p, maxBlobSize_p);
-
 				}
-				
 				
 				if (bFoundPupil){
 					pupilCentroid = pFinder.currentPupilCenter;
-					
 				}
 			}
 		}
@@ -194,7 +163,9 @@ ofPoint	eyeTracker::getEyePoint(){
 ofPoint	eyeTracker::getGlintPoint(int glintID){
 	
 	if (bUseHomography && gFinder.bFourGlints){
-		return (dstPos[glintID] / magRatio) + ofPoint(targetRect.x, targetRect.y);
+		ofPoint* temp;
+		temp = homographyCal.getDstPos();
+		return (temp[glintID] / magRatio) + ofPoint(targetRect.x, targetRect.y);
 	} else {
 		return gFinder.getGlintPosition(glintID) + ofPoint(targetRect.x, targetRect.y);
 	}

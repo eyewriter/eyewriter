@@ -5,7 +5,7 @@ void trackingManager::drawInput(int xBright, int yBright, int wBright, int hBrig
 	
 	ofSetColor(255,255,255);
 	if ((tracker.bIsBrightEye && IM.fcount == 0) || (!tracker.bIsBrightEye && IM.fcount ==1) ||
-			(IM.grabberType == INPUT_OFXLIBDC && IM.mode == INPUT_LIVE_VIDEO)) { //Bright Eye => Left, Dark Eye =>Right
+			(IM.grabberType == INPUT_OFXLIBDC && IM.mode == INPUT_LIVE_VIDEO)) {		//Bright Eye => Left, Dark Eye =>Right
 		IM.drawEvenFrame(xBright, yBright, wBright, hBright);
 		IM.drawOddFrame(xDark, yDark, wDark, hDark);		
 	} else {
@@ -15,8 +15,6 @@ void trackingManager::drawInput(int xBright, int yBright, int wBright, int hBrig
 	
 	ofDrawBitmapString("Input_Bright", xBright+1, yBright+hBright + 12);			// can't display letters, if x is 0. Report the BUG.
 	ofDrawBitmapString("Input_Dark", xDark+1, yDark+hDark + 12);						// can't display letters, if x is 0. Report the BUG.
-	
-	
 }
  
 //--------------------------------------------------------------
@@ -90,8 +88,8 @@ void trackingManager::drawPupilFinder(int x, int y){
 	ofSetColor(255, 255, 255);
 	ofDrawBitmapString("pupilFinder/EllipseFit", x + 1, y + tracker.pFinder.currentImg.height + 12);
 	
-	
 }
+
 //--------------------------------------------------------------
 void trackingManager::drawGlintFinder(int x, int y){
 	
@@ -99,19 +97,19 @@ void trackingManager::drawGlintFinder(int x, int y){
 	
 	ofSetColor(255,255,255);
 	tracker.gFinder.eyeImage.draw(x, y);
-	if (!tracker.gFinder.bFourGlints){
-		tracker.gFinder.contourFinder.draw(x + tracker.gFinder.glintROI.x, y + tracker.gFinder.glintROI.y);
-	} else {
-		tracker.gFinder.contourFinder.draw(x, y);
-	}
+//	if (!tracker.gFinder.bFourGlints){
+	tracker.gFinder.contourFinder.draw(x + tracker.gFinder.glintROI.x, y + tracker.gFinder.glintROI.y);
+//	} else {
+//		tracker.gFinder.contourFinder.draw(x, y);
+//	}
 	
 	ofDisableAlphaBlending();
 	
 	ofSetColor(255, 255, 255);
 	ofDrawBitmapString("glintFinder", x + 1, y + tracker.gFinder.eyeImage.height + 12);
 	
-	
 }
+
 //--------------------------------------------------------------
 void trackingManager::drawBrightDarkPupil(int xBright, int yBright, int xDark, int yDark){
 	
@@ -124,6 +122,7 @@ void trackingManager::drawBrightDarkPupil(int xBright, int yBright, int xDark, i
 	ofDisableAlphaBlending();
 	
 }
+
 //--------------------------------------------------------------
 void trackingManager::drawAutoThresholdBrightnessGraph(int x, int y){
 	
@@ -204,15 +203,13 @@ void trackingManager::drawRawInput(int offsetX, int offsetY, float scale){
 	
 	//ofDisableAlphaBlending();
 }
+
 //--------------------------------------------------------------
 void trackingManager::drawWarpedImg(int x, int y, int w, int h){
 
-	tracker.warpedImg.draw(x, y, w, h);
+	tracker.homographyCal.warpedImg.draw(x, y, w, h);
 	ofDrawBitmapString("warpedImg", x + 1, y + 255 + 12);
 
 }
-//--------------------------------------------------------------
-
-
 
 

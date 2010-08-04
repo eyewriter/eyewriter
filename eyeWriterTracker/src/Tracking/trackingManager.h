@@ -1,7 +1,6 @@
 #ifndef _TRACKSCENE_H
 #define _TRACKSCENE_H
 
-
 #include "ofMain.h"
 #include "eyeTracker.h"
 #include "ofxControlPanel.h"

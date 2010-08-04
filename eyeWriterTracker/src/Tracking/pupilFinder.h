@@ -1,11 +1,3 @@
-/*
- *  pupilFinder.h
- *  EyeTrackDTTest
- *
- *  Created by itotaka on 5/19/10.
- *
- */
-
 #ifndef _PUPIL_FINDER_
 #define _PUPIL_FINDER_
 
@@ -17,6 +9,7 @@
 #include "eyeFinder.h"
 
 class pupilFinder {
+	
 public:
 
 	void setup(int width, int height, float magRatio, float divisor);
@@ -25,8 +18,6 @@ public:
 	ofxCvGrayscaleAdvanced	currentImg;
 	ofxCvGrayscaleAdvanced	previousImg;
 	ofxCvGrayscaleAdvanced	diffImg;
-//	ofxCvGrayscaleImage		notDiffImg;
-//	ofxCvGrayscaleImage		smallCurrentImg;
 
 	ofxCvGrayscaleImage		imgBeforeThreshold;			// only for displaying in tracking mode
 	
@@ -37,8 +28,8 @@ public:
 
 	ellipseCalcurator		ellipseCal;
 		
-	float		convMin;
-	float		convMax;
+	float		convMin;					// convertTorange		default min:0 , max 255	... needed?
+	float		convMax;					// change the brightness range into convMin - convMax
 
 	float		magRatio;
 
@@ -61,9 +52,6 @@ public:
 
 	bool		bUseCompactnessTest;
 	float		maxCompactness;
-
-//	float		smallTargetWidth;				// targetRect size in eyeFinder
-//	float		smallTargetHeight;
 	
 		
 	bool		bUseAdaptiveThreshold;

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF1589D21208A6EA006A84E9 /* homographyCalcurator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1589D01208A6EA006A84E9 /* homographyCalcurator.cpp */; };
+		CF4183FA1201CEBB003775AD /* inputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4183F81201CEBB003775AD /* inputManager.cpp */; };
+		CF4183FE1201CEC5003775AD /* ofxCvGrayscaleAdvanced.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4183FC1201CEC5003775AD /* ofxCvGrayscaleAdvanced.cpp */; };
 		CF4FEA7611B84F0D002AC074 /* ofxDirList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEA7411B84F0D002AC074 /* ofxDirList.cpp */; };
 		CF82F0A511F680E700414F46 /* libdc1394.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF82F07311F680E700414F46 /* libdc1394.a */; };
 		CF82F0A611F680E700414F46 /* ofxLibdc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF82F07611F680E700414F46 /* ofxLibdc.cpp */; };
@@ -27,13 +30,12 @@
 		CF94B3C411B83B4E00C3115A /* eyeFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3B211B83B4E00C3115A /* eyeFinder.cpp */; };
 		CF94B3C511B83B4E00C3115A /* eyeTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3B411B83B4E00C3115A /* eyeTracker.cpp */; };
 		CF94B3C611B83B4E00C3115A /* glintFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3B611B83B4E00C3115A /* glintFinder.cpp */; };
-		CF94B3C711B83B4E00C3115A /* inputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3B811B83B4E00C3115A /* inputManager.cpp */; };
-		CF94B3C811B83B4E00C3115A /* ofxCvGrayscaleAdvanced.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3BA11B83B4E00C3115A /* ofxCvGrayscaleAdvanced.cpp */; };
 		CF94B3C911B83B4E00C3115A /* pupilFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3BC11B83B4E00C3115A /* pupilFinder.cpp */; };
 		CF94B3CA11B83B4E00C3115A /* trackingManager_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3BE11B83B4E00C3115A /* trackingManager_draw.cpp */; };
 		CF94B3CB11B83B4E00C3115A /* trackingManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3BF11B83B4E00C3115A /* trackingManager.cpp */; };
 		CF94B3CC11B83B4E00C3115A /* trakingManager_controlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3C111B83B4E00C3115A /* trakingManager_controlPanel.cpp */; };
 		CF94B3E311B83C0100C3115A /* ofxLeastSquares.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF94B3E111B83C0100C3115A /* ofxLeastSquares.cpp */; };
+		CFAECE1011F8E35800D77DD0 /* ofxThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFAECE0E11F8E35800D77DD0 /* ofxThread.cpp */; };
 		CFBEC7D311E7C195007A4A8C /* calibrationFileSaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBEC7D011E7C195007A4A8C /* calibrationFileSaver.cpp */; };
 		CFBEC7D411E7C195007A4A8C /* calibrationManager_controlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBEC7D211E7C195007A4A8C /* calibrationManager_controlPanel.cpp */; };
 		CFD80A7911A1F27500417256 /* guiBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFD80A4411A1F27500417256 /* guiBaseObject.cpp */; };
@@ -139,6 +141,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CF1589D01208A6EA006A84E9 /* homographyCalcurator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = homographyCalcurator.cpp; path = Tracking/homographyCalcurator.cpp; sourceTree = "<group>"; };
+		CF1589D11208A6EA006A84E9 /* homographyCalcurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = homographyCalcurator.h; path = Tracking/homographyCalcurator.h; sourceTree = "<group>"; };
+		CF4183F81201CEBB003775AD /* inputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = inputManager.cpp; sourceTree = "<group>"; };
+		CF4183F91201CEBB003775AD /* inputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputManager.h; sourceTree = "<group>"; };
+		CF4183FC1201CEC5003775AD /* ofxCvGrayscaleAdvanced.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCvGrayscaleAdvanced.cpp; sourceTree = "<group>"; };
+		CF4183FD1201CEC5003775AD /* ofxCvGrayscaleAdvanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvGrayscaleAdvanced.h; sourceTree = "<group>"; };
+		CF4184011201D00B003775AD /* baseVideoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseVideoGrabber.h; sourceTree = "<group>"; };
+		CF4184021201D00B003775AD /* fireflyVideoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fireflyVideoGrabber.h; sourceTree = "<group>"; };
+		CF4184031201D00B003775AD /* qtVideoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qtVideoGrabber.h; sourceTree = "<group>"; };
+		CF4184041201D00B003775AD /* threadedPtGreyGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threadedPtGreyGrabber.h; sourceTree = "<group>"; };
+		CF4184051201D00B003775AD /* threadedQtVideoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threadedQtVideoGrabber.h; sourceTree = "<group>"; };
 		CF4FEA7411B84F0D002AC074 /* ofxDirList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDirList.cpp; sourceTree = "<group>"; };
 		CF4FEA7511B84F0D002AC074 /* ofxDirList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxDirList.h; sourceTree = "<group>"; };
 		CF82F05F11F680E700414F46 /* dc1394.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dc1394.h; sourceTree = "<group>"; };
@@ -223,10 +236,6 @@
 		CF94B3B511B83B4E00C3115A /* eyeTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eyeTracker.h; path = Tracking/eyeTracker.h; sourceTree = "<group>"; };
 		CF94B3B611B83B4E00C3115A /* glintFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glintFinder.cpp; path = Tracking/glintFinder.cpp; sourceTree = "<group>"; };
 		CF94B3B711B83B4E00C3115A /* glintFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glintFinder.h; path = Tracking/glintFinder.h; sourceTree = "<group>"; };
-		CF94B3B811B83B4E00C3115A /* inputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = inputManager.cpp; path = Tracking/inputManager.cpp; sourceTree = "<group>"; };
-		CF94B3B911B83B4E00C3115A /* inputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inputManager.h; path = Tracking/inputManager.h; sourceTree = "<group>"; };
-		CF94B3BA11B83B4E00C3115A /* ofxCvGrayscaleAdvanced.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxCvGrayscaleAdvanced.cpp; path = Tracking/ofxCvGrayscaleAdvanced.cpp; sourceTree = "<group>"; };
-		CF94B3BB11B83B4E00C3115A /* ofxCvGrayscaleAdvanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxCvGrayscaleAdvanced.h; path = Tracking/ofxCvGrayscaleAdvanced.h; sourceTree = "<group>"; };
 		CF94B3BC11B83B4E00C3115A /* pupilFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pupilFinder.cpp; path = Tracking/pupilFinder.cpp; sourceTree = "<group>"; };
 		CF94B3BD11B83B4E00C3115A /* pupilFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pupilFinder.h; path = Tracking/pupilFinder.h; sourceTree = "<group>"; };
 		CF94B3BE11B83B4E00C3115A /* trackingManager_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trackingManager_draw.cpp; path = Tracking/trackingManager_draw.cpp; sourceTree = "<group>"; };
@@ -235,6 +244,8 @@
 		CF94B3C111B83B4E00C3115A /* trakingManager_controlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trakingManager_controlPanel.cpp; path = Tracking/trakingManager_controlPanel.cpp; sourceTree = "<group>"; };
 		CF94B3E111B83C0100C3115A /* ofxLeastSquares.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLeastSquares.cpp; sourceTree = "<group>"; };
 		CF94B3E211B83C0100C3115A /* ofxLeastSquares.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLeastSquares.h; sourceTree = "<group>"; };
+		CFAECE0E11F8E35800D77DD0 /* ofxThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxThread.cpp; sourceTree = "<group>"; };
+		CFAECE0F11F8E35800D77DD0 /* ofxThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxThread.h; sourceTree = "<group>"; };
 		CFBEC7D011E7C195007A4A8C /* calibrationFileSaver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = calibrationFileSaver.cpp; path = calibration/calibrationFileSaver.cpp; sourceTree = "<group>"; };
 		CFBEC7D111E7C195007A4A8C /* calibrationFileSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calibrationFileSaver.h; path = calibration/calibrationFileSaver.h; sourceTree = "<group>"; };
 		CFBEC7D211E7C195007A4A8C /* calibrationManager_controlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = calibrationManager_controlPanel.cpp; path = calibration/calibrationManager_controlPanel.cpp; sourceTree = "<group>"; };
@@ -381,6 +392,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF4183F71201CEBB003775AD /* InputManager */ = {
+			isa = PBXGroup;
+			children = (
+				CF4184001201D00B003775AD /* threadedGrabber */,
+				CF4183F81201CEBB003775AD /* inputManager.cpp */,
+				CF4183F91201CEBB003775AD /* inputManager.h */,
+			);
+			name = InputManager;
+			path = Tracking/InputManager;
+			sourceTree = "<group>";
+		};
+		CF4183FB1201CEC5003775AD /* ofxCvGrayscaleAdvanced */ = {
+			isa = PBXGroup;
+			children = (
+				CF4183FC1201CEC5003775AD /* ofxCvGrayscaleAdvanced.cpp */,
+				CF4183FD1201CEC5003775AD /* ofxCvGrayscaleAdvanced.h */,
+			);
+			name = ofxCvGrayscaleAdvanced;
+			path = utils/ofxCvGrayscaleAdvanced;
+			sourceTree = "<group>";
+		};
+		CF4184001201D00B003775AD /* threadedGrabber */ = {
+			isa = PBXGroup;
+			children = (
+				CF4184011201D00B003775AD /* baseVideoGrabber.h */,
+				CF4184031201D00B003775AD /* qtVideoGrabber.h */,
+				CF4184021201D00B003775AD /* fireflyVideoGrabber.h */,
+				CF4184051201D00B003775AD /* threadedQtVideoGrabber.h */,
+				CF4184041201D00B003775AD /* threadedPtGreyGrabber.h */,
+			);
+			path = threadedGrabber;
+			sourceTree = "<group>";
+		};
 		CF4FEA6F11B84F0D002AC074 /* ofxDirList */ = {
 			isa = PBXGroup;
 			children = (
@@ -645,9 +689,28 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		CFAECE0911F8E35800D77DD0 /* ofxThread */ = {
+			isa = PBXGroup;
+			children = (
+				CFAECE0D11F8E35800D77DD0 /* src */,
+			);
+			name = ofxThread;
+			path = ../../../addons/ofxThread;
+			sourceTree = SOURCE_ROOT;
+		};
+		CFAECE0D11F8E35800D77DD0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				CFAECE0E11F8E35800D77DD0 /* ofxThread.cpp */,
+				CFAECE0F11F8E35800D77DD0 /* ofxThread.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		CFB4A6CA11986312004299B8 /* Tracking */ = {
 			isa = PBXGroup;
 			children = (
+				CF4183F71201CEBB003775AD /* InputManager */,
 				CF94B3AD11B83B4E00C3115A /* EllipseFit */,
 				CF94B3B411B83B4E00C3115A /* eyeTracker.cpp */,
 				CF94B3B511B83B4E00C3115A /* eyeTracker.h */,
@@ -655,12 +718,10 @@
 				CF94B3B311B83B4E00C3115A /* eyeFinder.h */,
 				CF94B3B611B83B4E00C3115A /* glintFinder.cpp */,
 				CF94B3B711B83B4E00C3115A /* glintFinder.h */,
-				CF94B3B811B83B4E00C3115A /* inputManager.cpp */,
-				CF94B3B911B83B4E00C3115A /* inputManager.h */,
-				CF94B3BA11B83B4E00C3115A /* ofxCvGrayscaleAdvanced.cpp */,
-				CF94B3BB11B83B4E00C3115A /* ofxCvGrayscaleAdvanced.h */,
 				CF94B3BC11B83B4E00C3115A /* pupilFinder.cpp */,
 				CF94B3BD11B83B4E00C3115A /* pupilFinder.h */,
+				CF1589D01208A6EA006A84E9 /* homographyCalcurator.cpp */,
+				CF1589D11208A6EA006A84E9 /* homographyCalcurator.h */,
 				CF94B3BF11B83B4E00C3115A /* trackingManager.cpp */,
 				CF94B3BE11B83B4E00C3115A /* trackingManager_draw.cpp */,
 				CF94B3C111B83B4E00C3115A /* trakingManager_controlPanel.cpp */,
@@ -745,6 +806,7 @@
 		CFD80D6111A1F32B00417256 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				CF4183FB1201CEC5003775AD /* ofxCvGrayscaleAdvanced */,
 				CFD80A4311A1F27500417256 /* ofxControlPanel */,
 				CF94B3DF11B83C0100C3115A /* ofxLeastSquares */,
 				CFD80D7A11A1F60700417256 /* buttons */,
@@ -797,6 +859,7 @@
 		CFE6D592117F5F9500D92167 /* AddOn */ = {
 			isa = PBXGroup;
 			children = (
+				CFAECE0911F8E35800D77DD0 /* ofxThread */,
 				CF82F05A11F680E700414F46 /* ofxLibdc */,
 				CF82F07C11F680E700414F46 /* ofxOpenCv */,
 				CF4FEA6F11B84F0D002AC074 /* ofxDirList */,
@@ -1211,8 +1274,6 @@
 				CF94B3C411B83B4E00C3115A /* eyeFinder.cpp in Sources */,
 				CF94B3C511B83B4E00C3115A /* eyeTracker.cpp in Sources */,
 				CF94B3C611B83B4E00C3115A /* glintFinder.cpp in Sources */,
-				CF94B3C711B83B4E00C3115A /* inputManager.cpp in Sources */,
-				CF94B3C811B83B4E00C3115A /* ofxCvGrayscaleAdvanced.cpp in Sources */,
 				CF94B3C911B83B4E00C3115A /* pupilFinder.cpp in Sources */,
 				CF94B3CA11B83B4E00C3115A /* trackingManager_draw.cpp in Sources */,
 				CF94B3CB11B83B4E00C3115A /* trackingManager.cpp in Sources */,
@@ -1230,6 +1291,10 @@
 				CF82F0AD11F680E700414F46 /* ofxCvGrayscaleImage.cpp in Sources */,
 				CF82F0AE11F680E700414F46 /* ofxCvImage.cpp in Sources */,
 				CF82F0AF11F680E700414F46 /* ofxCvShortImage.cpp in Sources */,
+				CFAECE1011F8E35800D77DD0 /* ofxThread.cpp in Sources */,
+				CF4183FA1201CEBB003775AD /* inputManager.cpp in Sources */,
+				CF4183FE1201CEC5003775AD /* ofxCvGrayscaleAdvanced.cpp in Sources */,
+				CF1589D21208A6EA006A84E9 /* homographyCalcurator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

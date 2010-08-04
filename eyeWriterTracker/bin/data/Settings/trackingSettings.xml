@@ -98,7 +98,7 @@
     <val_0>1.000000</val_0>
 </B_DRAW_LINE_G>
 <B_DRAW_CONTOUR>
-    <val_0>0.000000</val_0>
+    <val_0>1.000000</val_0>
 </B_DRAW_CONTOUR>
 <B_USE_DILATE_EYEPOS>
     <val_0>0.000000</val_0>
@@ -182,10 +182,10 @@
     <val_0>1.000000</val_0>
 </B_USE_BLUR_PUPIL>
 <BLUR_PUPIL>
-    <val_0>10.000000</val_0>
+    <val_0>5.333333</val_0>
 </BLUR_PUPIL>
 <THRESHOLD_PUPIL>
-    <val_0>77.916664</val_0>
+    <val_0>116.166664</val_0>
 </THRESHOLD_PUPIL>
 <MIN_BLOB_PUPIL>
     <val_0>5000.000000</val_0>
@@ -272,8 +272,20 @@
     <val_0>0.000000</val_0>
 </B_USE_STRETCH_PUPIL>
 <B_USE_AUTOTHRESHOLD_PUPIL>
-    <val_0>1.000000</val_0>
+    <val_0>0.000000</val_0>
 </B_USE_AUTOTHRESHOLD_PUPIL>
 <B_USE_AUTO_THRESHOLD_GLINT>
     <val_0>0.000000</val_0>
 </B_USE_AUTO_THRESHOLD_GLINT>
+<ROI_ORIGIN_X>
+    <val_0>0.000000</val_0>
+</ROI_ORIGIN_X>
+<ROI_ORIGIN_Y>
+    <val_0>0.344444</val_0>
+</ROI_ORIGIN_Y>
+<ROI_END_X>
+    <val_0>1.000000</val_0>
+</ROI_END_X>
+<ROI_END_Y>
+    <val_0>0.955556</val_0>
+</ROI_END_Y>

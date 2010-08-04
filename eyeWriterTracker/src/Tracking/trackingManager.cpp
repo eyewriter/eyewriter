@@ -28,9 +28,7 @@ void trackingManager::setup(){
 	eyePoint.set(0,0,0);
 	
 	scanX = 0;
-	scanY = 0;
-	
-	
+	scanY = 0;	
 	
 }
 
@@ -72,7 +70,7 @@ bool trackingManager::bGotAnEyeThisFrame(){
 
 //--------------------------------------------------------------
 void trackingManager::trackEyes(){
-	tracker.update(IM.grayImage);
+	tracker.update(*IM.grayImage);
 	
 	bFoundEye	= tracker.bFoundOne;						
 	eyePoint	= tracker.getVectorGlintToPupil(GLINT_BOTTOM_LEFT);					// TODO: CHECK here.

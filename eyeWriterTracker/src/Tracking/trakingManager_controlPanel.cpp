@@ -88,6 +88,8 @@ void trackingManager::setupGui(){
 	panel.addToggle("use blur", "B_USE_BLUR_EYEPOS", true);
 	panel.addSlider("blur ", "BLUR_EYEPOS", 5, 0, 20, false);
 	
+	//panel.addSlider("ROI(pupil, glint) width", "EYE_ROI_WIDTH", <#float value#>, <#float min#>, <#float max#>, <#bool isInt#>);
+	
 	
 	
 	// pupil position 1
@@ -129,9 +131,7 @@ void trackingManager::setupGui(){
 	panel.addToggle("use contrast / bri", "B_USE_CONTRAST_PUPIL", false);
 	panel.addSlider("contrast ", "CONTRAST_PUPIL", 0.28f, 0.0, 1.0f, false);
 	panel.addSlider("brightness ", "BRIGHTNESS_PUPIL", -0.02f, -1.0, 3.0f, false);
-	
-	
-	
+		
 	
 	
 	// glint position
@@ -154,8 +154,12 @@ void trackingManager::setupGui(){
 	panel.addSlider("range Min", "RANGE_MIN_GLINT", 0, -500, 500, false);
 	panel.addSlider("range Max", "RANGE_MAX_GLINT", 255, -255, 1000, false);
 	
-	panel.loadSettings("settings/trackingSettings.xml");
+	panel.addSlider("ROIorigin(x)", "ROI_ORIGIN_X", 0, 0, 1, false);
+	panel.addSlider("ROIorigin(y)", "ROI_ORIGIN_Y", 0, 0, 1, false);
+	panel.addSlider("ROIend(x)", "ROI_END_X", 1, 0, 1, false);
+	panel.addSlider("ROIend(y)", "ROI_END_Y", 1, 0, 1, false);
 	
+	panel.loadSettings("settings/trackingSettings.xml");
 	
 }
 
@@ -285,6 +289,12 @@ void trackingManager::updateGui(){
 	tracker.pFinder.convMin = panel.getValueF("RANGE_MIN_GLINT");
 	tracker.pFinder.convMax = panel.getValueF("RANGE_MAX_GLINT");
 	
+	tracker.gFinder.pctGlintROIorigin.x = panel.getValueF("ROI_ORIGIN_X");
+	tracker.gFinder.pctGlintROIorigin.y = panel.getValueF("ROI_ORIGIN_Y");
+	tracker.gFinder.pctGlintROIend.x = panel.getValueF("ROI_END_X");
+	tracker.gFinder.pctGlintROIend.y = panel.getValueF("ROI_END_Y");
+	
+	
 	if (IM.mode != INPUT_VIDEO){
 		panel.setWhichPanel("live video settings");
 		if (panel.getValueB("VIDEO_SETTINGS") == true){
@@ -298,15 +308,11 @@ void trackingManager::updateGui(){
 				cam.videoSettings();
 			}
 			panel.setValueB("VIDEO_SETTINGS", false);
-			
 		} 		
 		
 	} else {
-		
 		IM.vidPlayer.setSpeed(panel.getValueF("VIDEOSPEED"));
-		
 	}
-	
 }
 
 //--------------------------------------------------------------

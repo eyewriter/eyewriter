@@ -1,11 +1,3 @@
-/*
- *  glintFinder.cpp
- *  EyeTrackDTTest
- *
- *  Created by itotaka on 5/19/10.
- *
- */
-
 #include "glintFinder.h"
 //--------------------------------------------------------------------
 void glintFinder::setup(int bigEyeWidth,int bigEyeHeight, float _magRatio){
@@ -18,16 +10,20 @@ void glintFinder::setup(int bigEyeWidth,int bigEyeHeight, float _magRatio){
 	eyeImage.allocate(w * magRatio, h * magRatio);
 	//	bIsVerticalLED = false;
 	bFourGlints = false;					// 2 or 4
-		
+
 	subtractVal = 0.0f;
 	multiplyVal = 1.0f;
-	
 	limitratio = 0.7f;
 	
 	glintROI.x = 0;
 	glintROI.y = 0;
 	glintROI.width = w * magRatio;
 	glintROI.height = h * magRatio;
+	
+	pctGlintROIorigin.x = 0;
+	pctGlintROIorigin.y = 0;
+	pctGlintROIend.x = 1;
+	pctGlintROIend.y = 1;
 	
 	bUseContrastStretch = true;			// overridden by controlpanel.
 	
@@ -38,17 +34,15 @@ bool glintFinder::update(ofxCvGrayscaleAdvanced & blackEyeImg, float threshold, 
 	
 	bFound = false;
 	
-	if (bFourGlints){
-		glintROI.x = 0;
-		glintROI.y = 0;
-		glintROI.width = w * magRatio;
-		glintROI.height = h * magRatio;
-	} else {
-		glintROI.x = 0;
-		glintROI.y = h * magRatio/2 - 30;
-		glintROI.width = w * magRatio;
-		glintROI.height = h * magRatio/2;
-	}
+	glintROI.x = w * magRatio * pctGlintROIorigin.x;
+	glintROI.y = h * magRatio * pctGlintROIorigin.y;
+	glintROI.width = w * magRatio * ( pctGlintROIend.x - pctGlintROIorigin.x );
+	glintROI.height = h * magRatio * ( pctGlintROIend.y - pctGlintROIorigin.y );
+	
+//		glintROI.x = 0;
+//		glintROI.y = h * magRatio/2 - 30;
+//		glintROI.width = w * magRatio;
+//		glintROI.height = h * magRatio/2;
 	
 	eyeImage = blackEyeImg;
 	eyeImage.setROI(glintROI);
@@ -126,24 +120,17 @@ bool glintFinder::update(ofxCvGrayscaleAdvanced & blackEyeImg, float threshold, 
 				else if (gp.x >= averagePoint.x && gp.y < averagePoint.y) glintPos[GLINT_TOP_RIGHT] = gp / magRatio;
 				else if (gp.x < averagePoint.x && gp.y >= averagePoint.y) glintPos[GLINT_BOTTOM_LEFT] = gp / magRatio;
 				else if (gp.x >= averagePoint.x && gp.y >= averagePoint.y) glintPos[GLINT_BOTTOM_RIGHT] = gp / magRatio;
-				
 			}
 		}
-		
 		bFound = true;
-		
 	}
-	
 	return bFound;
 }
 
 //--------------------------------------------------------------------
 ofPoint	glintFinder::getGlintPosition(int glintID){
-
 	// this is glint positions in the targetRect.
-	
 	return ofPoint(glintPos[glintID].x + glintROI.x / magRatio , glintPos[glintID].y + glintROI.y / magRatio);
-	
 }
 
 //--------------------------------------------------------------------

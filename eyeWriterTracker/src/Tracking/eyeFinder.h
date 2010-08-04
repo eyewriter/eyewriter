@@ -1,11 +1,3 @@
-/*
- *  eyeFinder.h
- *  EyeTrackDTTest
- *
- *  Created by itotaka on 5/19/10.
- *
- */
-
 #ifndef _EYE_FINDER_
 #define _EYE_FINDER_
 

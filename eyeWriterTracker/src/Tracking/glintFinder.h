@@ -1,11 +1,3 @@
-/*
- *  glintFinder.h
- *  EyeTrackDTTest
- *
- *  Created by itotaka on 5/19/10.
- *
- */
-
 #ifndef _GLINT_FINDER_
 #define _GLINT_FINDER_
 
@@ -54,6 +46,9 @@ public:
 	bool				bFound;
 	
 	ofRectangle			glintROI;
+	ofPoint				pctGlintROIorigin;
+	ofPoint				pctGlintROIend;
+	
 	//	bool				bIsVerticalLED;
 	
 };
