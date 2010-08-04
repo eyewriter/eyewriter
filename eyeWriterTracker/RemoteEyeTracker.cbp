@@ -165,11 +165,8 @@
 		<Unit filename="src\Tracking\trackingManager.h" />
 		<Unit filename="src\Tracking\trackingManager_draw.cpp" />
 		<Unit filename="src\Tracking\trakingManager_controlPanel.cpp" />
-		<Unit filename="src\calibration\calibrationFileSaver.cpp" />
-		<Unit filename="src\calibration\calibrationFileSaver.h" />
 		<Unit filename="src\calibration\calibrationManager.cpp" />
 		<Unit filename="src\calibration\calibrationManager.h" />
-		<Unit filename="src\calibration\calibrationManager_controlPanel.cpp" />
 		<Unit filename="src\main.cpp" />
 		<Unit filename="src\testApp.cpp" />
 		<Unit filename="src\testApp.h" />
