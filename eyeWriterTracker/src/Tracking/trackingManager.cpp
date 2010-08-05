@@ -139,12 +139,16 @@ void trackingManager::draw(){
 //		tracker.pFinder.tempMaskNegative.draw(88/2 + 10, IM.height/4 + IM.height + 120);
 //		tracker.pFinder.tempCopyCurrentImg.draw(88 + 20, IM.height/4 + IM.height + 120);
 		
-		
 	} else {
 		
-		IM.grayOddImage.draw(0, 0, IM.width, IM.height);
-		IM.grayEvenImage.draw(IM.width, 0, IM.width, IM.height);
-		
+		if ((tracker.bIsBrightEye && IM.fcount == 0) || (!tracker.bIsBrightEye && IM.fcount ==1) ||
+			(IM.grabberType == INPUT_OFXLIBDC && IM.mode == INPUT_LIVE_VIDEO)) {		//Bright Eye => Left, Dark Eye =>Right
+			IM.grayEvenImage.draw(0, 0, IM.width, IM.height);
+			IM.grayOddImage.draw(IM.width, 0, IM.width, IM.height);
+		} else {
+			IM.grayOddImage.draw(0, 0, IM.width, IM.height);
+			IM.grayEvenImage.draw(IM.width, 0, IM.width, IM.height);
+		}
 	}
 	
 	panel.draw();
