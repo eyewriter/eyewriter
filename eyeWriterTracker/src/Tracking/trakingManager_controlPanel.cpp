@@ -37,6 +37,12 @@ void trackingManager::setupGui(){
 	panel.addToggle("num of glints(0: 2, 1: 4)", "B_FOUR_GLINTS", true);
 	panel.addToggle("Use Homography", "B_USE_HOMOGRAPHY", false);
 	
+	panel.addSlider("threshold(eye)", "THRESHOLD_EYEPOS", 60, 0, 255, true);
+	panel.addSlider("threshold_pupil", "THRESHOLD_PUPIL", 60, 0, 255, true);
+	panel.addSlider("threshold(glint)", "THRESHOLD_GLINT", 190, 0, 255, true);
+	
+
+	
 	if(IM.mode == INPUT_LIVE_VIDEO && IM.grabberType == INPUT_OFXLIBDC) {
 		ofxLibdcPtGrey& cam = *((ofxLibdcPtGrey*) IM.vidGrabber);
 		lastShutter = cam.getShutterNorm();
@@ -54,8 +60,6 @@ void trackingManager::setupGui(){
 	// eye positon
 	
 	panel.setWhichPanel("eye detection 1");
-	
-	panel.addSlider("threshold(eye)", "THRESHOLD_EYEPOS", 60, 0, 255, true);
 	
 	panel.addSlider("min blob(eye)","MIN_BLOB_EYEPOS",50*10,0,5000,true);
 	panel.addSlider("max blob(eye)","MAX_BLOB_EYEPOS",100*100,0,50500,true);
@@ -96,7 +100,6 @@ void trackingManager::setupGui(){
 	panel.setWhichPanel("pupil detection 1");
 	
 	panel.addToggle("use auto threshold", "B_USE_AUTOTHRESHOLD_PUPIL", true);
-	panel.addSlider("threshold_pupil", "THRESHOLD_PUPIL", 60, 0, 255, true);
 	
 	panel.addSlider("min blob(pupil)","MIN_BLOB_PUPIL",50*10,0,5000,true);
 	panel.addSlider("max blob(pupil)","MAX_BLOB_PUPIL",100*100,0,50500,true);
@@ -139,7 +142,6 @@ void trackingManager::setupGui(){
 	
 	panel.addToggle("use auto threshold", "B_USE_AUTO_THRESHOLD_GLINT", true);
 	//	panel.addSlider("threshold(bright/dark) ", "THRESHOLD_BD", 170, 0, 255, true);
-	panel.addSlider("threshold(glint)", "THRESHOLD_GLINT", 190, 0, 255, true);
 		
 	panel.addSlider("w/h limiting ratio", "WH_RATIO", 0.7, 0.1, 1, false);
 	
@@ -182,7 +184,8 @@ void trackingManager::updateGui(){
 		float curExposure = panel.getValueF("INPUT_EXPOSURE");
 		float curGamma = panel.getValueF("INPUT_GAMMA");
 		
-		ofxLibdcPtGrey& cam = *((ofxLibdcPtGrey*) IM.vidGrabber);
+//		ofxLibdcPtGrey& cam = *((ofxLibdcPtGrey*) IM.vidGrabber);
+		fireflyVideoGrabber& cam = *((fireflyVideoGrabber*) IM.vidGrabber);
 		
 		if(curShutter != lastShutter)
 			cam.setShutterNorm(curShutter);
@@ -304,8 +307,8 @@ void trackingManager::updateGui(){
 			ofSetFullscreen(false);
 #endif
 			if(IM.grabberType == INPUT_OFVIDEOGRABBER) {
-				ofVideoGrabber& cam = *((ofVideoGrabber*) IM.vidGrabber);
-				cam.videoSettings();
+				qtVideoGrabber& cam = *((qtVideoGrabber*) IM.vidGrabber);
+				cam.openVideoSettings();
 			}
 			panel.setValueB("VIDEO_SETTINGS", false);
 		} 		

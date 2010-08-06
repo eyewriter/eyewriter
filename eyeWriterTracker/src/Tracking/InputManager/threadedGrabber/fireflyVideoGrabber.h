@@ -41,7 +41,6 @@ public:
 		vidGrabber.setupGrabber(this);
 		vidGrabber.startCapture(false);
 	}
-	
 	void update(){
 		if (bNeedUpdate){
 			vidGrabber.lock();
@@ -49,11 +48,35 @@ public:
 			vidGrabber.unlock();
 		}
 	}
-	
 	void draw(int x, int y){
 		if (bUseTexture){
 			grayImg.draw(x,y);
 		}
+	}
+	void setShutterNorm(float curShutter){
+		vidGrabber.lock();
+		vidGrabber.setShutterNorm(curShutter);
+		vidGrabber.unlock();
+	}
+	void setGainNorm(float curGain){		
+		vidGrabber.lock();
+		vidGrabber.setGainNorm(curGain);
+		vidGrabber.unlock();
+	}
+	void setBrightnessNorm(float curBrightness){
+		vidGrabber.lock();
+		vidGrabber.setBrightnessNorm(curBrightness);
+		vidGrabber.unlock();
+	}
+	void setExposureNorm(float curExposure){
+		vidGrabber.lock();
+		vidGrabber.setExposureNorm(curExposure);
+		vidGrabber.unlock();
+	}
+	void setGammaNorm(float curGamma){
+		vidGrabber.lock();
+		vidGrabber.setGammaNorm(curGamma);
+		vidGrabber.unlock();
 	}
 	
 	

@@ -39,6 +39,12 @@ public:
 	void setDeviceID(int device){
 		vidGrabber.setDeviceID(device);
 	}
+	void openVideoSettings(){
+		vidGrabber.lock();
+		vidGrabber.videoSettings();
+		vidGrabber.unlock();
+	}
+	
 	
 	//------- don't call this function from main thread, this is only for vidGrabber -------
 	void frameReceived(ofVideoGrabber& grabber){
