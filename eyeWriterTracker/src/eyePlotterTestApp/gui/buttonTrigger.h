@@ -77,7 +77,7 @@ class buttonTrigger : public buttonRect{
 			diff = 0.0001;
 		}
 				
-		float fps = ofClamp(1.0/diff, 2, 60.0);
+		float fps = ofClamp(1.0/diff, 2, 6000.0);
 		float update = amntShouldHappened / fps;
 
 		//printf("Diff is %f fps is %f\n", diff, fps);
@@ -87,7 +87,7 @@ class buttonTrigger : public buttonRect{
 		if( inRect(xIn, yIn) ){
 			
 			if( hasLeft || allowRetrigger ){
-				counter += 0.125f*update;
+				counter += 0.6f*update;
 				pct = counter;
 				if(counter >= maxCount ){					
 					hasLeft = false;
@@ -107,9 +107,11 @@ class buttonTrigger : public buttonRect{
 			if( !hasLeft ){
 				hasLeft = true;
 			}else{
-				counter *= 0.93f / update;
+				counter *= ofClamp(0.93f / update, 0.0, 0.99);
 			}
 		}
+		
+		pct = counter;		
 		
 		if( bFlash && ofGetElapsedTimef() > flashTill ){
 			bFlash = false;
@@ -123,7 +125,7 @@ class buttonTrigger : public buttonRect{
 	void draw(float opacity = 255){
 		ofFill();
 		
-		float pctActive = ofMap(pct, 0.0, maxCount, 0.0, 110.0);		
+		float pctActive = ofMap(pct, 0.0, maxCount, 0.0, 110.0, true);		
 		
 		//pctActive = ofClamp(pctActive, 0, 110.0);	
 		if( bFlash){

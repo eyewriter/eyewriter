@@ -58,11 +58,16 @@ void eyePlotterTestApp::update(float mouseX, float mouseY){
 	float mousex = mouseX;
 	float mousey = mouseY;
 	
-	mx *= (1.0-smoothPct);
-	mx += smoothPct * (float)mousex;
+	float rateAdj = 30.0f / ofClamp( ofGetFrameRate(), 2, 900 ); 
+	float fpsPct  = ofClamp( smoothPct * rateAdj, 0.01, 0.99);
 	
-	my *= (1.0-smoothPct);
-	my += smoothPct * (float)mousey;	
+	printf("smoothPct is %f - fpsPct is %f\n", smoothPct, fpsPct);
+	
+	mx *= (1.0-fpsPct);
+	mx += fpsPct * (float)mousex;
+	
+	my *= (1.0-fpsPct);
+	my += fpsPct * (float)mousey;	
 	
 	scenes[whichScene]->update(mx, my);
 	

@@ -49,8 +49,8 @@ class buttonToggle : public buttonRect{
 			diff = 0.0001;
 		}
 				
-		float fps = ofClamp(1.0/diff, 2, 60.0);
-		
+		float fps = ofClamp(1.0/diff, 2, 6000.0);
+				
 		float update = amntShouldHappened / fps;
 		
 		if( inRect(xIn, yIn) ){
@@ -69,7 +69,7 @@ class buttonToggle : public buttonRect{
 			if( !hasLeft ){
 				hasLeft = true;
 			}else{
-				counter *= 0.93f/update;
+				counter *= ofClamp(0.93f / update, 0.0, 0.99);
 			}
 		}
 

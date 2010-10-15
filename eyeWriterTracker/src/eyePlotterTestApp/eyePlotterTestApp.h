@@ -32,6 +32,7 @@ class eyePlotterTestApp{
 		void resized(int w, int h);
 		
 		float mx, my;
+		float preTime;
 	
 		int whichScene;
 		vector <baseScene *> scenes;

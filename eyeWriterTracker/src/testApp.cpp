@@ -130,9 +130,11 @@ void testApp::draw(){
 		
 	// draw a green dot to see how good the tracking is:
 	if (CM.fitter.bBeenFit || bMouseSimulation){
-		ofSetColor(0,255,0,120);
-		ofFill();
-		ofCircle(eyeSmoothed.x, eyeSmoothed.y, 20);
+		if( mode != MODE_DRAW ){	
+			ofSetColor(0,255,0,120);
+			ofFill();
+			ofCircle(eyeSmoothed.x, eyeSmoothed.y, 20);
+		}
 	}
 	
 	if (TM.IM.bRecord) {
