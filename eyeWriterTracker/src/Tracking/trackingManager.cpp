@@ -35,7 +35,13 @@ void trackingManager::update(){
 		trackEyes();
 	}
 	
-	glintPupilVector = tracker.getVectorGlintToPupil(GLINT_BOTTOM_LEFT);
+	//only update the point if the vector was found
+	//the function returns a 0,0 point if vector was not found
+	ofPoint pt = tracker.getVectorGlintToPupil(GLINT_BOTTOM_LEFT);
+	
+	if( pt.x != 0.0 || pt.y != 0.0 ){
+		glintPupilVector = pt;
+	}
 	
 	// to make trail
 	//	currentdrawPoint.x = currentdrawPoint.x * 0.80 + glintPupilVector.x * 0.20;
@@ -66,8 +72,13 @@ void trackingManager::trackEyes(){
 	tracker.update(*IM.grayImage);
 	
 	bFoundEye	= tracker.bFoundEye;						
-	eyePoint	= tracker.getVectorGlintToPupil(GLINT_BOTTOM_LEFT);					// TODO: CHECK here.
+	ofPoint pt	= tracker.getVectorGlintToPupil(GLINT_BOTTOM_LEFT);					// TODO: CHECK here.
 	
+	//only update the point if the vector was found
+	//the function returns a 0,0 point if vector was not found
+	if( pt.x != 0.0 || pt.y != 0.0 ){
+		eyePoint = pt;
+	}
 }
 
 //--------------------------------------------------------------
