@@ -3,22 +3,16 @@
 //--------------------------------------------------------------
 void calibrationManager::setup(){
 
-	bBeenFit = false;
-
 	calibrationInfo.loadImage("images/calibrationInfo.png");
 	font.loadFont("fonts/HelveticaNeueMed.ttf", 32);
 
 	nDivisionsWidth = 5;
 	nDivisionsHeight = 5;
-	inputCount = 6;
-	outputCount = 2;
-
-	ls.setup(inputCount, outputCount);
 
 	nPosition = 0;
 	pos  = 0;
 
-	inputEnergy = 0;
+	inputEnergy = 0;			// we need it?
 
 	bAutomatic = false;
 	bPreAutomatic = false;
@@ -37,51 +31,42 @@ void calibrationManager::setup(){
 	calibrationRectangle.height = 768;
 
 	setupControlPanel();
+	fitter.setup(nDivisionsWidth, nDivisionsHeight);
 
 	smoothing = 1.0f;
 	menuEnergy = 1;
-	lastRemoveOutliers = 0;
 	
+	bPreAutomatic = false;
+
 }
 
 //--------------------------------------------------------------
 void calibrationManager::start(){
+	
 	bAutomatic = true;
 	bAmInAutodrive = true;
 	startTime = ofGetElapsedTimef();
 	
-	for (int i = 0; i < nDivisionsWidth * nDivisionsHeight; i++) {
-		nPtsPP[i] = 0;
-	}
+	fitter.startCalibration();
 }
 
 //--------------------------------------------------------------
 void calibrationManager::stop(){
+	
 	bAutomatic = false;
 	bPreAutomatic = false;
 	bAmInAutodrive = false;
 	startTime = ofGetElapsedTimef();
 	nPosition = 0;
 	pos  = 0;
-}
-
-//--------------------------------------------------------------
-void calibrationManager::saveCalibration(){
-	
-	calibFileSaver.saveCalibration(ls, nDivisionsWidth*nDivisionsHeight, spx, spy, cp, eyePoints, screenPoints);
-	
-}
-
-//--------------------------------------------------------------
-void calibrationManager::loadCalibration(){
-
-	calibFileSaver.loadCalibration(ls, spx, spy, cp, eyePoints, screenPoints);
-	bBeenFit = true;
 	
 }
 
 //--------------------------------------------------------------
 void calibrationManager::update(){
+	
+	// TODO: rewrite the code to control calibration mode.
+	// bAuto--, bPre--- are not friendly to understand how it works.
 
 	calibrationRectangle.x = 0;
 	calibrationRectangle.y = 0;
@@ -102,15 +87,9 @@ void calibrationManager::update(){
 //	nDivisionsWidth = panel.getValueI("N_DIV_W");
 //	nDivisionsHeight = panel.getValueI("N_DIV_H");;
 
-	
-	if(bBeenFit && lastRemoveOutliers != removeOutliers) {
-		ls.resetOutliers();
-		ls.removeOutliers(removeOutliers);
-		lastRemoveOutliers = removeOutliers;
-	}
+	fitter.removeOutliers();
 	
 	totalTimePerDot = preTimePerDot + recordTimePerDot;
-	
 
 	if ((bAutomatic == true && bAmInAutodrive == true) || bPreAutomatic){
 		menuEnergy = 0.94f * menuEnergy + 0.06f * 0.0f;
@@ -119,31 +98,30 @@ void calibrationManager::update(){
 	}
 	
 	// do the auto:
-
 	if (bAutomatic == true && bAmInAutodrive == true){
 		int nPts = nDivisionsWidth * nDivisionsHeight;
 		float totalTime = totalTimePerDot * nPts;
-		if (ofGetElapsedTimef() - startTime > totalTime){
+		
+		if (ofGetElapsedTimef() - startTime > totalTime){		// calibration finish.
 			bAmInAutodrive = false;
 			bInAutoRecording = false;
-			bPreAutomatic = false;			// ito added
-			calculate();
+			bPreAutomatic = false;
+			fitter.calculate(calibrationRectangle);
+			
 		} else {
 
 			float diffTime = ofGetElapsedTimef() - startTime ;
 			pt = (int)(diffTime / totalTimePerDot);
 			float diffDotTime = diffTime - pt * totalTimePerDot;
-			//cout << diffTime << " " << pt <<  " " << diffDotTime << endl;
+			// cout << diffTime << " " << pt <<  " " << diffDotTime << endl;
 			if (diffDotTime < preTimePerDot){
 
 				autoPct = (diffDotTime / preTimePerDot);
 				bInAutoRecording = false;
 
-			} else{
-
+			} else {
 				autoPct = (diffDotTime - preTimePerDot) / recordTimePerDot;
 				bInAutoRecording = true;
-
 			}
 			pos = pt;
 		}
@@ -154,7 +132,6 @@ void calibrationManager::update(){
 	int xx = (pos % nDivisionsWidth);
 	int yy = (pos / nDivisionsWidth);
 
-
 	bool bEven = false;
 	if (yy % 2 == 0)  bEven = true;
 
@@ -162,58 +139,8 @@ void calibrationManager::update(){
 				 calibrationRectangle.x + (calibrationRectangle.width - ((float)calibrationRectangle.width / (float)(nDivisionsWidth-1)) * xx);
 
 	yp = calibrationRectangle.y + calibrationRectangle.height - ((float)calibrationRectangle.height / (float)(nDivisionsHeight-1)) * yy;
-
-}
-
-//--------------------------------------------------------------
-void calibrationManager::registerCalibrationInput(float x, float y){
-	screenPoints.push_back(ofPoint(xp,yp));
-	eyePoints.push_back(ofPoint(x, y));
 	
-	nPtsPP[pt]++;
-	inputEnergy = 1;
-}
-
-//--------------------------------------------------------------
-void calibrationManager::drawNonCalibration(){
-
-	ofPushStyle();
-	ofSetLineWidth(3);
-	ofSetColor(255,0,0);
-	ofNoFill();
-	ofRect(calibrationRectangle.x, calibrationRectangle.y, calibrationRectangle.width, calibrationRectangle.height);
-	ofPopStyle();
-}
-
-//--------------------------------------------------------------
-void calibrationManager::drawCalibrationData(){
-
-	if (bDrawLsError) drawLsError();
-	if (bDrawRawCalibrationInput) drawRawCalibrationInput(rawDataOffset.x, rawDataOffset.y, rawDataScale);
-}
-
-//--------------------------------------------------------------
-void calibrationManager::drawLsError(){
-	
-	if (bBeenFit) {
-		ofSetColor(0, 0, 255);
-		for (int i = 0; i < nDivisionsWidth * nDivisionsHeight; i++ ){
-			ofLine(spx[i], spy[i], cp[i].x, cp[i].y);
-		}
-	}
-	ofSetColor(255, 255, 255);
-}
-
-//--------------------------------------------------------------
-void calibrationManager::drawRawCalibrationInput(int offsetX, int offsetY, float scale){
-	
-	if (bBeenFit) {
-		ofSetColor(0, 0, 255);
-		for (int i = 0; i < eyePoints.size(); i++) {
-			ofCircle(eyePoints[i].x*scale + offsetX, eyePoints[i].y*scale + offsetY, 3);
-		}
-	}
-	ofSetColor(255, 255, 255);
+	fitter.update(pt, xp, yp);		// raw data is comming from testApp directly to fitter.
 }
 
 //--------------------------------------------------------------
@@ -221,7 +148,7 @@ void calibrationManager::draw(){
 
 	// draw a light grid:
 
-	panel.draw();
+	if (!bPreAutomatic || !bAutomatic) panel.draw();
 
 	ofEnableAlphaBlending();
 	ofSetColor(70, 70, 70, (int) (255 - 255 *  menuEnergy));
@@ -238,10 +165,9 @@ void calibrationManager::draw(){
 		ofLine(calibrationRectangle.x,yLine, calibrationRectangle.x + calibrationRectangle.width,yLine);
 	}
 
-
 	//-----------------------------------------------------------------------
 	//-----------------------------------------------------------------------
-	if (bBeenFit != true){
+	if (fitter.bBeenFit != true){
 
 		ofEnableAlphaBlending();
 
@@ -274,7 +200,6 @@ void calibrationManager::draw(){
 				ofCircle(xp, yp, 5);
 
 			} else {
-
 				ofSetColor(255, 255, 255, 150);
 				ofCircle(xp, yp, 200 - 200* autoPct);
 			}
@@ -294,15 +219,14 @@ void calibrationManager::draw(){
 
 		ofSetColor(255, 255, 255);
 		//calibrationInfo.draw(100,100);
-
 	}
+	
 	//-----------------------------------------------------------------------
 	//-----------------------------------------------------------------------
-
 
 	if (!bAutomatic && !bPreAutomatic){
 
-		if (!bBeenFit)	{
+		if (!fitter.bBeenFit)	{
 			ofSetColor(255, 0, 0,127);
 			font.drawString("not calibrated", 100,100);
 		} else {
@@ -313,125 +237,16 @@ void calibrationManager::draw(){
 
 	if (bPreAutomatic == true){
 		calibrationInfo.draw(100,100);
+//		cout << bPreAutomatic << endl;
 	}
-	
-	drawCalibrationData();
+
+	fitter.draw();
 }
 
 //--------------------------------------------------------------
 void calibrationManager::clear(){
-	screenPoints.clear();
-	eyePoints.clear();
 	pos = 0;
-	bBeenFit = false;
-}
-
-//--------------------------------------------------------------
-void calibrationManager::calculate(){
-
-
-	if (eyePoints.size() < 8) return;
-	int startPoint = 0;
-	
-	if (bRemovePointsFarFromAverage){
-		
-		//check the points very far(error) from average.
-		
-		vector <int> bigErrorPoints;
-		
-		for (int i = 0; i < nDivisionsHeight; i++){
-			for (int j = 0; j < nDivisionsWidth; j++) {
-				
-				// make average point.
-				ofPoint tempAverage;
-				
-				tempAverage.x = 0;
-				tempAverage.y = 0;
-				
-				for (int k = 0; k < nPtsPP[j+i*nDivisionsWidth]; k++){
-					tempAverage.x += eyePoints[k + startPoint].x;
-					tempAverage.y += eyePoints[k + startPoint].y;
-				}
-				
-				tempAverage /= nPtsPP[j+i*nDivisionsWidth];
-				
-				// make average distance from average point
-				float distAverage = 0;
-				
-				for (int k = 0; k < nPtsPP[j+i*nDivisionsWidth]; k++){
-					distAverage += ofDist(eyePoints[k + startPoint].x, eyePoints[k + startPoint].y, tempAverage.x, tempAverage.y);
-				}
-				
-				distAverage /= nPtsPP[j+i*nDivisionsWidth];
-				
-				
-				// check distance, check if the error is big.
-				int nErrors = 0;
-				
-				for (int k = 0; k < nPtsPP[j+i*nDivisionsWidth]; k++){
-					if (distAverage * 1.7 < ofDist(eyePoints[k + startPoint].x, eyePoints[k + startPoint].y, tempAverage.x, tempAverage.y)){
-						int temp = k + startPoint;
-						bigErrorPoints.push_back(temp);
-						nErrors++;
-					}
-				}
-				
-				startPoint += nPtsPP[j+i*nDivisionsWidth];
-				nPtsPP[j+i*nDivisionsWidth] -= nErrors;
-				
-			}
-		}
-		
-		
-		// remove error Points.
-		for (int i = 0; i < bigErrorPoints.size(); i++) {
-			//!!!: temp
-			eyePoints.erase(eyePoints.begin() + bigErrorPoints[i] - i);
-			screenPoints.erase(screenPoints.begin() + bigErrorPoints[i] - i);
-		}
-		startPoint = 0;
-	}
-	
-	calculateWeights(eyePoints, screenPoints);
-	inputEnergy = 0;
-	
-	
-	// make new averages to display ls error
-	
-	for (int i = 0; i < nDivisionsHeight; i++){
-		for (int j = 0; j < nDivisionsWidth; j++) {
-			
-			int jj;
-			
-			if (i % 2 == 1){
-				jj = nDivisionsWidth - j - 1;
-			} else {
-				jj = j;
-			}
-			
-			// get reference point coodinates.
-			spx[j+i*nDivisionsWidth] = calibrationRectangle.x + ((float)calibrationRectangle.width / (float)(nDivisionsWidth-1)) * jj;
-			spy[j+i*nDivisionsWidth] = calibrationRectangle.y + calibrationRectangle.height - ((float)calibrationRectangle.height / (float)(nDivisionsHeight-1)) * i;
-			
-			
-			// make average point again.
-			ofPoint tempAverage;
-			
-			tempAverage.x = 0;
-			tempAverage.y = 0;
-			
-			for (int k = 0; k < nPtsPP[j+i*nDivisionsWidth]; k++){
-				tempAverage.x += eyePoints[k + startPoint].x;
-				tempAverage.y += eyePoints[k + startPoint].y;
-			}
-			
-			tempAverage /= nPtsPP[j+i*nDivisionsWidth];
-			startPoint += nPtsPP[j+i*nDivisionsWidth];
-			
-			cp[j+i*nDivisionsWidth] = getCalibratedPoint(tempAverage.x, tempAverage.y);
-			
-		}
-	}	
+	fitter.clear();
 }
 
 //--------------------------------------------------------------
@@ -442,74 +257,6 @@ void calibrationManager::advancePosition(){
 }
 
 //--------------------------------------------------------------
-void calibrationManager::calculateWeights(vector <ofPoint> trackedPoints, vector <ofPoint> knownPoints){
-
-	int length = trackedPoints.size();
-
-	ls.clear();
-
-	for(int i = 0; i < length; i++) {
-		ofPoint& ipt = trackedPoints[i];
-		ofPoint& opt = knownPoints[i];
-		ls.add(makeInput(ipt.x, ipt.y), makeOutput(opt.x, opt.y));
-	}
-
-	bBeenFit = true;
-}
-
-//--------------------------------------------------------------
-ofPoint calibrationManager::getCalibratedPoint (float x, float y){
-
-	if (bBeenFit == true){
-
-		vector<float> out = ls.map(makeInput(x, y));
-
-		float calibratedx = out[0];
-		float calibratedy =	out[1];
-
-		// ---------------------------------------------------
-		// let's fix "offscreen" or very bad values, since we are smoothing them in....
-		// and nans, etc will screw us up bad.
-
-		if (calibratedx < -1000)	calibratedx = -1000;
-		if (calibratedx > 2000)		calibratedx = 2000;
-		if (calibratedy < -1000)	calibratedy = -1000;
-		if (calibratedy > 2000)		calibratedy = 2000;
-
-		if (isnan(calibratedx))		calibratedx = 0;
-		if (isnan(calibratedy))		calibratedy = 0;
-		// ---------------------------------------------------
-
-		return ofPoint(calibratedx, calibratedy);
-
-	}
-	return ofPoint(0,0);
-}
-
-//--------------------------------------------------------------
-// Ax + Bx^2 + Cy + Dy^2 + Exy + F
-vector<float> calibrationManager::makeInput(float x, float y) {
-	vector<float> in;
-	in.resize(inputCount);
-	in[0] = x;
-	in[1] = x * x;
-	in[2] = y;
-	in[3] = y * y;
-	in[4] = x * y;
-	in[5] = 1;
-	return in;
-}
-
-//--------------------------------------------------------------
-vector<float> calibrationManager::makeOutput(float x, float y) {
-	vector<float> out;
-	out.resize(outputCount);
-	out[0] = x;
-	out[1] = y;
-	return out;
-}
-
-//--------------------------------------------------------------
 void calibrationManager::mouseDragged(int x, int y, int button){
 	panel.mouseDragged(x,y,button);
 }
@@ -517,7 +264,6 @@ void calibrationManager::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void calibrationManager::mousePressed(int x, int y, int button){
 	panel.mousePressed(x,y,button);
-
 }
 
 //--------------------------------------------------------------
@@ -526,7 +272,7 @@ void calibrationManager::mouseReleased(int x, int y, int button){
 }
 
 //--------------------------------------------------------------
-void calibrationManager::keyPressed(int key){
+void calibrationManager::keyPressed(int key) {
 	if (bPreAutomatic == true){
 		if (key == ' '){
 			bPreAutomatic = false;
@@ -534,11 +280,10 @@ void calibrationManager::keyPressed(int key){
 		}
 	}
 
-	if (bPreAutomatic == false){
+	if (bPreAutomatic == false && !bAmInAutodrive) { 
 		if (key == ' '){
 			bPreAutomatic = true;
 		}
-
 	}
 
 	if (key == 'x'){
@@ -547,4 +292,5 @@ void calibrationManager::keyPressed(int key){
 	}
 }
 
+//--------------------------------------------------------------
 

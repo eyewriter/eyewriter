@@ -35,7 +35,7 @@
     <val_0>1.700000</val_0>
 </THRESHOLD_DIST>
 <B_DRAW_RAWINPUT>
-    <val_0>1.000000</val_0>
+    <val_0>0.000000</val_0>
 </B_DRAW_RAWINPUT>
 <B_DRAW_CALIBINPUT>
     <val_0>0.000000</val_0>
@@ -53,7 +53,7 @@
     <val_0>20.000000</val_0>
 </RAW_SCALE>
 <RAW_OFFSET_X>
-    <val_0>680.000000</val_0>
+    <val_0>690.000000</val_0>
 </RAW_OFFSET_X>
 <RAW_OFFSET_Y>
     <val_0>430.000000</val_0>
@@ -62,5 +62,8 @@
     <val_0>2.000000</val_0>
 </REMOVE_OUTLIERS>
 <AMOUNT_SMOOTHING>
-    <val_0>0.970000</val_0>
+    <val_0>0.995556</val_0>
 </AMOUNT_SMOOTHING>
+<B_MOUSE_SIMULATION>
+    <val_0>0.000000</val_0>
+</B_MOUSE_SIMULATION>

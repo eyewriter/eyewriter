@@ -10,9 +10,9 @@ protected:
 	int pollRate;
 	void threadedFunction() {
 		while(threadRunning) {
-			// lock
+			lock();
 			update();						// we don't need lock here only if getThreadedPixels is called from "frameReceived"
-			// unlock
+			unlock();
 			if(isFrameNew())
 				ofNotifyEvent(frameReceived, *this);
 			ofSleepMillis(pollRate);

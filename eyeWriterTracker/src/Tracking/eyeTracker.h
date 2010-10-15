@@ -10,6 +10,8 @@
 #include "glintFinder.h"
 #include "EllipseCalcurator.h"
 #include "homographyCalcurator.h"
+#include "brightDarkFinder.h"
+#include "thresholdCalculator.h"
 
 
 class eyeTracker {
@@ -19,49 +21,34 @@ public:
 	eyeTracker();
 	void		setup(int width, int height);
 	void		update(ofxCvGrayscaleImage & grayImgFromCam);
-	
-	void		drawGlintLine(float x, float y, float width, float height);
-	void		drawPupilLine(float x, float y, float width, float height);
-	void		drawEllipse(float x, float y, float width, float height);
-	
-	ofPoint	getEyePoint();
-	ofPoint	getGlintPoint(int glintID);
-	ofPoint	getVectorGlintToPupil(int glintID);
-	void	getAverages();								//get the brightness averages of pupil & white part
+	ofPoint		getGlintPoint(int glintID);
+	ofPoint		getVectorGlintToPupil(int glintID);			// final eye tracked position. (not gaze estimation)
 	
 	ofxCvGrayscaleAdvanced			currentImg;
-	
 	ofxCvGrayscaleImage				brightEyeImg;
 	ofxCvGrayscaleImage				darkEyeImg;
-	
-	ofxCvGrayscaleAdvanced			magCurrent;
-	
-	ofxCvGrayscaleImage				notDiffImg;
-	ofxCvGrayscaleImage				smallCurrentImg;
+	ofxCvGrayscaleAdvanced			magCurrentImg;
+	ofxCvGrayscaleAdvanced			smallCurrentImg;
 	
 	eyeFinder						eFinder;
 	pupilFinder						pFinder;
 	glintFinder						gFinder;
 	
-	float			smallTargetWidth;
-	float			smallTargetHeight;
+	thresholdCalculator				thresCal;
 	
-	ofPoint		pupilCentroid;
-	ofRectangle	targetRect;
+	ofPoint			pupilCentroid;
+	ofRectangle		targetRect;
 	
-	int				targetWidth;
-	int				targetHeight;
+	ofRectangle		targetRectDark;		// temporary for draw diagnostic on input image.
+	ofRectangle		targetRectBright;	// temporary for draw diagnostic on input image.
+
 	float			magRatio;
-	float			divisorEyeFinder;
-	
 	int				w, h;
-	int				bigEyeSizeWidth;
-	int				bigEyeSizeHeight;
-	bool			bFirstFrame;
-	
-	float			pupilAvg;
-	float			whiteAvg;
-	float			maxBrightness;
+	bool			bFoundEye;
+
+	// should keep thresholds here for auto threshold stuff.
+	// but.. make struct.. or think about it. to make more readable codes.
+	// 
 	
 	//eye Tracking
 	float			divisor;
@@ -72,7 +59,7 @@ public:
 	//pupil Tracking
 	bool			bUseAutoThreshold_p;
 	float			threshold_p_frompanel;
-	float			threshold_p;
+	float			threshold_p; 
 	float			minBlobSize_p;
 	float			maxBlobSize_p;
 	
@@ -84,32 +71,22 @@ public:
 	float			maxBlobSize_g;
 	
 	//Bright/Dark Threshold
-	float			threshold_bd;
+	bool				bFoundOne;
+	brightDarkFinder	briDarkFinder;
 	
-	bool			bFoundOne;
-	bool			firstFrame;
+	ofPoint				currentEyePoint;
+	bool				bIsBrightEye;
 	
-	float			threshold_temp;
+	bool				bUseGlintinBrightEye;
 	
-	ofPoint			currentEyePoint;
-	
-	float			pixelAvg;
-	float			pixelAvginTenframes;
-	vector	 <float> averageVec;
-	
-	bool			bIsBrightEye;
-	
-	// Warp
-	bool			bUseHomography;	
+	// Warp, Homography
+	bool					bUseHomography;	
 	homographyCalcurator	homographyCal;
-	
-
 	
 	
 protected:
 	
 	bool	getBrightEyeDarkEye();
-	
 	
 };
 

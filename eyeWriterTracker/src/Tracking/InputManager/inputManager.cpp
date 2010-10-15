@@ -13,6 +13,8 @@ inputManager::~inputManager(){
 
 void inputManager::setup(){
 		
+	bRecord = false;
+	
 	ofxXmlSettings XML;
 	XML.loadFile("settings/inputSettings.xml");
 	mode = XML.getValue("app:mode", 0);
@@ -24,6 +26,7 @@ void inputManager::setup(){
 		vidPlayer.play();
 		width	= vidPlayer.width;
 		height	= vidPlayer.height;
+		playposition = 0;
 		
 		grayImage = new ofxCvGrayscaleImage;
 
@@ -97,6 +100,9 @@ void inputManager::update(){
 	} else {									// if (mode == INPUT_VIDEO)
 		vidPlayer.idleMovie();
 		bIsFrameNew = vidPlayer.isFrameNew();
+		if (bIsFrameNew){
+			playposition = vidPlayer.getPosition();
+		}
 	}
 	
 	if (bIsFrameNew){
@@ -125,6 +131,13 @@ void inputManager::update(){
 
 		if (fcount == 0) grayEvenImage = *grayImage;
 		else grayOddImage = *grayImage;
+		
+		if (bRecord) {
+			string temp = folderName + "/" + ofToString(ofGetFrameNum()) + ".jpg";
+			threadedImageSaver * TO = new threadedImageSaver(grayImage->getPixels(), temp);
+			TO->start();
+		}
+		
 	}
 }
 
@@ -135,5 +148,20 @@ void inputManager::drawOddFrame(int x, int y, int width, int height){
 void inputManager::drawEvenFrame(int x, int y, int width, int height){
 	grayEvenImage.draw(x,y,width, height);
 }
+
+void inputManager::startRecord(){
+	
+	folderName = "recordedImages/" + ofToString(ofGetMonth(),0) + ofToString(ofGetDay(), 0)
+				+ ofToString(ofGetHours(), 0) + ofToString(ofGetMinutes(), 0)
+				+ ofToString(ofGetSeconds(), 0);
+
+	fileHelper.makeDirectory(folderName);
+	bRecord = true;
+}
+
+void inputManager::stopRecord(){
+	bRecord = false;
+}
+
 
 

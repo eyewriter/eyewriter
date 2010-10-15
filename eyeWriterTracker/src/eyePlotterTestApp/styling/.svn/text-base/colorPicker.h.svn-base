@@ -1,0 +1,42 @@
+/*
+ *  colorPicker.h
+ *  openFrameworks
+ *
+ *  Created by Keith on 8/22/09.
+ *  Copyright 2009 __MyCompanyName__. All rights reserved.
+ *
+ */
+
+#pragma once
+
+#include "ofGraphics.h"
+
+class colorPicker{
+	public:
+	
+	vector <int> colors;
+	
+	colorPicker(){
+		colors.push_back(0xfb0010);
+		colors.push_back(0xe29184);
+		colors.push_back(0x5b3877);
+		colors.push_back(0xfdfb02);
+		colors.push_back(0xdb8825);
+		colors.push_back(0x16995f);
+		colors.push_back(0x133871);
+		colors.push_back(0x64b6d2);
+		colors.push_back(0x5c666b);
+		colors.push_back(0xcdbdac);
+		colors.push_back(0xffffff);
+		colors.push_back(0x000000);
+	}
+	
+	void draw(){
+		for(int i=0;i<colors.size();i++){
+			ofFill();
+			ofSetColor(colors[i]);
+			ofRect(120*(i%4),120*(i/4),120,120);
+		}
+	}
+	
+};

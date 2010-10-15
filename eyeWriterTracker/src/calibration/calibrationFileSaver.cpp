@@ -1,16 +1,7 @@
-/*
- *  calibrationFileSaver.cpp
- *  RemoteEyeTracker
- *
- *  Created by Takayuki Ito on 7/9/10.
- *  Copyright 2010 -. All rights reserved.
- *
- */
-
 #include "calibrationFileSaver.h"
 
 //--------------------------------------------------------------
-void calibrationFileSaver::saveCalibration(ofxLeastSquares& ls, int nRefPoints, float spx[], float spy[], ofPoint cp[], vector<ofPoint>& eyePoints, vector<ofPoint>& screenPoints){
+void calibrationFileSaver::saveCalibration(ofxLeastSquares& ls, int nRefPoints, vector<ofPoint>& referencePoints, vector<ofPoint>& pointsFromls, vector<ofPoint>& eyePoints, vector<ofPoint>& screenPoints){
 	
 	ofxXmlSettings xml;
 	vector< vector<float> > map = ls.getMap();
@@ -28,14 +19,14 @@ void calibrationFileSaver::saveCalibration(ofxLeastSquares& ls, int nRefPoints, 
 	for (int i = 0; i < nRefPoints; i++) {
 		xml.addTag("referencepoint");
 		xml.pushTag("referencepoint", i);
-		xml.addValue("x", spx[i]);
-		xml.addValue("y", spy[i]);
+		xml.addValue("x", referencePoints[i].x);
+		xml.addValue("y", referencePoints[i].y);
 		xml.popTag();
 		
 		xml.addTag("inputaverage");
 		xml.pushTag("inputaverage", i);
-		xml.addValue("x", cp[i].x);
-		xml.addValue("y", cp[i].y);
+		xml.addValue("x", pointsFromls[i].x);
+		xml.addValue("y", pointsFromls[i].y);
 		xml.popTag();
 	}
 	
@@ -65,7 +56,7 @@ void calibrationFileSaver::saveCalibration(ofxLeastSquares& ls, int nRefPoints, 
 }
 
 //--------------------------------------------------------------
-void calibrationFileSaver::loadCalibration(ofxLeastSquares& ls, float spx[], float spy[], ofPoint cp[], vector<ofPoint>& eyePoints, vector<ofPoint>& screenPoints){
+void calibrationFileSaver::loadCalibration(ofxLeastSquares& ls, vector<ofPoint>& referencePoints, vector<ofPoint>& pointsFromls, vector<ofPoint>& eyePoints, vector<ofPoint>& screenPoints){
 			
 	eyePoints.clear();
 	screenPoints.clear();
@@ -86,13 +77,13 @@ void calibrationFileSaver::loadCalibration(ofxLeastSquares& ls, float spx[], flo
 	for (int i = 0; i < xml.getValue("nRefPoints", 0); i++) {
 		
 		xml.pushTag("referencepoint",i);
-		spx[i] = xml.getValue("x", 0.0f);
-		spy[i] = xml.getValue("y", 0.0f);
+		referencePoints[i].x = xml.getValue("x", 0.0f);
+		referencePoints[i].y = xml.getValue("y", 0.0f);
 		xml.popTag();
 		
 		xml.pushTag("inputaverage", i);
-		cp[i].x = xml.getValue("x", 0.0f);
-		cp[i].y = xml.getValue("y", 0.0f);
+		pointsFromls[i].x = xml.getValue("x", 0.0f);
+		pointsFromls[i].y = xml.getValue("y", 0.0f);
 		xml.popTag();
 	}
 	

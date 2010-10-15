@@ -7,7 +7,7 @@
 	
 	<!-- some per mode settings -->
 
-    	<videoFile>movies/FourGlints2.mov</videoFile>
+    	<videoFile>movies/Tony3ew2-cut1.mov</videoFile>
         <videoFrameRate>30</videoFrameRate>
 
 	<videoGrabber>
@@ -23,3 +23,4 @@
 	</videoGrabber>
 
 </app>
+

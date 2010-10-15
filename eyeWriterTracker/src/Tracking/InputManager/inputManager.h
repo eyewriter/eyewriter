@@ -5,6 +5,8 @@
 #include "ofxXmlSettings.h"
 #include "ofxOpenCv.h"
 #include "qtVideoGrabber.h"
+#include "threadedImgSaver.h"
+#include "ofxFileHelper.h"
 
 #ifdef TARGET_OSX
 #include "fireflyVideoGrabber.h"
@@ -31,27 +33,34 @@ public:
 	void update();
 	void drawOddFrame(int x, int y, int width, int height);
 	void drawEvenFrame(int x, int y, int width, int height);
+	void startRecord();
+	void stopRecord();
 	
+	int						width,height;
 	int						mode;
 	int						grabberType;
 	
 	baseVideoGrabber*		vidGrabber;
 	ofVideoPlayer			vidPlayer;
-		
-	int						width,height;
+	float					playposition;
 	
 	ofxCvColorImage			colorImg;
-	ofxCvGrayscaleImage* 	grayImage;
-	
+	ofxCvGrayscaleImage* 	grayImage;	
 	ofxCvGrayscaleImage		grayOddImage;
 	ofxCvGrayscaleImage		grayEvenImage;
 	
-	bool					bIsFrameNew;			// on this update, is the frame new?
-	
+	bool					bIsFrameNew;			// on this update, is the frame new?	
 	int						fcount;
+	
+	bool					bRecord;
+	ofxFileHelper			fileHelper;
+	string					folderName;
 	
 	bool					flipX;
 	bool					flipY;
 };
 
-#endif
+#endif /* _INPUT_MANAGER */
+
+
+

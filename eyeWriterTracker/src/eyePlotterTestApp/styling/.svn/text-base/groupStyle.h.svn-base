@@ -1,0 +1,43 @@
+/*
+ *  groupStyle.h
+ *  openFrameworks
+ *
+ *  Created by Keith on 8/21/09.
+ *  Copyright 2009 __MyCompanyName__. All rights reserved.
+ *
+ */
+#pragma once
+
+class groupStyle{
+	public:
+	
+		groupStyle(){ init(0); };
+		groupStyle(int l){ init(l); }
+		virtual ~groupStyle(){};
+	
+		int layer;
+	
+		int strokeWeight;
+		int dropShadow[2];
+		bool dotShadow;
+		bool outline;
+		bool doFill;
+	
+		int strokeColor[4];
+		int fillColor[4];
+		int shadowColor[4];
+		int outlineColor[4];
+	
+		void init(int l){
+			doFill            = false;
+			outline           = false;
+			layer             = l;
+			strokeWeight      = 2;
+			dotShadow         = false;
+			dropShadow[0] = 0; dropShadow[1] = 0;
+			shadowColor[0] = 200; shadowColor[1] = 200;	shadowColor[2] = 0; shadowColor[3] = 255; 
+			strokeColor[0] = 0; strokeColor[1] =   0; strokeColor[2] =   0; strokeColor[3] = 255; 
+			fillColor[0] = 255; fillColor[1]   = 255; fillColor[2]   = 255; fillColor[3]   = 255; 			
+			outlineColor[0] = 255; outlineColor[1]   = 255; outlineColor[2]   = 255; outlineColor[3]   = 255; 
+		}
+};

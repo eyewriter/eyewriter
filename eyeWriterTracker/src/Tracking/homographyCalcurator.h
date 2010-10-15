@@ -10,6 +10,7 @@ class homographyCalcurator {
 public:
 	
 	void	setup(int widthGlintRectangle, int heightGlintRectangle, int widthWarpedImage, int heightWarpedImage);
+	void	draw(int x, int y , int w, int h);
 	ofxCvGrayscaleAdvanced*	getWarpedImage(ofxCvGrayscaleImage& magCurrent, glintFinder& gFinder, float magRatio);
 	ofPoint*	getDstPos();
 

@@ -12,7 +12,7 @@ public:
 	
 	void setup(int width, int height, int _targetWidth, int _targetHeight, int divisor = 1);
 	bool update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, float minBlobSize, float maxBlobSize, bool bAllArea);
-	void drawFindingRect(float x, float y, float width, float height);
+	void draw(float x, float y, float width, float height);
 	void getRotatedBoundingBox(int blobNum);
 	
 	ofxCvContourFinder			contourFinder;
@@ -20,7 +20,6 @@ public:
 	ofxCvGrayscaleAdvanced		previousImg;
 	ofxCvGrayscaleAdvanced		diffImg;
 
-	
 	//!!!: only to check
 	//	ofxCvGrayscaleAdvanced		tempCurrent;
 	//	ofxCvGrayscaleAdvanced		tempPrevious;
@@ -28,10 +27,9 @@ public:
 	
 	ofxCvBlob						foundBlob;
 	
-	float			w,h,div;
+	float			w, h, div;
 	float			wdiv, hdiv;
-	int				targetWidth;
-	int				targetHeight;
+	int				targetWidth, targetHeight;
 	
 	ofRectangle		offsetROI;
 	ofRectangle		boundingRect;
@@ -45,16 +43,11 @@ public:
 	
 	bool			bUseGamma;
 	float			gamma;
-	
 	bool			bUseDilate;
-	int				nErosions;
-	int				nDilations;
-	
+	int				nErosions, nDilations;
 	bool			bUseBlur;
 	float			blur;
-	
 	bool			bUseContrast;
-	
 	float			contrast;
 	float			brightness;
 	
@@ -62,23 +55,18 @@ public:
 	
 	bool			bUseCompactnessTest;
 	float			maxCompactness;
-	
 	bool			bUseLongShortTest;
 	float			minLongShortRatio;
 	CvBox2D			box;
 	
 	float			maxWidth;
 	float			maxHeight;
-	
 	float			minSquareness;
 	
 	
 private:
 	
 	ofRectangle	findingRect;
-	
-	
-	
 	
 };
 

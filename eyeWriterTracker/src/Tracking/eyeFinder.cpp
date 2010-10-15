@@ -3,21 +3,17 @@
 //------------------------------------------------------------------------------------
 void eyeFinder::setup(int width, int height, int _targetWidth, int _targetHeight, int divisor){
 	
-	w = width;
-	h = height;
-	div = divisor;
+	w = width;					// width from inputManager (640 normally)
+	h = height;					// height from inputManager (480 normally)
+	div = divisor;				// divisor to get smaller image (default 2)
 	
 	wdiv = w / div;
 	hdiv = h / div;
 	
-	previousImg.allocate(wdiv, hdiv);
+	previousImg.allocate(wdiv, hdiv);			// TODO: use array of images here, and then can remove one =(copy) process.
 	diffImg.allocate(wdiv, hdiv);
-	currentImg.allocate(wdiv, hdiv);
-	
-	//	tempCurrent.allocate(wdiv, hdiv);
-	//	tempPrevious.allocate(wdiv, hdiv);
-	//	temptest_dif.allocate(wdiv, hdiv);
-	
+	currentImg.allocate(wdiv, hdiv);			// TODO: use array of images here, and then can remove one =(copy) process.
+		
 	bUseContrast		= false;
 	contrast			= 0.2;
 	brightness			= 0.0;
@@ -59,11 +55,10 @@ bool eyeFinder::update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, fl
 	
 	// TODO: change here to get the best one
 	
-	if (div !=1) currentImg.scaleIntoMe(_currentImg, CV_INTER_LINEAR);
-	else currentImg = _currentImg;
+	currentImg = _currentImg;			// _currentImg is already small(width&height are devided by div) from eyeTracker.
 	
 	if (bFirstFrame){
-		previousImg = currentImg;
+		previousImg = currentImg;			// this is slow a bit. can do the same thing wighout this copy. just alternate the valuable every frame.
 		bFirstFrame = false;
 	}
 	
@@ -94,7 +89,7 @@ bool eyeFinder::update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, fl
 	if (diffImg.countNonZeroInRegion(0,0,diffImg.width, diffImg.height) > 80000 / (div * div)) bBadFrame = true;		// not sure.. are there some faster way?
 	
 	if (!bBadFrame) {
-		
+				
 		offsetROI.x = findingRect.x * div;
 		offsetROI.y = findingRect.y * div;
 		offsetROI.width = findingRect.width * div;
@@ -102,20 +97,6 @@ bool eyeFinder::update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, fl
 		
 		diffImg.setROI(findingRect);
 		int num = contourFinder.findContours(diffImg, minBlobSize, maxBlobSize, 20, true, true);
-		
-		// a bug is in the "findContours" in ofxCvContourFinder.
-		// I changed the order of lines.
-		// see findContour in ofxCvContourFinder.		
-		//	
-		// To use findContour with ROI, I changed the codes like below.
-		//
-		// From:
-		// inputCopy = input;
-		// inputCopy.setROI( input.getROI() );
-		//
-		// To:
-		// inputCopy.setROI( input.getROI() );
-		// inputCopy = input;
 		
 		diffImg.resetROI();
 		
@@ -155,7 +136,7 @@ bool eyeFinder::update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, fl
 				contourFinder.blobs[k].boundingRect.width / contourFinder.blobs[k].boundingRect.height :
 				contourFinder.blobs[k].boundingRect.height / contourFinder.blobs[k].boundingRect.width;
 				
-				if( ratio > minSquareness){
+				if( ratio > minSquareness) {
 					
 					bFoundOne = true;
 					
@@ -172,36 +153,35 @@ bool eyeFinder::update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, fl
 					//					tempPrevious = previousImg;
 					//					temptest_dif = diffImg;
 					
-					if (!bAllArea){
-						
-						findingRect.x = fabs(boundingRect.x - 150) / div;
-						findingRect.y = fabs(boundingRect.y - 100) / div;
-						findingRect.width = CLAMP(boundingRect.width + 300, 0, w - boundingRect.x - boundingRect.width) / div;
-						findingRect.height = CLAMP(boundingRect.height + 200, 0, h - boundingRect.y - boundingRect.height) / div;
-						
-					} else {
-						
-						findingRect.x = (targetWidth/2)/div;
-						findingRect.y = (targetHeight/2)/div;
-						findingRect.width = wdiv - targetWidth/div;
-						findingRect.height = hdiv - targetHeight/div;
-					}
-					
 					break;
 				}
 			}
 		}
+		
+		if (!bAllArea){
+			
+			if (bFoundOne){
+				findingRect.x = fabs(centroid.x - targetWidth) / div;
+				findingRect.y = fabs(centroid.y - targetHeight) / div;
+				findingRect.width =  targetWidth * 2 / div;
+				findingRect.height = targetHeight * 2 / div;
+				
+			} else {
+				
+				findingRect.x = (targetWidth/2)/div;
+				findingRect.y = (targetHeight/2)/div;
+				findingRect.width = wdiv - targetWidth/div;
+				findingRect.height = hdiv - targetHeight/div;
+			}
+			
+		}
+		// if (bAllArea), we don't have to change findingRect after setup.
+		
 	}	
 	
 	previousImg = currentImg;
 	
 	return bFoundOne;
-}
-
-//------------------------------------------------------------------------------------
-void eyeFinder::drawFindingRect(float x, float y, float width, float height){
-	
-	ofRect(findingRect.x * div * width/w + x, findingRect.y * div * height/h + y, findingRect.width * div * width/w, findingRect.height * div * height/h);
 }
 
 //------------------------------------------------------------------------------------
@@ -220,6 +200,47 @@ void eyeFinder::getRotatedBoundingBox(int blobNum){
 	
 	cvClearSeq(output);
 	cvReleaseMemStorage( &m_storage );
+	
+}
+
+//------------------------------------------------------------------------------------
+void eyeFinder::draw(float x, float y, float width, float height){
+	
+	ofNoFill();
+	
+	ofEnableAlphaBlending();
+	ofSetColor(255,255,255, 80);
+	
+	currentImg.draw(x, y, width, height);
+	diffImg.draw(x, y, width, height);
+	
+	ofNoFill();
+	
+	ofSetColor(255,0,0, 130);
+	ofRect(x + boundingRect.x * width / w, y + boundingRect.y * height / h,
+		   boundingRect.width * width / w, boundingRect.height * height / h);
+	
+	float	targetRectTempX = centroid.x - (targetWidth/2);
+	float	targetRectTempY = centroid.y - (targetHeight/2);
+
+	if (bFoundOne){
+		ofSetColor(0,0,255, 150);
+		ofRect(x + targetRectTempX * width / w, y + targetRectTempY * height / h,
+			   targetWidth  * width / w, targetHeight * height / h);
+	}
+		
+	ofSetColor(255, 0, 0,100);
+	ofRect(findingRect.x * div * width/w + x, findingRect.y * div * height/h + y, findingRect.width * div * width/w, findingRect.height * div * height/h);
+	
+	if (bFoundOne){
+		ofSetColor(255,255,255);
+		foundBlob.draw(x + offsetROI.x * width / w, y + offsetROI.y * height / h);
+	}
+		
+	ofDisableAlphaBlending();
+	
+	ofSetColor(255, 255, 255);
+	ofDrawBitmapString("EyeFinder", x + 1, y + height + 12);
 	
 }
 

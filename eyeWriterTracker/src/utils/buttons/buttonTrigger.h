@@ -20,6 +20,13 @@ class buttonTrigger : public buttonRect{
 		counter = 0.0f;
 		pct = 0.0f;
 		maxCount = 40.0f;
+		bHasFont = false;
+		
+	}
+	
+	void setDisplayFont(ofTrueTypeFont * fontIn){
+		font = fontIn;
+		bHasFont = true;
 	}
 
 	void setMaxCounter(float nCounter){
@@ -73,16 +80,27 @@ class buttonTrigger : public buttonRect{
 		ofNoFill();
 		ofSetColor(30, 30, 30);
 		ofRect(x, y, width, height);
+		
+		if (!bHasFont){
+			float textWidth = 8.0f * displayText.length();
+			float remainX = (width - textWidth)/2;
 
-		float textWidth = 8.0f * displayText.length();
-		float remainX = (width - textWidth)/2;
+			float textHeight = 14.0f;
+			float remainY = (height - textHeight)/2.0f + (textHeight/2.0f);
 
-		float textHeight = 14.0f;
-		float remainY = (height - textHeight)/2.0f + (textHeight/2.0f);
-
-		ofSetColor(100, 100, 160);
-		ofDrawBitmapString(displayText, x + remainX, y + remainY);
-
+			ofSetColor(100, 100, 160);
+			ofDrawBitmapString(displayText, x + remainX, y + remainY);
+		} else {
+			ofRectangle bounds = font->getStringBoundingBox(displayText, 0,0);
+			
+			float textWidth = bounds.width;
+			float remainX = (width - textWidth)/2;
+			
+			float textHeight = bounds.height;
+			float remainY = (height - textHeight)/2.0f + (textHeight/2.0f);
+			
+			font->drawString(displayText, x + remainX, y + remainY);
+		}
 	}
 
 	float maxCount;
@@ -93,5 +111,8 @@ class buttonTrigger : public buttonRect{
 	bool hasLeft;
 	string displayText;
 	bool active;
+	ofTrueTypeFont * font;
+	bool bHasFont;
+	
 
 };

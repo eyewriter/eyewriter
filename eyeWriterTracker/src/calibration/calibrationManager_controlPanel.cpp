@@ -2,14 +2,14 @@
 
 void calibrationManager::setupControlPanel(){
 
-	panel.setup("calibration", 720, 20, 300, 500);
+	panel.setup("calibration", 1080, 10, 270, 500);
 	panel.addPanel("auto calibration", 1, false);
 	panel.addPanel("display calibration data", 1, false);
 	panel.addPanel("calibration setup", 1, false);
 	panel.addPanel("manual calibration", 1, false);
 	panel.addPanel("smoothing", 1, false);
 
-
+	
 	//---- gaze
 	panel.setWhichPanel("calibration setup");
 	panel.addSlider("num divisions horiz", "N_DIV_W", nDivisionsWidth, 2, 15, true);
@@ -27,13 +27,15 @@ void calibrationManager::setupControlPanel(){
 	panel.addToggle("reset calibration", "RESET_CALIB", false);
 	panel.addToggle("save calibration", "SAVE_CALIB", false);
 	panel.addToggle("load calibration", "LOAD_CALIB", false);
+	
+	panel.addToggle("mouse simulation", "B_MOUSE_SIMULATION", false);
 
 	panel.loadSettings("settings/calibrationSettings.xml");
 
 
 	panel.setWhichPanel("display calibration data");
 
-	panel.addToggle("bDrawRawInput", "B_DRAW_RAWINPUT", true);
+	panel.addToggle("bDrawRawInput", "B_DRAW_RAWINPUT", false);
 	panel.addToggle("bDrawRawCalibrationInput", "B_DRAW_CALIBINPUT", false);
 	panel.addToggle("bDrawMapOutput", "B_DRAW_MAPOUTPUT", false);
 	panel.addToggle("bDrawLsError", "B_DRAW_LS_ERROR", true);
@@ -46,12 +48,11 @@ void calibrationManager::setupControlPanel(){
 
 	panel.setWhichPanel("smoothing");
 	panel.addSlider("remove outliers", "REMOVE_OUTLIERS", 2, .1, 4, false);
-	panel.addSlider("smoothing amount", "AMOUNT_SMOOTHING", 0.97, 0.01, 1.0f, false);
+	panel.addSlider("smoothing amount", "AMOUNT_SMOOTHING", 0.993, 0.8, 1.0f, false);
 }
 
 //--------------------------------------------------------------
 void calibrationManager::updateControlPanel(){
-	
 	
 	panel.update();
 
@@ -59,7 +60,7 @@ void calibrationManager::updateControlPanel(){
 	recordTimePerDot = panel.getValueF("RECORD_TIME");;
 	smoothing = panel.getValueF("AMOUNT_SMOOTHING");
 	
-	removeOutliers = panel.getValueF("REMOVE_OUTLIERS");
+	fitter.removeOutliersf = panel.getValueF("REMOVE_OUTLIERS");
 	
 	if (panel.getValueB("START_AUTO")){
 		bPreAutomatic = true;
@@ -72,31 +73,28 @@ void calibrationManager::updateControlPanel(){
 	}
 	
 	if (panel.getValueB("SAVE_CALIB")){
-		if (bBeenFit){
-			saveCalibration();
+		if (fitter.bBeenFit){
+			fitter.saveCalibration();
 		}
 		panel.setValueB("SAVE_CALIB", false);
 	}
 	
 	if (panel.getValueB("LOAD_CALIB")){
-		loadCalibration();
+		fitter.loadCalibration();
 		panel.setValueB("LOAD_CALIB", false);
 	}
 	
-	bDrawRawCalibrationInput = panel.getValueB("B_DRAW_CALIBINPUT");
-	bDrawLsError = panel.getValueB("B_DRAW_LS_ERROR");
+	fitter.bDrawRawCalibrationInput = panel.getValueB("B_DRAW_CALIBINPUT");
+	fitter.bDrawLsError = panel.getValueB("B_DRAW_LS_ERROR");
 	bDrawMapOutput = panel.getValueB("B_DRAW_MAPOUTPUT");
 	bDrawRawInput = panel.getValueB("B_DRAW_RAWINPUT");
 	bDrawEyeInput = panel.getValueB("B_DRAW_EYE_INPUT");
 	
-	rawDataScale = panel.getValueF("RAW_SCALE");
-	rawDataOffset.x = panel.getValueF("RAW_OFFSET_X");
-	rawDataOffset.y = panel.getValueF("RAW_OFFSET_Y");
+	fitter.rawDataScale = panel.getValueF("RAW_SCALE");
+	fitter.rawDataOffset.x = panel.getValueF("RAW_OFFSET_X");
+	fitter.rawDataOffset.y = panel.getValueF("RAW_OFFSET_Y");
 	
-
-
-
-
-
-
+//	bMouseSimulation = panel.getValueB("B_MOUSE_SIMULATION");
+	
 }
+

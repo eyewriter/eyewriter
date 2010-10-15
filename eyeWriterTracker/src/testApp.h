@@ -4,54 +4,67 @@
 
 #include "ofMain.h"
 
-
-#include "trackingManager.h"
+#include "trackingManager.h"	
 #include "calibrationManager.h"
 #include "buttonTrigger.h"
+#include "typingScene.h"
+
+#include "pongScene.h"
+
 
 enum{
-
-	MODE_TRACKING,	MODE_CALIBRATING,	MODE_TEST
+	
+	MODE_TRACKING,	MODE_CALIBRATING,	MODE_TEST, MODE_DRAW,  MODE_TYPING, MODE_PONG
 
 };
 
+#include "eyePlotterTestApp.h"
 
 class testApp : public ofBaseApp {
 
-public:
+	public:
 
-	testApp();
-	void setup();
-	void update();
-	void draw();
+		testApp();
+		void setup();
+		void update();
+		void draw();
 
-	void keyPressed  (int key);
-	void keyReleased(int key);
-	void mouseMoved(int x, int y );
-	void mouseDragged(int x, int y, int button);
-	void mousePressed(int x, int y, int button);
-	void mouseReleased(int x, int y, int button);
-	void resized(int w, int h);
+		void keyPressed  (int key);
+		void keyReleased(int key);
+		void mouseMoved(int x, int y );
+		void mouseDragged(int x, int y, int button);
+		void mousePressed(int x, int y, int button);
+		void mouseReleased(int x, int y, int button);
+		void resized(int w, int h);
 
-	//----- scenes
+		//----- scenes
 
-	trackingManager			TM;
-	calibrationManager		CM;
-
-	buttonTrigger			BT;
-
-
-	ofPoint eyeSmoothed;
-	ofPoint screenPoint;
-
-
-	int mode;
-
-	//------ drawing
-	void drawHelp();
+		trackingManager			TM;
+		calibrationManager		CM;
 	
-	static const float rotSmooth = .9;
+		buttonTrigger			BT;
+		eyePlotterTestApp	eyeApp;
+		typingScene				typeScene;
+		pongScene				ponger;
 
+	
+	
+		ofPoint eyeSmoothed;
+		ofPoint screenPoint;
+		float waitFpsTime;
+		float timeSince;
+	
+		int mode; 
+	
+		bool bMouseSimulation;
+		bool bMouseEyeInputSimulation;
+	
+		//------ drawing
+		void drawHelp();
+	
+		static const float rotSmooth = .9;
+
+	
 };
 
 #endif

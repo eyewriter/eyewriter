@@ -1,0 +1,10 @@
+<FTP>
+    <HOST></HOST>
+    <USER></USER>
+    <PASS></PASS>
+    <PORT></PORT>
+</FTP>
+<buttonCount>28</buttonCount>
+<rate>1.300000</rate>
+<ptThreshold>7.000000</ptThreshold>
+<smoothPct>0.400000</smoothPct>

@@ -9,8 +9,8 @@ class calibrationFileSaver {
 	
 public:
 	
-	void saveCalibration(ofxLeastSquares& ls, int nRefPoints, float spx[], float spy[], ofPoint cp[], vector<ofPoint>& eyePoints, vector<ofPoint>& screenPoints);
-	void loadCalibration(ofxLeastSquares& ls, float spx[], float spy[], ofPoint cp[], vector<ofPoint>& eyePoints, vector<ofPoint>& screenPoints);
+	void saveCalibration(ofxLeastSquares& ls, int nRefPoints, vector<ofPoint>& referencePoints, vector<ofPoint>& pointsFromls, vector<ofPoint>& eyePoints, vector<ofPoint>& screenPoints);
+	void loadCalibration(ofxLeastSquares& ls, vector<ofPoint>& referencePoints, vector<ofPoint>& pointsFromls, vector<ofPoint>& eyePoints, vector<ofPoint>& screenPoints);
 	
 };
 

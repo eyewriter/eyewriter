@@ -2,7 +2,7 @@
     <val_0>0.000000</val_0>
 </B_RIGHT_FLIP_X>
 <B_RIGHT_FLIP_Y>
-    <val_0>1.000000</val_0>
+    <val_0>0.000000</val_0>
 </B_RIGHT_FLIP_Y>
 <B_USE_CONTRAST>
     <val_0>0.000000</val_0>
@@ -128,10 +128,10 @@
     <val_0>2.444444</val_0>
 </BLUR_EYEPOS>
 <THRESHOLD_EYEPOS>
-    <val_0>29.750000</val_0>
+    <val_0>39.666668</val_0>
 </THRESHOLD_EYEPOS>
 <MIN_BLOB_EYEPOS>
-    <val_0>83.333336</val_0>
+    <val_0>27.777779</val_0>
 </MIN_BLOB_EYEPOS>
 <MAX_BLOB_EYEPOS>
     <val_0>6452.778320</val_0>
@@ -185,7 +185,7 @@
     <val_0>5.333333</val_0>
 </BLUR_PUPIL>
 <THRESHOLD_PUPIL>
-    <val_0>116.166664</val_0>
+    <val_0>66.583336</val_0>
 </THRESHOLD_PUPIL>
 <MIN_BLOB_PUPIL>
     <val_0>5000.000000</val_0>
@@ -227,10 +227,10 @@
     <val_0>0.000000</val_0>
 </SCAN_YB_PUPIL>
 <SCAN_X_PUPIL>
-    <val_0>181.766663</val_0>
+    <val_0>224.816681</val_0>
 </SCAN_X_PUPIL>
 <SCAN_Y_PUPIL>
-    <val_0>110.500000</val_0>
+    <val_0>126.083328</val_0>
 </SCAN_Y_PUPIL>
 <B_USE_ADAPTIVE_PUPIL>
     <val_0>0.000000</val_0>
@@ -272,20 +272,47 @@
     <val_0>0.000000</val_0>
 </B_USE_STRETCH_PUPIL>
 <B_USE_AUTOTHRESHOLD_PUPIL>
-    <val_0>0.000000</val_0>
+    <val_0>1.000000</val_0>
 </B_USE_AUTOTHRESHOLD_PUPIL>
 <B_USE_AUTO_THRESHOLD_GLINT>
-    <val_0>0.000000</val_0>
+    <val_0>1.000000</val_0>
 </B_USE_AUTO_THRESHOLD_GLINT>
 <ROI_ORIGIN_X>
     <val_0>0.000000</val_0>
 </ROI_ORIGIN_X>
 <ROI_ORIGIN_Y>
-    <val_0>0.344444</val_0>
+    <val_0>0.000000</val_0>
 </ROI_ORIGIN_Y>
 <ROI_END_X>
     <val_0>1.000000</val_0>
 </ROI_END_X>
 <ROI_END_Y>
-    <val_0>0.955556</val_0>
+    <val_0>1.000000</val_0>
 </ROI_END_Y>
+<B_DRAW_RAW_INPUT>
+    <val_0>0.000000</val_0>
+</B_DRAW_RAW_INPUT>
+<B_RECORD_GLINTS>
+    <val_0>0.000000</val_0>
+</B_RECORD_GLINTS>
+<B_DELETE_LINES>
+    <val_0>1.000000</val_0>
+</B_DELETE_LINES>
+<GLINT_MIN_DISTANCE>
+    <val_0>58.333336</val_0>
+</GLINT_MIN_DISTANCE>
+<GLINT_MAX_DISTANCE>
+    <val_0>151.111115</val_0>
+</GLINT_MAX_DISTANCE>
+<B_USE_RECORDED_GRINTREF>
+    <val_0>1.000000</val_0>
+</B_USE_RECORDED_GRINTREF>
+<GLINT_MIN_DIS_PCT>
+    <val_0>0.750000</val_0>
+</GLINT_MIN_DIS_PCT>
+<GLINT_MAX_DIS_PCT>
+    <val_0>1.527778</val_0>
+</GLINT_MAX_DIS_PCT>
+<B_BRIGHT_GLINT>
+    <val_0>1.000000</val_0>
+</B_BRIGHT_GLINT>

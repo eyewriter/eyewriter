@@ -5,6 +5,10 @@
 #include "eyeTracker.h"
 #include "ofxControlPanel.h"
 #include "inputManager.h"
+#include "threadedImgSaver.h"
+#include "ofxFileHelper.h"
+#include "ofxXmlSettings.h"
+#include "ofxDirList.h"
 
 class trackingManager {
 	
@@ -15,64 +19,39 @@ public:
 	void setup();
 	void update();
 	void draw();
-	
 	void drawInput(int xBright, int yBright, int wBright, int hBright, int xDark, int yDark, int wDark, int hDark);
-	void drawEyeFinder(int x, int y, int w, int h);
-	void drawEyeImageBeforePupilThreshold(int x, int y, int w, int h);
-	void drawPupilFinder(int x, int y);
-	void drawGlintFinder(int x, int y);
-	void drawBrightDarkPupil(int xBright, int yBright, int xDark, int yDark);
-	void drawAutoThresholdBrightnessGraph(int x, int y);
-	void drawBrighnessScanGraph(const unsigned char * pupilpixels, int x, int y, int nLine, bool bIsVertical, string graphname);
-	void drawRawInput(int offsetX, int offsetY, float scale);
-	void drawWarpedImg(int x, int y, int w, int h);
-	
+	void drawRawInput(int offsetX, int offsetY, float scale);	
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
 	void mouseReleased();
-	
 	void setupGui();
 	void updateGui();
-	
 	void trackEyes();
+	void videoSettings();		// open video settings panel if using a camera
+	ofPoint getEyePoint();		// returns the tracked vector from glint to pupil centroid
+	bool bGotAnEyeThisFrame();
+	void setOriginalPosition();
 	
-	// open video settings panel if using a camera
-	void videoSettings();
-	
-	// returns the tracked pupil centroid
-	ofPoint	getEyePoint();
-	bool	bGotAnEyeThisFrame();
-	
-	bool	bFocusScreenMode;
-	
-	ofxControlPanel	panel;	
 	inputManager		IM;
+	ofxControlPanel		panel;	
 	eyeTracker			tracker;
 	
-	int					minBlob, maxBlob;
-	float				threshold;
-	float				threshold_bd;
-	float				threshold_glint;
-	
-	bool				bDrawLine_Pupil;
-	bool				bDrawLine_Glint;
-	bool				bDrawContour;
-	
 	bool				bFoundEye;
+	bool				bDrawRawInput;
+	bool				bFocusScreenMode;
 	
-	ofPoint			eyePoint;
-	ofPoint			glintPoint[2];
+	ofPoint				eyePoint;
+	ofPoint				glintPoint[2];
+	ofPoint				glintPupilVector;
+	ofPoint				currentdrawPoint;
+	vector <ofPoint>	trail;
 	
-	ofPoint			glintPupilVector;
-	ofPoint			currentdrawPoint;
-	vector <ofPoint> trail;
-	
-	int					scanX;
-	int					scanY;
+	ofImage				originalPositionB;
+	ofImage				originalPositionD;
+	bool				bOriginalPositon;
 	
 	// ideally we would have hasValueChanged() in ofxControlPanel
 	float lastShutter, lastGain, lastExposure, lastBrightness, lastGamma;
-	
 };
 
 #endif

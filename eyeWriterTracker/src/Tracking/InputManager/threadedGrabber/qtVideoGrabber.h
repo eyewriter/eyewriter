@@ -49,7 +49,7 @@ public:
 	//------- don't call this function from main thread, this is only for vidGrabber -------
 	void frameReceived(ofVideoGrabber& grabber){
 		vidGrabber.getThreadedPixels(colorImg, bNeedUpdate);
-		vidGrabber.lock();
+		vidGrabber.lock();															// lock again..
 		cvCvtColor(colorImg.getCvImage(), grayImg.getCvImage(), CV_RGB2GRAY);
 		vidGrabber.unlock();
 	}

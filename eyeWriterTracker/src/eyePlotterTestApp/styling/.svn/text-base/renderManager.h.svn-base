@@ -1,0 +1,143 @@
+/*
+ *	renderManager.h
+ *  openFrameworks
+ *
+ *  Created by Keith on 8/21/09.
+ *  Copyright 2009 __MyCompanyName__. All rights reserved.
+ *
+ */
+
+#pragma once
+
+#include "strokeGroup.h"
+#include "groupStyle.h"
+
+class renderManager{
+	public:
+	renderManager(){};
+		
+	/*
+	struct compare{
+		bool operator() (const strokeGroup& a,const strokeGroup& b) { return a.style.layer > b.style.layer;}
+	}layerSort;
+	*/
+	void render(const vector<strokeGroup>& groups){
+		ofPushStyle();
+		
+//		std::sort(groups.begin(),groups.end(),layerSort);
+	/*	
+		if (groups[s].style.outline == true){
+			
+			for(int i = groups.size(); --i >= 0; ){
+				for (int s = 0; s < groups[i].strokes.size(); s++){
+					for (int p = 0; p < groups[i].strokes[s].pts.size() - 1; p++){
+						ofxVec2f dir = groups[i].strokes[s].pts[p+1] - groups[i].strokes[s].pts[p];
+						float l = dir.lengthSquared();
+						float step = 100.0/l;
+						
+						for (float d = 0; d <= 1; d += step ){				
+							float offset = 10;
+							ofFill();
+							ofCircle(groups[i].strokes[s].pts[p].x + (d*dir).x + s, groups[i].strokes[s].pts[p].y + (d*dir).y + shiftY, offset);
+							ofCircle(groups[i].strokes[s].pts[p].x + (d*dir).x    , groups[i].strokes[s].pts[p].y + (d*dir).y, offset);
+							ofNoFill();
+							ofCircle(groups[i].strokes[s].pts[p].x + (d*dir).x + shiftX, groups[i].strokes[s].pts[p].y + (d*dir).y + shiftY, offset);
+							ofCircle(groups[i].strokes[s].pts[p].x + (d*dir).x         , groups[i].strokes[s].pts[p].y + (d*dir).y,         offset);
+						}
+					}
+*/				
+
+	////////////////////////////////////////////////////////////////
+		for(int i = 0; i < groups.size(); ++i ){
+			int shiftX = groups[i].style.dropShadow[0];
+			int shiftY = groups[i].style.dropShadow[1];
+			for (int s = 0; s < groups[i].strokes.size(); s++){
+				
+
+					/// BACK STROKE ///////////////////////////////////////////////
+					ofSetColor(groups[i].style.strokeColor[0], groups[i].style.strokeColor[1], groups[i].style.strokeColor[2]);
+					ofSetLineWidth(groups[i].style.strokeWeight);
+					ofNoFill();
+					ofBeginShape();
+					for(int p = 0; p < groups[i].strokes[s].pts.size(); p++){
+						ofVertex(groups[i].strokes[s].pts[p].x + shiftX, groups[i].strokes[s].pts[p].y + shiftY);
+					}
+					ofEndShape();
+					////////////////////////////////////////////////////////////////			
+
+				//// DROP SHADOW BASIC /////////////////////////////////////////
+				ofSetColor(groups[i].style.shadowColor[0], groups[i].style.shadowColor[1], groups[i].style.shadowColor[2]);
+				for(int p = 0; p < groups[i].strokes[s].pts.size()-1; p++){
+					//ofLine(groups[i].strokes[i].pts[k].x, groups[i].strokes[i].pts[k].y,groups[i].strokes[i].pts[k].x-50, groups[i].strokes[i].pts[k].y);
+					ofxVec2f dir = groups[i].strokes[s].pts[p+1] - groups[i].strokes[s].pts[p];
+					float dot = ofxVec2f(-1,0).dot(dir);
+					if (i == 1) dot*=-1;
+					(dot < 0) ? glColor3f(.5,.5,0) : glColor3f(1,1,0);
+					ofFill();
+					ofBeginShape();
+					ofVertex(groups[i].strokes[s].pts[p].x, groups[i].strokes[s].pts[p].y);
+					ofVertex(groups[i].strokes[s].pts[p].x+shiftX, groups[i].strokes[s].pts[p].y+shiftY);
+					ofVertex(groups[i].strokes[s].pts[p+1].x+shiftX, groups[i].strokes[s].pts[p+1].y+shiftY);
+					ofVertex(groups[i].strokes[s].pts[p+1].x, groups[i].strokes[s].pts[p+1].y);
+					ofEndShape();
+					}
+					
+					////////////////////////////////////////////////////////////////
+
+
+					/// CORNER LINES //////////////////////////////////////////////
+					ofSetColor(groups[i].style.strokeColor[0], groups[i].style.strokeColor[1], groups[i].style.strokeColor[2]);
+					ofSetLineWidth(groups[i].style.strokeWeight);
+					for(int p = 0; p < groups[i].strokes[s].pts.size(); p++){
+						ofLine(groups[i].strokes[s].pts[p].x, groups[i].strokes[s].pts[p].y,groups[i].strokes[s].pts[p].x + shiftX, groups[i].strokes[s].pts[p].y + shiftY);
+					}
+					////////////////////////////////////////////////////////////////
+					
+				if (groups[i].style.strokeWeight > 4){
+					/// DROP SHADOW CORNER DOTS ///////////////////////////////////
+					ofSetColor(groups[i].style.strokeColor[0], groups[i].style.strokeColor[1], groups[i].style.strokeColor[2]);
+					ofFill();
+					for(int p = 0; p < groups[i].strokes[s].pts.size(); p++){
+						ofCircle(groups[i].strokes[s].pts[p].x+shiftX, groups[i].strokes[s].pts[p].y+shiftY,.5*groups[i].style.strokeWeight);
+					}
+					////////////////////////////////////////////////////////////////
+				}
+				
+				if(groups[i].style.doFill){
+					/// MAIN LETTER FILL //////////////////////////////////////////
+					ofSetColor(groups[i].style.fillColor[0], groups[i].style.fillColor[1], groups[i].style.fillColor[2]);
+					ofFill();
+					ofBeginShape();
+					for(int p = 0; p < groups[i].strokes[s].pts.size(); p++){
+						ofVertex(groups[i].strokes[s].pts[p].x, groups[i].strokes[s].pts[p].y);
+					}
+					ofEndShape();	
+					////////////////////////////////////////////////////////////////
+				}
+
+				/// MAIN LETTER STROKE ///////////////////////////////////////
+				ofSetColor(groups[i].style.strokeColor[0], groups[i].style.strokeColor[1], groups[i].style.strokeColor[2]);
+				ofSetLineWidth(groups[i].style.strokeWeight);
+				ofNoFill();
+				ofBeginShape();
+				for(int p = 0; p < groups[i].strokes[s].pts.size(); p++){
+					ofVertex(groups[i].strokes[s].pts[p].x, groups[i].strokes[s].pts[p].y);
+				}
+				ofEndShape();
+		
+				////////////////////////////////////////////////////////////////
+				
+				//// MAIN STROKE CORNER DOTS ///////////////////////////////////
+				if (groups[i].style.strokeWeight > 4){
+					ofFill();
+					for(int p = 0; p < groups[i].strokes[s].pts.size(); p++){
+						ofCircle(groups[i].strokes[s].pts[p].x, groups[i].strokes[s].pts[p].y,.5*groups[i].style.strokeWeight);
+					}
+				}
+				////////////////////////////////////////////////////////////////	
+			}
+		}
+			
+		ofPopStyle();
+	}
+};
