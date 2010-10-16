@@ -28,6 +28,7 @@ void testApp::setup(){
 	
 	
 	BT.setup("catch me!", 50,50,180,180);
+	BT.setRetrigger(true);
 	
 	timeSince = 0;
 	bMouseSimulation = false;
@@ -40,7 +41,7 @@ void testApp::setup(){
 void testApp::update(){
 
 //	ofBackground(70,70,70);
-	ofBackground(72,72,72);
+	ofBackground(30,30,30);
 	
 	// update the tracking manager (and internally, its input manager)
 	TM.update();

@@ -6,8 +6,8 @@ void calibrationManager::setup(){
 	calibrationInfo.loadImage("images/calibrationInfo.png");
 	font.loadFont("fonts/HelveticaNeueMed.ttf", 32);
 
-	nDivisionsWidth = 5;
-	nDivisionsHeight = 5;
+	nDivisionsWidth = 3;
+	nDivisionsHeight = 3;
 
 	nPosition = 0;
 	pos  = 0;
@@ -151,19 +151,19 @@ void calibrationManager::draw(){
 	if (!bPreAutomatic || !bAutomatic) panel.draw();
 
 	ofEnableAlphaBlending();
-	ofSetColor(70, 70, 70, (int) (255 - 255 *  menuEnergy));
+	ofSetColor(30, 30, 30, (int) (255 - 255 *  menuEnergy));
 	ofRect(0,0,ofGetWidth(), ofGetHeight());
 
-	ofSetColor(255, 255, 255, 40);
-	for (int i = 0; i < nDivisionsWidth; i++){
-		float xLine = calibrationRectangle.x + ((float)calibrationRectangle.width / (float)(nDivisionsWidth-1)) * i;
-		ofLine(xLine, calibrationRectangle.y,xLine, calibrationRectangle.y + calibrationRectangle.height);
-	}
-
-	for (int i = 0; i < nDivisionsHeight; i++){
-		float yLine = calibrationRectangle.y + calibrationRectangle.height - ((float)calibrationRectangle.height / (float)(nDivisionsHeight-1)) * i;
-		ofLine(calibrationRectangle.x,yLine, calibrationRectangle.x + calibrationRectangle.width,yLine);
-	}
+//	ofSetColor(255, 255, 255, 40);
+//	for (int i = 0; i < nDivisionsWidth; i++){
+//		float xLine = calibrationRectangle.x + ((float)calibrationRectangle.width / (float)(nDivisionsWidth-1)) * i;
+//		ofLine(xLine, calibrationRectangle.y,xLine, calibrationRectangle.y + calibrationRectangle.height);
+//	}
+//
+//	for (int i = 0; i < nDivisionsHeight; i++){
+//		float yLine = calibrationRectangle.y + calibrationRectangle.height - ((float)calibrationRectangle.height / (float)(nDivisionsHeight-1)) * i;
+//		ofLine(calibrationRectangle.x,yLine, calibrationRectangle.x + calibrationRectangle.width,yLine);
+//	}
 
 	//-----------------------------------------------------------------------
 	//-----------------------------------------------------------------------
@@ -200,8 +200,10 @@ void calibrationManager::draw(){
 				ofCircle(xp, yp, 5);
 
 			} else {
+				ofNoFill();
 				ofSetColor(255, 255, 255, 150);
 				ofCircle(xp, yp, 200 - 200* autoPct);
+				ofFill();
 			}
 		}
 
@@ -278,15 +280,11 @@ void calibrationManager::keyPressed(int key) {
 			bPreAutomatic = false;
 			start();
 		}
-	}
-
-	if (bPreAutomatic == false && !bAmInAutodrive) { 
+	}else if (bPreAutomatic == false && !bAmInAutodrive) { 
 		if (key == ' '){
 			bPreAutomatic = true;
 		}
-	}
-
-	if (key == 'x'){
+	}else if (key == ' '){
 		clear();
 		stop();
 	}

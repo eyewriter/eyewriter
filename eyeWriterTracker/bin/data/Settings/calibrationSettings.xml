@@ -1,11 +1,11 @@
 <N_DIV_W>
-    <val_0>5.466667</val_0>
+    <val_0>3.877778</val_0>
 </N_DIV_W>
 <N_DIV_H>
-    <val_0>5.000000</val_0>
+    <val_0>3.227778</val_0>
 </N_DIV_H>
 <PRE_RECORD_TIME>
-    <val_0>0.698889</val_0>
+    <val_0>0.562778</val_0>
 </PRE_RECORD_TIME>
 <RECORD_TIME>
     <val_0>0.400000</val_0>
@@ -62,7 +62,7 @@
     <val_0>2.000000</val_0>
 </REMOVE_OUTLIERS>
 <AMOUNT_SMOOTHING>
-    <val_0>0.995556</val_0>
+    <val_0>0.994444</val_0>
 </AMOUNT_SMOOTHING>
 <B_MOUSE_SIMULATION>
     <val_0>0.000000</val_0>

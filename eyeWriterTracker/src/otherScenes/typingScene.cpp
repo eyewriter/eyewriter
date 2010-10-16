@@ -19,7 +19,7 @@ void typingScene::setup(){
 	
 	franklinBookSmall.loadFont("fonts/HelveticaNeueMed.ttf", 16);
 	carriageReturnCounter = 0;
-	buttonCount=390;
+	//buttonCount=390;
 	ofBackground(255, 255, 255);
 	shiftOn = false;
 	
