@@ -9,7 +9,7 @@ class brightDarkFinder {
 	public:
 		
 		bool getBrightEyeDarkEye(ofxCvGrayscaleAdvanced & img, ofRectangle & roi);
-		void drawAutoThresholdBrightnessGraph(int x, int y);
+		void drawAutoThresholdBrightnessGraph(int x, int y, bool bError);
 	
 		vector	<float>		averageVec;
 		float				pixelAvg;

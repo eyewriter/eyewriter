@@ -26,7 +26,7 @@ bool brightDarkFinder::getBrightEyeDarkEye(ofxCvGrayscaleAdvanced & img, ofRecta
 }
 
 //----------------------------------------------------------------------------------------------
-void brightDarkFinder::drawAutoThresholdBrightnessGraph(int x, int y){
+void brightDarkFinder::drawAutoThresholdBrightnessGraph(int x, int y, bool bError){
 	
 	ofSetColor(255, 255, 255);
 	ofBeginShape();
@@ -42,6 +42,12 @@ void brightDarkFinder::drawAutoThresholdBrightnessGraph(int x, int y){
 	ofRect(x, y, 320, 255);
 	
 	ofDrawBitmapString("Threshold(Bright/Dark)", x + 1, y + 255 + 12);
+	
+	if (bError) {
+		ofSetColor(255, 0, 0);
+		ofDrawBitmapString("Bad Alternation", x + 190, y + 255 + 12);
+	
+	}
 	
 }
 //----------------------------------------------------------------------------------------------

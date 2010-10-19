@@ -40,11 +40,22 @@ void eyeTracker::setup(int width, int height) {
 	
 	bUseGlintinBrightEye = false;	
 	bFoundEye = false;
-
+	
+	// initialize status.
+	tState.bEyeFound = false;
+	tState.bGoodAlternation = false;
+	tState.bGlintInBrightEyeFound = false;
+	tState.bGlintInDarkEyeFound = false;
+	tState.bPupilFound = false;
+	
 }
 
 //----------------------------------------------------
 void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam) {
+	
+	// initialize status, keep status for pupil & glint.
+	tState.bEyeFound = false;
+	tState.bGoodAlternation = false;
 	
 	// get the image from input manager.
 	currentImg.setFromPixels(grayImgFromCam.getPixels(), grayImgFromCam.width, grayImgFromCam.height);	
@@ -63,6 +74,8 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam) {
 	bFoundEye = false;
 	bool bFoundPupil = false;
 	
+	tState.bEyeFound = bFoundOne;				// update the trackingState.
+	
 	if (bFoundOne){
 		
 		targetRect.x = eFinder.centroid.x - (targetRect.width/2);
@@ -79,13 +92,15 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam) {
 		
 		currentImg.resetROI();
 		
-		// get current bright eye image & dark eye image
-		bIsBrightEye = getBrightEyeDarkEye();
+		// get current bright eye image & dark eye image, and compare current status with past status.
+		bool	bWasBrightEye = bIsBrightEye;
+		bIsBrightEye = getBrightEyeDarkEye();		
+		if (bWasBrightEye != bIsBrightEye) tState.bGoodAlternation = true;
 		
-		// get glint position in a bright eye image, if needed. <= shoul be here..? think about it.
+		// get glint position in a bright eye image, if needed. <= should be here..? think about it.
 		if (bIsBrightEye && bUseGlintinBrightEye) {
-			thresCal.update(smallCurrentImg, eFinder.diffImg, currentImg, targetRect, true);
-			gFinder.findGlintCandidates(magCurrentImg, thresCal.getGlintThreshold(true), minBlobSize_g, maxBlobSize_g, true);
+			thresCal.update(smallCurrentImg, eFinder.diffImg, currentImg, targetRect, true);			// update threshold for glint in bright eye.
+			tState.bGlintInBrightEyeFound = gFinder.findGlintCandidates(magCurrentImg, thresCal.getGlintThreshold(true), minBlobSize_g, maxBlobSize_g, true);
 			targetRectBright = targetRect;
 		}
 		
@@ -102,9 +117,10 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam) {
 			
 			// get glint position with dark eye image.
 			gFinder.update(magCurrentImg, threshold_g, minBlobSize_g, maxBlobSize_g, bUseGlintinBrightEye);
+			tState.bGlintInDarkEyeFound = gFinder.bFound;
 			
 			if (gFinder.bFound){
-				
+								
 				if (bUseAutoThreshold_p) threshold_p = thresCal.getPupilThreshold();
 				else threshold_p = threshold_p_frompanel;
 				
@@ -117,6 +133,8 @@ void eyeTracker::update(ofxCvGrayscaleImage & grayImgFromCam) {
 					
 					bFoundPupil = pFinder.update(magCurrentImg, threshold_p, minBlobSize_p, maxBlobSize_p, targetRect);
 				}
+				
+				tState.bPupilFound = bFoundPupil;
 				
 				if (bFoundPupil){
 					pupilCentroid = pFinder.currentPupilCenter;

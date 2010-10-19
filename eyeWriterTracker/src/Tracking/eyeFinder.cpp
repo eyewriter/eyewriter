@@ -204,7 +204,7 @@ void eyeFinder::getRotatedBoundingBox(int blobNum){
 }
 
 //------------------------------------------------------------------------------------
-void eyeFinder::draw(float x, float y, float width, float height){
+void eyeFinder::draw(float x, float y, float width, float height, bool bError){
 	
 	ofNoFill();
 	
@@ -241,6 +241,11 @@ void eyeFinder::draw(float x, float y, float width, float height){
 	
 	ofSetColor(255, 255, 255);
 	ofDrawBitmapString("EyeFinder", x + 1, y + height + 12);
+	
+	if (bError) {
+		ofSetColor(255, 0, 0);
+		ofDrawBitmapString("Error, can't find eye", x + 100, y + height + 12);
+	}
 	
 }
 

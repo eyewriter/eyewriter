@@ -15,7 +15,7 @@ public:
 
 	void setup(int width, int height, float _magRatio, float IMwidth, float IMheight);
 	bool update(ofxCvGrayscaleAdvanced & _currentImg, int threshold, int minBlobSize, int maxBlobSize, ofRectangle & _targetRect);
-	void draw(float x, float y);
+	void draw(float x, float y, bool bError);
 
 	ofxCvGrayscaleAdvanced	currentImg;
 	ofxCvGrayscaleImage		imgBeforeThreshold;			// only for displaying in tracking mode

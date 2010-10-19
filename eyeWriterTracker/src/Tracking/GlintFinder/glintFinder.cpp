@@ -150,13 +150,18 @@ bool glintFinder::update(ofxCvGrayscaleAdvanced & blackEyeImg, float threshold, 
 }
 
 //--------------------------------------------------------------------
-void glintFinder::findGlintCandidates(ofxCvGrayscaleAdvanced & eyeImg, float _threshold, float minBlobSize, float maxBlobSize, bool isBrightEye){
+bool glintFinder::findGlintCandidates(ofxCvGrayscaleAdvanced & eyeImg, float _threshold, float minBlobSize, float maxBlobSize, bool isBrightEye){
 
 	if (isBrightEye){
+		int nFound;
 		eyeImg.threshold(_threshold, false);
-		contourFinderBright.findContours(eyeImg, minBlobSize, maxBlobSize, 3, true, true);
+		nFound = contourFinderBright.findContours(eyeImg, minBlobSize, maxBlobSize, 3, true, true);
 		checkBrightEye = eyeImg;
+		if (nFound > 0) return true;
+		else return false;
 	}
+	
+	return false;
 }
 
 //--------------------------------------------------------------------
@@ -234,7 +239,7 @@ void glintFinder::drawCross(ofPoint & pos, float x, float y, float width, float 
 }
 
 //--------------------------------------------------------------------
-void glintFinder::draw(float x, float y) {
+void glintFinder::draw(float x, float y, bool bError) {
 	
 	// ofTranslate didn't work well easily because of glScissor.
 		
@@ -259,7 +264,27 @@ void glintFinder::draw(float x, float y) {
 	ofSetColor(255, 255, 255);
 	ofDrawBitmapString("glintFinder", x + 1, y + eyeImage.height + 12);
 	
+	if (bError) {
+		ofSetColor(255, 0, 0);
+		ofDrawBitmapString("Error, can't find glints", x + 180, y + eyeImage.height + 12);
+	}
+	
 }
 
 //--------------------------------------------------------------------
+void glintFinder::drawGlintinBrightEye(float x, float y, bool bError){
+
+	ofSetColor(255, 255, 255);
+	checkBrightEye.draw(x + 1, y);
+	contourFinderBright.draw(x + 1, y);
+	ofSetColor(255, 255, 255);
+	ofDrawBitmapString("Glint in Bright Eye", x + 1, y + eyeImage.height + 12);
+	if (bError) {
+		ofSetColor(255, 0, 0);
+		ofDrawBitmapString("Error, can't find glint in bright eye", x + 180, y + eyeImage.height + 12);
+	}
+
+
+}
+
 

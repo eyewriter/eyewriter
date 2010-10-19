@@ -12,7 +12,7 @@ public:
 	
 	void setup(int width, int height, int _targetWidth, int _targetHeight, int divisor = 1);
 	bool update(ofxCvGrayscaleAdvanced & _currentImg, float threshold, float minBlobSize, float maxBlobSize, bool bAllArea);
-	void draw(float x, float y, float width, float height);
+	void draw(float x, float y, float width, float height, bool bError);
 	void getRotatedBoundingBox(int blobNum);
 	
 	ofxCvContourFinder			contourFinder;

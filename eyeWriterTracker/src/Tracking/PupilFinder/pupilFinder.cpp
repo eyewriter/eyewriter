@@ -85,7 +85,7 @@ bool pupilFinder::update(ofxCvGrayscaleAdvanced & _currentImg, int threshold, in
 }
 
 //----------------------------------------------------
-void pupilFinder::draw(float x, float y){
+void pupilFinder::draw(float x, float y, bool bError){
 
 	ofPushMatrix();
 	ofTranslate(x, y, 0);
@@ -110,6 +110,11 @@ void pupilFinder::draw(float x, float y){
 	
 	ofSetColor(255, 255, 255);
 	ofDrawBitmapString("pupilFinder/EllipseFit", 1, currentImg.height + 12);
+	
+	if (bError) {
+		ofSetColor(255, 0, 0);
+		ofDrawBitmapString("Error, can't find pupil", 200, currentImg.height + 12);
+	}
 	
 	ofPopMatrix();
 	

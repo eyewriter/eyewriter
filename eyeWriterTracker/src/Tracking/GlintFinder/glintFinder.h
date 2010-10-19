@@ -16,8 +16,9 @@ public:
 	bool		update(ofxCvGrayscaleAdvanced & blackEyeImg, float threshold, float minBlobSize, float maxBlobSize, bool bUseBrightEyeCheck);
 	void		drawLine(float x, float y, float width, float height, float len);
 	void		drawLineOnBrightGlint(float x, float y, float width, float height, float len);
-	void		draw(float x, float y);
-	void		findGlintCandidates(ofxCvGrayscaleAdvanced & eyeImg, float _threshold, float minBlobSize, float maxBlobSize, bool isBrightEye);
+	void		draw(float x, float y, bool bError);
+	void		drawGlintinBrightEye(float x, float y, bool bError);
+	bool		findGlintCandidates(ofxCvGrayscaleAdvanced & eyeImg, float _threshold, float minBlobSize, float maxBlobSize, bool isBrightEye);
 	ofPoint		getGlintPosition(int glintID);
 	
 	glintLineChecker		gLineChecker;

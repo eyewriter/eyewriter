@@ -38,7 +38,7 @@ void trackingManager::update(){
 	//only update the point if the vector was found
 	//the function returns a 0,0 point if vector was not found
 	ofPoint pt = tracker.getVectorGlintToPupil(GLINT_BOTTOM_LEFT);
-	
+		
 	if( pt.x != 0.0 || pt.y != 0.0 ){
 		glintPupilVector = pt;
 	}
@@ -71,7 +71,7 @@ bool trackingManager::bGotAnEyeThisFrame(){
 void trackingManager::trackEyes(){
 	tracker.update(*IM.grayImage);
 	
-	bFoundEye	= tracker.bFoundEye;						
+	bFoundEye	= tracker.bFoundEye;					
 	ofPoint pt	= tracker.getVectorGlintToPupil(GLINT_BOTTOM_LEFT);					// TODO: CHECK here.
 	
 	//only update the point if the vector was found
@@ -113,24 +113,23 @@ void trackingManager::draw(){
 		drawInput(0, 0, IM.width/4, IM.height/4, IM.width/4, 0, IM.width/4, IM.height/4);	
 
 		// Draw EyeFinder
-		tracker.eFinder.draw(0, IM.height/4+30, IM.width/2, IM.height/2);
+		tracker.eFinder.draw(0, IM.height/4+30, IM.width/2, IM.height/2, !tracker.tState.bEyeFound);
 
 		// Draw Pupil Finder	
 		tracker.thresCal.drawPupilImageWithScanLine(IM.width/2 + 20, 0, tracker.pFinder.imgBeforeThreshold.width, tracker.pFinder.imgBeforeThreshold.height, tracker.pFinder.imgBeforeThreshold);
-		tracker.pFinder.draw(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height + 30);
+		tracker.pFinder.draw(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height + 30, !tracker.tState.bPupilFound);
 
 		// Draw Glint Finder
-		tracker.gFinder.draw(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height*2 + 60);
-		tracker.gFinder.checkBrightEye.draw(IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 255 * 2 + 60);
-		tracker.gFinder.contourFinderBright.draw(IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 255 * 2 + 60);
-		
+		tracker.gFinder.draw(IM.width/2 + 20, tracker.pFinder.imgBeforeThreshold.height*2 + 60, !tracker.tState.bGlintInDarkEyeFound);
+		tracker.gFinder.drawGlintinBrightEye(IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40, 255 * 2 + 60, !tracker.tState.bGlintInBrightEyeFound);
+
 		// Draw BrightEye, DarkEye
 		ofSetColor(255,255,255);
 		tracker.brightEyeImg.draw(0, IM.height/4 + IM.height/2 + 60);
 		tracker.darkEyeImg.draw(tracker.targetRect.width, IM.height/4 + IM.height/2 + 60);
 		
 		// Draw auto threshold Line for bright/dark eye.
-		tracker.briDarkFinder.drawAutoThresholdBrightnessGraph(0, IM.height/4 + IM.height/2 + 60);
+		tracker.briDarkFinder.drawAutoThresholdBrightnessGraph(0, IM.height/4 + IM.height/2 + 60, !tracker.tState.bGoodAlternation);
 		
 		// Draw brightness graph
 		int	tempX = IM.width/2 + tracker.pFinder.imgBeforeThreshold.width + 40;

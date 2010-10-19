@@ -13,6 +13,14 @@
 #include "brightDarkFinder.h"
 #include "thresholdCalculator.h"
 
+typedef struct {
+	bool bEyeFound;
+	bool bGoodAlternation;
+	bool bGlintInBrightEyeFound;
+	bool bGlintInDarkEyeFound;
+	bool bPupilFound;
+} trackingState;
+
 
 class eyeTracker {
 	
@@ -49,6 +57,8 @@ public:
 	// should keep thresholds here for auto threshold stuff.
 	// but.. make struct.. or think about it. to make more readable codes.
 	// 
+	
+	trackingState	tState;
 	
 	//eye Tracking
 	float			divisor;
