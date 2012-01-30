@@ -6,7 +6,7 @@ void calibrationManager::setup(){
 	calibrationInfo.loadImage("images/calibrationInfo.png");
 	font.loadFont("fonts/HelveticaNeueMed.ttf", 32);
 
-	nDivisionsWidth = 3;
+	nDivisionsWidth = 4;
 	nDivisionsHeight = 3;
 
 	nPosition = 0;
