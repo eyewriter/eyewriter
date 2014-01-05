@@ -46,8 +46,8 @@ void inputManager::setup(){
 		if(grabberType == INPUT_OFVIDEOGRABBER) {
 			vidGrabber = new qtVideoGrabber;
 			qtVideoGrabber& cam = *((qtVideoGrabber*) vidGrabber);
-			cam.setup(width, height, false);
 			if (device != 0) cam.setDeviceID(device);
+			cam.setup(width, height, false);
 			width = cam.width;				// in case we are different then what we request
 			height = cam.height;
 			
